@@ -8,7 +8,9 @@ public class CameraManager : MonoBehaviour {
     public GameObject character;
     public float minDistance;
     public float maxDistance;
+    public float accelationOnDrag;
 
+    Vector2 mouseOrigin;
     private void Awake()
     {
         if(instance == null)
@@ -29,12 +31,21 @@ public class CameraManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		OnScroll(Input.mouseScrollDelta.y);
-        Debug.Log(Input.mouseScrollDelta);
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            mouseOrigin = Input.mousePosition;
+        }
+        else if(Input.GetKey(KeyCode.Mouse0))
+        {
+            float normalizedDelta = Input.mousePosition.x - mouseOrigin.x != 0 ? (Input.mousePosition.x - mouseOrigin.x) / Mathf.Abs(Input.mousePosition.x - mouseOrigin.x) : 0;
+            OnDrag(normalizedDelta * accelationOnDrag);
+        }
 	}
 
     public void OnScroll(float delta)
     {
         Vector3 dis = character.transform.position - transform.position;
+        Debug.DrawLine(character.transform.position, transform.position, Color.red, Time.deltaTime);
         float currentSqrMag = dis.sqrMagnitude;
         if(currentSqrMag < minDistance*minDistance && delta > 0 || currentSqrMag > maxDistance*maxDistance && delta < 0)
         {
@@ -56,7 +67,8 @@ public class CameraManager : MonoBehaviour {
 
     public void OnDrag(float delta)
     {
-        
+        transform.RotateAround(character.transform.position, Vector3.up, delta);
     }
+
 
 }
