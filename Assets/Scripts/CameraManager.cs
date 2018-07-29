@@ -61,7 +61,7 @@ public class CameraManager : MonoBehaviour {
         }
         else 
         {
-            transform.Translate(dis.normalized * delta);
+            transform.Translate(dis.normalized * delta, Space.World);
         }
     }
 
