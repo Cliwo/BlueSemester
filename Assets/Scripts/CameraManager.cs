@@ -45,7 +45,6 @@ public class CameraManager : MonoBehaviour {
     public void OnScroll(float delta)
     {
         Vector3 dis = character.transform.position - transform.position;
-        Debug.DrawLine(character.transform.position, transform.position, Color.red, Time.deltaTime);
         float currentSqrMag = dis.sqrMagnitude;
         if(currentSqrMag < minDistance*minDistance && delta > 0 || currentSqrMag > maxDistance*maxDistance && delta < 0)
         {
@@ -70,5 +69,16 @@ public class CameraManager : MonoBehaviour {
         transform.RotateAround(character.transform.position, Vector3.up, delta);
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(character.transform.position, transform.position);
+        
+        Vector3 discCenter = new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z);
+        float radius = Vector3.Magnitude(discCenter - transform.position);
+        
+        UnityEditor.Handles.color = Color.cyan;
+        UnityEditor.Handles.DrawWireDisc(discCenter, Vector3.up, radius);
 
+    }
 }
