@@ -6,11 +6,12 @@ using UnityEngine.EventSystems;
 
 public class MinimapManager : MonoBehaviour
 {
+    public Camera minimapCamera;
     public GameObject target; //for now this is character
 
     public static MinimapManager instance;
 
-    private Vector3 dir;
+    private Vector3 destination;
     private bool shouldMove = false;
 
     private void Awake()
@@ -23,6 +24,11 @@ public class MinimapManager : MonoBehaviour
         {
             DestroyImmediate(this);
         }
+    }
+
+    private void Start()
+    {
+        minimapCamera = GetComponent<Camera>();   
     }
 
     private void LateUpdate()
@@ -38,13 +44,17 @@ public class MinimapManager : MonoBehaviour
     {
         if(shouldMove)
         {
-            target.transform.Translate(dir);
+            target.transform.position = Vector3.Lerp(target.transform.position, destination, Time.deltaTime);
         }
     }
 
     public void OnMinimapPinEneabled(Vector2 normalizedDirection)
     {
-        dir = new Vector3(normalizedDirection.x, 0, normalizedDirection.y);
+        float minimapHalfSize = minimapCamera.orthographicSize;
+        normalizedDirection *= 2;
+
+        Vector2 pos = normalizedDirection * minimapHalfSize;
+        destination = new Vector3(pos.x, target.transform.position.y, pos.y);
         shouldMove = true;
     }
 
