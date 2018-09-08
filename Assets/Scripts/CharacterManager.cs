@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour {
+	public float jumpWeightConst = 2.6f;
 
-	/*
-	TODO : NavMesh 를 통해서 이동하는 기능을 포함해야함. 후에 추가할 것
-	
-	 */
 	private Vector3 moveDirection = Vector3.zero;
 	private bool isJumped = false;
 	private const float gravity = -0.16f;
@@ -48,18 +45,18 @@ public class CharacterManager : MonoBehaviour {
 		Vector3 rightUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(1, 0, 0);
 		Vector3 forwardUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(0, 0, 1);
 
-		moveDirection = verticalWeight * forwardUnitVec + horizontalWeight * rightUnitVec;
-		//moveDirection += horizontalWeight * rightUnitVec;
+		Vector3 dir = verticalWeight * forwardUnitVec + horizontalWeight * rightUnitVec;
+		moveDirection.x = dir.x;
+		moveDirection.z = dir.z;
 	}
 
 	void OnJump()
 	{
 		if(!isJumped)
 		{
-			moveDirection += Vector3.up * 4;	
+			moveDirection += Vector3.up * jumpWeightConst;	
 			isJumped = true;
 		}
-		Debug.Log("OnJump");
 	}
 
 }
