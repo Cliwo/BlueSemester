@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour {
 	}
 	
 	public event Action OnTranslate = ()=> { };
-
+	public event Action OnJump = ()=> { };
     public event Action mouseLeftClick = () => { };
     public event Action<float> mouseWheel = (_) => { };
 
@@ -45,6 +45,10 @@ public class InputManager : MonoBehaviour {
 		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
 		{
 			OnTranslate();	
+		}
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			OnJump();
 		}
 		if(Input.GetMouseButtonDown(0))
 		{
