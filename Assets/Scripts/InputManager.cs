@@ -33,9 +33,15 @@ public class InputManager : MonoBehaviour {
     public event Action<float> mouseWheel = (_) => { };
 
     public event Action mouseRightDragStart = () => { };
-    public event Action<float> mouseRightDragging = (_) => { };
+    public event Action<Vector3> mouseRightDragging = (_) => { };
     public event Action mouseRightDragEnd = () => { };
     
+	Vector3 mouseDragOriginPos;
+	const float eventUpdateInterval = 0.3333f;
+	float leftMouseTimeBucket = 0.0f;
+	bool leftMouseWasDown = false;
+	float rightMouseTimeBucket = 0.0f;
+	bool rightMouseWasDown = false;
 
 
     // Update is called once per frame
@@ -56,31 +62,60 @@ public class InputManager : MonoBehaviour {
 		{
 			Button_D();
 		}
+		if(Input.GetMouseButtonDown(0))
+		{
+			leftMouseWasDown = true;
+			leftMouseTimeBucket = Time.time;
+		}
+		if(Input.GetMouseButton(0))
+		{
+			if(leftMouseTimeBucket + eventUpdateInterval < Time.time)
+			{
+				leftMouseWasDown = false;
+			}
+		}
+		if(Input.GetMouseButtonUp(0))
+		{
+			if(leftMouseWasDown)
+			{
+				mouseLeftClick();
+				leftMouseWasDown = false;
+			}
+		}
+		if(Input.GetMouseButtonDown(2))
+		{
+			rightMouseWasDown = true;
+			rightMouseTimeBucket = Time.time;
+		}
+		if(Input.GetMouseButton(2))
+		{
+			if(rightMouseTimeBucket + eventUpdateInterval < Time.time)
+			{
+				if(rightMouseWasDown)
+				{
+					mouseRightDragStart();
+					mouseDragOriginPos = Input.mousePosition;
+				}
+				else
+				{
+					mouseRightDragging(mouseDragOriginPos - Input.mousePosition);
+				}
+				rightMouseWasDown = false;
+			}
+		}
+		if(Input.GetMouseButtonUp(2))
+		{
+			if(rightMouseWasDown)
+			{
+				rightMouseWasDown = false;
+			}
+			else
+			{
+				mouseRightDragEnd();
+			}
+		}
         mouseWheel(Input.mouseScrollDelta.y);
         
 	}
 
-	/*
-	기본적으로 방향키 입력은 캐릭터의 움직임을 만드는게 맞다.
-	?1. 방향키 (WASD) 입력이 캐릭터의 움직임 이외를 만드는 경우의 수가 존재하는가? 
-	
-	F키와 같은  상호작용은 맥락에 따라 다른 결과가 나와야한다. 
-	>1. StatePattern 을 통해 State에 따라 처리한다.
-	>2. Trigger를 통해 다른 manager들이 event를 구독 해지한다. (추천)
-
-	그럼 각 입력에 대한 반응을 모두 이벤트 처리해아하나?
-	delegate event? 
-
-	모두 이벤트 처리할 때 단점.
-	-> (1) 다른 모든 매니저들이 Input을 이용하려면 이벤트 규격에 맞춰서 함수를 짜야한다. 
-		?1. 규격이 변동되는 경우가 생길까?
-	-> (2) 각 버튼에 따라 이벤트를 만들기 때문에 초반 Load가 있다. 
-		W,A,S,D, F, 마우스 휠, 좌클릭, 오른쪽 드래그, 스크롤
-	-> (3) 구독은 괜찮지만 해지관리를 명백히 하지 않으면 에러가 나기 쉽다. 디버깅 할 때 Event에 디버깅 포인트를 걸면 디버깅 하기 어렵다. 
-
-	모두 이벤트 처리할 때 장점.
-	-> (1) 다른 매니저들이 입력에 따라 Trigger 될 때 Callback 형식으로 만들기 쉽다.
-	-> (2) 여러 매니저에 동시에 이벤트를 보내기 용이하다. (ex. 커서도 바꾸고 카메라도 바꾸고 효과음도 내고)
-
-	 */
 }
