@@ -25,12 +25,12 @@ public class CameraManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		 
+        InputManager inst_Input = InputManager.getInstance();
+        inst_Input.mouseWheel += OnScroll;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		OnScroll(Input.mouseScrollDelta.y);
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             mouseOrigin = Input.mousePosition;

@@ -24,22 +24,22 @@ public class InputManager : MonoBehaviour {
 	}
 	
 	
-	public event Action Button_W;
-	public event Action Button_A;
-	public event Action Button_S;
-	public event Action Button_D;
+	public event Action Button_W = ()=> { };
+    public event Action Button_A = () => { };
+	public event Action Button_S = () => { };
+    public event Action Button_D = () => { };
 
-	public event Action mouseLeftClick;
-	public event Action<float> mouseWheel;
+    public event Action mouseLeftClick = () => { };
+    public event Action<float> mouseWheel = (_) => { };
 
-	public event Action mouseRightDragStart;
-	public event Action<float> mouseRightDragging;
-	public event Action mouseRightDragEnd;
+    public event Action mouseRightDragStart = () => { };
+    public event Action<float> mouseRightDragging = (_) => { };
+    public event Action mouseRightDragEnd = () => { };
+    
 
 
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 		if(Input.GetKey(KeyCode.W))
 		{
 			Button_W();
@@ -56,7 +56,8 @@ public class InputManager : MonoBehaviour {
 		{
 			Button_D();
 		}
-
+        mouseWheel(Input.mouseScrollDelta.y);
+        
 	}
 
 	/*
