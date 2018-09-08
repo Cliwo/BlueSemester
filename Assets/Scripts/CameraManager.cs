@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-    public static CameraManager instance;
+    private static CameraManager instance;
     public GameObject character;
     public float minDistance;
     public float maxDistance;
 
-    private void Awake()
+    public static CameraManager getInstance()
+    {
+        return instance;
+    }
+    void Awake()
     {
         if(instance == null)
         {
@@ -34,7 +38,7 @@ public class CameraManager : MonoBehaviour {
 
 	}
 
-    public void OnScroll(float delta)
+    void OnScroll(float delta)
     {
         Vector3 dis = character.transform.position - transform.position;
         float currentSqrMag = dis.sqrMagnitude;
@@ -56,7 +60,7 @@ public class CameraManager : MonoBehaviour {
         }
     }
 
-    public void OnDragging(Vector3 delta)
+    void OnDragging(Vector3 delta)
     {
         Debug.Log("MouseDragging");
         float y_axis_delta = delta.x;

@@ -23,11 +23,7 @@ public class InputManager : MonoBehaviour {
 		DontDestroyOnLoad(this);
 	}
 	
-	
-	public event Action Button_W = ()=> { };
-    public event Action Button_A = () => { };
-	public event Action Button_S = () => { };
-    public event Action Button_D = () => { };
+	public event Action OnTranslate = ()=> { };
 
     public event Action mouseLeftClick = () => { };
     public event Action<float> mouseWheel = (_) => { };
@@ -46,21 +42,9 @@ public class InputManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if(Input.GetKey(KeyCode.W))
+		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
 		{
-			Button_W();
-		}
-		if(Input.GetKey(KeyCode.A))
-		{
-			Button_A();
-		}
-		if(Input.GetKey(KeyCode.S))
-		{
-			Button_S();
-		}
-		if(Input.GetKey(KeyCode.D))
-		{
-			Button_D();
+			OnTranslate();	
 		}
 		if(Input.GetMouseButtonDown(0))
 		{
