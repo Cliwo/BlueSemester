@@ -31,6 +31,9 @@ public class InputManager : MonoBehaviour {
     public event Action mouseRightDragStart = () => { };
     public event Action<Vector3> mouseRightDragging = (_) => { };
     public event Action mouseRightDragEnd = () => { };
+
+	public event Action firstSkill = () => { };
+	public event Action secondSkill = () => { };
     
 	Vector3 mouseDragOriginPos;
 	const float eventUpdateInterval = 0.3333f;

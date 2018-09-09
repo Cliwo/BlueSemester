@@ -21,6 +21,7 @@ public class CharacterManager : MonoBehaviour {
 
 		inst_Input.OnTranslate += OnTranslate;
 		inst_Input.OnJump += OnJump;
+		inst_Input.mouseLeftClick += OnAttack;
 	}
 	void Update() 
 	{
@@ -57,6 +58,11 @@ public class CharacterManager : MonoBehaviour {
 			moveDirection += Vector3.up * jumpWeightConst;	
 			isJumped = true;
 		}
+	}
+
+	void OnAttack()
+	{
+		Debug.Log("Attack!");
 	}
 
 }
