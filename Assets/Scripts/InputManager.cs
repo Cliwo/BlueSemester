@@ -34,6 +34,7 @@ public class InputManager : MonoBehaviour {
 
 	public event Action firstSkill = () => { };
 	public event Action secondSkill = () => { };
+	public event Action combinationSkill = () => { };
     
 	Vector3 mouseDragOriginPos;
 	const float eventUpdateInterval = 0.3333f;
@@ -101,6 +102,18 @@ public class InputManager : MonoBehaviour {
 			{
 				mouseRightDragEnd();
 			}
+		}
+		if(Input.GetKey(KeyCode.Alpha1))
+		{
+			firstSkill();
+		}
+		if(Input.GetKey(KeyCode.Alpha2))
+		{
+			secondSkill();
+		}
+		if(Input.GetKey(KeyCode.Alpha3))
+		{
+			combinationSkill();
 		}
         mouseWheel(Input.mouseScrollDelta.y);
         

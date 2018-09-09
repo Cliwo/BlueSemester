@@ -22,6 +22,9 @@ public class CharacterManager : MonoBehaviour {
 		inst_Input.OnTranslate += OnTranslate;
 		inst_Input.OnJump += OnJump;
 		inst_Input.mouseLeftClick += OnAttack;
+		inst_Input.firstSkill += OnFirstSkill;
+		inst_Input.secondSkill += OnSecondSkill;
+		inst_Input.combinationSkill += OnCombinationSkill;
 	}
 	void Update() 
 	{
@@ -63,6 +66,21 @@ public class CharacterManager : MonoBehaviour {
 	void OnAttack()
 	{
 		Debug.Log("Attack!");
+	}
+	
+	void OnFirstSkill()
+	{
+		Debug.Log("First skill Dummy");
+	}
+
+	void OnSecondSkill()
+	{
+		Debug.Log("Second skill Dummy");
+	}
+	
+	void OnCombinationSkill()
+	{
+		Debug.Log("Combination skill Dummy");
 	}
 
 }
