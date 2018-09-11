@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-    public static CameraManager instance;
+    private static CameraManager instance;
     public GameObject character;
     public float minDistance;
     public float maxDistance;
-    public float accelationOnDrag;
 
-    Vector2 mouseOrigin;
-    private void Awake()
+    public static CameraManager getInstance()
+    {
+        return instance;
+    }
+    void Awake()
     {
         if(instance == null)
         {
@@ -25,24 +27,18 @@ public class CameraManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		 
+        InputManager inst_Input = InputManager.getInstance();
+        inst_Input.mouseWheel += OnScroll;
+        inst_Input.mouseRightDragging += OnDragging;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		OnScroll(Input.mouseScrollDelta.y);
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            mouseOrigin = Input.mousePosition;
-        }
-        else if(Input.GetKey(KeyCode.Mouse0))
-        {
-            float normalizedDelta = Input.mousePosition.x - mouseOrigin.x != 0 ? (Input.mousePosition.x - mouseOrigin.x) / Mathf.Abs(Input.mousePosition.x - mouseOrigin.x) : 0;
-            OnDrag(normalizedDelta * accelationOnDrag);
-        }
+	void Update () 
+    {
+
 	}
 
-    public void OnScroll(float delta)
+    void OnScroll(float delta)
     {
         Vector3 dis = character.transform.position - transform.position;
         float currentSqrMag = dis.sqrMagnitude;
@@ -64,9 +60,11 @@ public class CameraManager : MonoBehaviour {
         }
     }
 
-    public void OnDrag(float delta)
+    void OnDragging(Vector3 delta)
     {
-        transform.RotateAround(character.transform.position, Vector3.up, delta);
+        Debug.Log("MouseDragging");
+        float y_axis_delta = delta.x;
+        transform.RotateAround(character.transform.position, Vector3.up, y_axis_delta);
     }
 
     void OnDrawGizmos()
