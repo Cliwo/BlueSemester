@@ -698,6 +698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360850186}
   - component: {fileID: 1360850187}
+  - component: {fileID: 1360850188}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -727,6 +728,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88123e3d868c2c4c86ee2922587cd32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1360850188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1360850185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39db0ed224201684a96b43fc9dcae1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1427992062
@@ -1056,6 +1068,7 @@ GameObject:
   - component: {fileID: 2118557487}
   - component: {fileID: 2118557489}
   - component: {fileID: 2118557488}
+  - component: {fileID: 2118557490}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -1080,7 +1093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14.0000305, y: -12.000023}
+  m_AnchoredPosition: {x: -14, y: -12}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2118557488
@@ -1116,6 +1129,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2118557486}
   m_CullTransparentMesh: 0
+--- !u!114 &2118557490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118557486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5f9c4213e0ec84f99a179caf3b6fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimapCamera_g: {fileID: 2122890236}
+  Canvas: {fileID: 1357504995}
 --- !u!1 &2122890236
 GameObject:
   m_ObjectHideFlags: 0
