@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class CharacterManager : MonoBehaviour {
     
     //TODO(0916) : NavMeshAgent를 적용하고나서 점프가 작동이 이상함.
+    [HideInInspector]
     public NavMeshAgent s_navAgent;
 
 	public float jumpWeightConst = 2.6f;
@@ -13,9 +14,12 @@ public class CharacterManager : MonoBehaviour {
     private CameraManager inst_Camera;
     private InputManager inst_Input;
 
+    private Vector3 navigationDestination;
     private Vector3 moveDirection = Vector3.zero;
+    private bool navigationStarted = false;
 	private bool isJumped = false;
 	private const float gravity = -0.16f;
+    private const float navigationEpslion = 0.4f;
 
     private static CharacterManager instance;
     public static CharacterManager getInstance()
@@ -25,6 +29,9 @@ public class CharacterManager : MonoBehaviour {
 
     public void NavigationStart(Vector3 worldPos)
     {
+        navigationStarted = true;
+        s_navAgent.updatePosition = true;
+        navigationDestination = worldPos;
         s_navAgent.destination = worldPos;
     }
 
@@ -69,8 +76,9 @@ public class CharacterManager : MonoBehaviour {
 			isJumped = false;
 		}
 		s_characterController.Move(moveDirection);
-		
-	}
+
+        NavigationCheck();
+    }
 	
 	void OnTranslate()
 	{
@@ -114,4 +122,15 @@ public class CharacterManager : MonoBehaviour {
 		Debug.Log("Combination skill Dummy");
 	}
 
+    void NavigationCheck()
+    {
+        if(navigationStarted)
+        {
+            if((transform.position - navigationDestination).sqrMagnitude < navigationEpslion)
+            {
+                s_navAgent.updatePosition = false;
+                navigationStarted = false;
+            }
+        }
+    }
 }
