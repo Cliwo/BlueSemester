@@ -32,8 +32,8 @@ public class MinimapManager : MonoBehaviour {
 
     public void PinPointNavigate(Vector3 raycastStartPos)
     {
-        //인자인 raycastStartPos는 map에서 chracter 의 position을 기준으로하는 로컬좌표계에서 방향을 나타낸다. World 기준으로 바꿔주어야한다.
-        Vector3 raycastStartWorldPos = raycastStartPos + inst_character.transform.position;
+        Quaternion characterYRotation = Quaternion.Euler(0, inst_character.transform.rotation.eulerAngles.y, 0);
+        Vector3 raycastStartWorldPos = characterYRotation * raycastStartPos + inst_character.transform.position;
 
         RaycastHit hit;
         if(Physics.Raycast(raycastStartWorldPos, Vector3.down, out hit))
