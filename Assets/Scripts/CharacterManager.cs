@@ -1,21 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class CharacterManager : MonoBehaviour {
+    
+    //TODO(0916) : NavMeshAgent를 적용하고나서 점프가 작동이 이상함.
+    public NavMeshAgent s_navAgent;
+
 	public float jumpWeightConst = 2.6f;
 
-	private Vector3 moveDirection = Vector3.zero;
+    private CharacterController s_characterController;
+    private CameraManager inst_Camera;
+    private InputManager inst_Input;
+
+    private Vector3 moveDirection = Vector3.zero;
 	private bool isJumped = false;
 	private const float gravity = -0.16f;
-	private CameraManager inst_Camera;
-	private InputManager inst_Input;
 
     private static CharacterManager instance;
     public static CharacterManager getInstance()
     {
         return instance;
     }
+
+    public void NavigationStart(Vector3 worldPos)
+    {
+        s_navAgent.destination = worldPos;
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -29,13 +41,14 @@ public class CharacterManager : MonoBehaviour {
         DontDestroyOnLoad(this);
     }
 
-    private CharacterController s_characterController;
+    
 	void Start() 
 	{
 		inst_Camera = CameraManager.getInstance();
 		inst_Input = InputManager.getInstance();
 
-		s_characterController = GetComponent<CharacterController>();
+        s_navAgent = GetComponent<NavMeshAgent>();
+        s_characterController = GetComponent<CharacterController>();
 
 		inst_Input.OnTranslate += OnTranslate;
 		inst_Input.OnJump += OnJump;

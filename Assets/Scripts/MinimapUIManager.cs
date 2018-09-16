@@ -11,6 +11,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
 
     Camera MinimapCamera;
     RectTransform MinimapRect;
+
     MinimapManager inst_Minimap;
 
     float verticalMinimapScale;
@@ -50,14 +51,5 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
 
         return new Vector2(horiz * 2 - 1, vert * 2 - 1); //[-1,+1] , [-1,+1]
     }
-
-    /*
-     * 1. 카메라의 Size의 단위는 unit (1m), 카메라의 size는 수직길이의 절반을 뜻한다
-     * 2. 만약 16:9설정이고 size가 8이면 수직 길이는 16unit, 수평 길이는 28.444...unit이다.
-     * 3. Click position은 [-1,+1] 사이로 Clamp 된다.
-     * 4. 만약 click Position이 0.5 -0.5 로 주어진다면 캐릭터는 자신의 위치에서 +4unit, -7.111...unit 
-     *    떨어진 곳으로 도착해야한다. 
-     * 
-     */
 
 }
