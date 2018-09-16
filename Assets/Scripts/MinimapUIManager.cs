@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
 {
+    public int MaxMinimapSize;
+    public int MinMinimapSize;
+
     public GameObject MinimapCamera_g;
     public Canvas Canvas;
 
@@ -29,6 +32,24 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         inst_Minimap = MinimapManager.getInstance();
+    }
+
+    public void Minify()
+    {
+        if(MaxMinimapSize <= MinimapCamera.orthographicSize)
+        {
+            return;
+        }
+        MinimapCamera.orthographicSize += 2;
+    }
+
+    public void Magnify()
+    {
+        if (MinMinimapSize >= MinimapCamera.orthographicSize)
+        {
+            return;
+        }
+        MinimapCamera.orthographicSize -= 2;
     }
 
     public void OnPointerClick(PointerEventData eventData)
