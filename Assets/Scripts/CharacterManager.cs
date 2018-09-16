@@ -11,7 +11,25 @@ public class CharacterManager : MonoBehaviour {
 	private CameraManager inst_Camera;
 	private InputManager inst_Input;
 
-	private CharacterController s_characterController;
+    private static CharacterManager instance;
+    public static CharacterManager getInstance()
+    {
+        return instance;
+    }
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        if (instance != this)
+        {
+            DestroyImmediate(this);
+        }
+        DontDestroyOnLoad(this);
+    }
+
+    private CharacterController s_characterController;
 	void Start() 
 	{
 		inst_Camera = CameraManager.getInstance();
