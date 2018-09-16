@@ -71,12 +71,12 @@ public class InputManager : MonoBehaviour {
 				leftMouseWasDown = false;
 			}
 		}
-		if(Input.GetMouseButtonDown(2))
+		if(Input.GetMouseButtonDown(1))
 		{
 			rightMouseWasDown = true;
 			rightMouseTimeBucket = Time.time;
 		}
-		if(Input.GetMouseButton(2))
+		if(Input.GetMouseButton(1))
 		{
 			if(rightMouseTimeBucket + eventUpdateInterval < Time.time)
 			{
@@ -92,7 +92,7 @@ public class InputManager : MonoBehaviour {
 				rightMouseWasDown = false;
 			}
 		}
-		if(Input.GetMouseButtonUp(2))
+		if(Input.GetMouseButtonUp(1))
 		{
 			if(rightMouseWasDown)
 			{
