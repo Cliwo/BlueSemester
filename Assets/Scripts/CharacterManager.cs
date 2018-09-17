@@ -2,85 +2,90 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour {
-	public float jumpWeightConst = 2.6f;
+public class CharacterManager : MonoBehaviour
+{
+    public float jumpWeightConst = 2.6f;
 
-	private Vector3 moveDirection = Vector3.zero;
-	private bool isJumped = false;
-	private const float gravity = -0.16f;
-	private CameraManager inst_Camera;
-	private InputManager inst_Input;
+    private Vector3 moveDirection = Vector3.zero;
+    private bool isJumped = false;
+    private const float gravity = -0.16f;
+    private CameraManager inst_Camera;
+    private InputManager inst_Input;
 
-	private CharacterController s_characterController;
-	void Start() 
-	{
-		inst_Camera = CameraManager.getInstance();
-		inst_Input = InputManager.getInstance();
+    [SerializeField]
+    private ParticleManager particles;
 
-		s_characterController = GetComponent<CharacterController>();
+    private CharacterController s_characterController;
 
-		inst_Input.OnTranslate += OnTranslate;
-		inst_Input.OnJump += OnJump;
-		inst_Input.mouseLeftClick += OnAttack;
-		inst_Input.firstSkill += OnFirstSkill;
-		inst_Input.secondSkill += OnSecondSkill;
-		inst_Input.combinationSkill += OnCombinationSkill;
-	}
-	void Update() 
-	{
-		if(!s_characterController.isGrounded)
-		{
-			moveDirection += Vector3.up * gravity;
-		}
-		else if (s_characterController.isGrounded && moveDirection.y < 0)
-		{
-			moveDirection.y = 0f;
-			isJumped = false;
-		}
-		s_characterController.Move(moveDirection);
-		
-	}
-	
-	void OnTranslate()
-	{
-		float verticalWeight = Input.GetAxis("Vertical");
-		float horizontalWeight = Input.GetAxis("Horizontal");
+    private void Start()
+    {
+        inst_Camera = CameraManager.getInstance();
+        inst_Input = InputManager.getInstance();
 
-		Vector3 rightUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(1, 0, 0);
-		Vector3 forwardUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(0, 0, 1);
+        s_characterController = GetComponent<CharacterController>();
 
-		Vector3 dir = verticalWeight * forwardUnitVec + horizontalWeight * rightUnitVec;
-		moveDirection.x = dir.x;
-		moveDirection.z = dir.z;
-	}
+        inst_Input.OnTranslate += OnTranslate;
+        inst_Input.OnJump += OnJump;
+        inst_Input.mouseLeftClick += OnAttack;
+        inst_Input.firstSkill += OnFirstSkill;
+        inst_Input.secondSkill += OnSecondSkill;
+        inst_Input.combinationSkill += OnCombinationSkill;
+    }
 
-	void OnJump()
-	{
-		if(!isJumped)
-		{
-			moveDirection += Vector3.up * jumpWeightConst;	
-			isJumped = true;
-		}
-	}
+    private void Update()
+    {
+        if (!s_characterController.isGrounded)
+        {
+            moveDirection += Vector3.up * gravity;
+        }
+        else if (s_characterController.isGrounded && moveDirection.y < 0)
+        {
+            moveDirection.y = 0f;
+            isJumped = false;
+        }
+        s_characterController.Move(moveDirection);
+    }
 
-	void OnAttack()
-	{
-		Debug.Log("Attack!");
-	}
-	
-	void OnFirstSkill()
-	{
-		Debug.Log("First skill Dummy");
-	}
+    private void OnTranslate()
+    {
+        float verticalWeight = Input.GetAxis("Vertical");
+        float horizontalWeight = Input.GetAxis("Horizontal");
 
-	void OnSecondSkill()
-	{
-		Debug.Log("Second skill Dummy");
-	}
-	
-	void OnCombinationSkill()
-	{
-		Debug.Log("Combination skill Dummy");
-	}
+        Vector3 rightUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(1, 0, 0);
+        Vector3 forwardUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(0, 0, 1);
 
+        Vector3 dir = verticalWeight * forwardUnitVec + horizontalWeight * rightUnitVec;
+        moveDirection.x = dir.x;
+        moveDirection.z = dir.z;
+    }
+
+    private void OnJump()
+    {
+        if (!isJumped)
+        {
+            moveDirection += Vector3.up * jumpWeightConst;
+            isJumped = true;
+        }
+    }
+
+    private void OnAttack()
+    {
+        Debug.Log("Attack!");
+    }
+
+    private void OnFirstSkill()
+    {
+        Debug.Log("First skill Dummy");
+        particles.OnSkill();
+    }
+
+    private void OnSecondSkill()
+    {
+        Debug.Log("Second skill Dummy");
+    }
+
+    private void OnCombinationSkill()
+    {
+        Debug.Log("Combination skill Dummy");
+    }
 }
