@@ -23,8 +23,6 @@ public class CharacterManager : MonoBehaviour {
     
     [SerializeField]
     private ParticleManager particles;
-    
-    private CharacterController s_characterController;
 
 
     private static CharacterManager instance;
