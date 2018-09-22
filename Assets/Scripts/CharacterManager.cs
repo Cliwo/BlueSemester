@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class CharacterManager : MonoBehaviour {
     
+	public GameObject characterModel;
     //TODO(0916) : NavMeshAgent를 적용하고나서 점프가 작동이 이상함.
     [HideInInspector]
     public NavMeshAgent s_navAgent;
@@ -95,6 +96,8 @@ public class CharacterManager : MonoBehaviour {
 		Vector3 dir = verticalWeight * forwardUnitVec + horizontalWeight * rightUnitVec;
 		moveDirection.x = dir.x;
 		moveDirection.z = dir.z;
+		if(verticalWeight != 0f || horizontalWeight != 0f)
+			characterModel.transform.rotation = Quaternion.LookRotation(dir);
 	}
 
 	void OnJump()

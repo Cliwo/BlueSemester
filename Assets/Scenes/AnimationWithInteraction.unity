@@ -1191,6 +1191,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ae6e9d28a4c1c04e83be5d636492ff7, type: 3}
   m_IsPrefabAsset: 0
+--- !u!1 &1804834985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 6dcbe8912ffec2d44ada5fee45b220bb,
+    type: 3}
+  m_PrefabInternal: {fileID: 2146214065}
 --- !u!95 &1804834986 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 6dcbe8912ffec2d44ada5fee45b220bb,
@@ -1241,6 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5439fd188f0b1b640ac64a8de8f0f65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterModel: {fileID: 1804834985}
   s_navAgent: {fileID: 0}
   jumpWeightConst: 2.6
   particles: {fileID: 0}
