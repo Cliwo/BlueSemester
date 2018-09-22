@@ -6,6 +6,7 @@ using System;
 public abstract class InteractionObject : MonoBehaviour {
 	abstract public float InteractingTime { get; }
 	protected static InputManager inst_Input;
+	protected static CharacterAnimationManager inst_Animation;
 	protected InteractionEventBundle bundle;
 	protected float startTime;
 	protected bool isStarted = false;
@@ -16,6 +17,7 @@ public abstract class InteractionObject : MonoBehaviour {
 		public Action cancelAction;
 	}
 	void Start() {
+		inst_Animation = CharacterAnimationManager.getInstance();
 		inst_Input = InputManager.getInstance();
 		bundle = new InteractionEventBundle
 				{
