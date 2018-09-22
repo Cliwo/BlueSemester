@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
+using System;
+using System.Linq;
 public class InputManager : MonoBehaviour {
 	private static InputManager instance;
 	public static InputManager getInstance()
@@ -35,7 +36,10 @@ public class InputManager : MonoBehaviour {
 	public event Action firstSkill = () => { };
 	public event Action secondSkill = () => { };
 	public event Action combinationSkill = () => { };
-    
+
+	public List<InteractionObject.InteractionEventBundle> InteractionBundles = new List<InteractionObject.InteractionEventBundle>();
+	public InteractionObject.InteractionEventBundle currentInteraction;
+
 	Vector3 mouseDragOriginPos;
 	const float eventUpdateInterval = 0.3333f;
 	float leftMouseTimeBucket = 0.0f;
@@ -46,7 +50,31 @@ public class InputManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		OnTranslate();	
+		CheckInteractions();
+		CheckCharacterInputs();
+        CheckCameraInputs();
+	}
+
+	private void CheckInteractions()
+	{
+		if(Input.anyKeyDown && currentInteraction != null)
+		{
+			//행동 취소
+			currentInteraction.cancelAction();
+		}
+		if(Input.GetKeyDown(KeyCode.F))
+		{
+			//행동 시작
+			if(currentInteraction == null && InteractionBundles.Count != 0)
+			{
+				currentInteraction = InteractionBundles[0];
+				InteractionBundles[0].startAction();
+			}
+		}
+	}
+	private void CheckCharacterInputs()
+	{
+		OnTranslate();
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			OnJump();
@@ -115,8 +143,9 @@ public class InputManager : MonoBehaviour {
 		{
 			combinationSkill();
 		}
-        mouseWheel(Input.mouseScrollDelta.y);
-        
 	}
-
+	private void CheckCameraInputs()
+	{
+		mouseWheel(Input.mouseScrollDelta.y);
+	}
 }
