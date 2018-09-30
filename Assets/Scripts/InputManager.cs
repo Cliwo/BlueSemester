@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour {
 	{
 		return instance;
 	}
+	
+	private ConversationManager inst_conv;
 
 	void Awake()
 	{
@@ -24,6 +26,9 @@ public class InputManager : MonoBehaviour {
 		DontDestroyOnLoad(this);
 	}
 	
+	void Start() {
+		inst_conv = ConversationManager.getInstance();	
+	}
 	public bool EnableInput{ get; private set; }
 	public event Action OnTranslate = ()=> { };
 	public event Action OnJump = ()=> { };
@@ -60,6 +65,7 @@ public class InputManager : MonoBehaviour {
 	}
 
     void Update () {
+		CheckUIInputs();
 		if(EnableInput)
 		{
 			CheckInteractions();
@@ -68,9 +74,16 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
+	private void CheckUIInputs()
+	{
+		if(Input.GetKey(KeyCode.KeypadEnter))
+		{
+			
+		}
+	}
 	private void CheckInteractions()
 	{
-		if(Input.anyKeyDown && currentInteraction != null)
+		if(Input.GetKey(KeyCode.Escape) && currentInteraction != null)
 		{
 			//행동 취소
 			currentInteraction.cancelAction();

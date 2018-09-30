@@ -20,4 +20,15 @@ public class InteractiveCharacter : InteractionObject {
 		
 		transform.LookAt(inst_Char.transform.position);
 	}
+
+    protected override void OnInteractionCancel()
+    {
+
+    }
+
+    protected override void OnInteractionEnd()
+    {
+        
+    }
+
 }
