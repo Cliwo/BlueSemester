@@ -96,8 +96,11 @@ public class CharacterManager : MonoBehaviour {
 		Vector3 dir = verticalWeight * forwardUnitVec + horizontalWeight * rightUnitVec;
 		moveDirection.x = dir.x;
 		moveDirection.z = dir.z;
+
 		if(verticalWeight != 0f || horizontalWeight != 0f)
+		{
 			characterModel.transform.rotation = Quaternion.LookRotation(dir);
+		}
 	}
 
 	void OnJump()

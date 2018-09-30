@@ -24,13 +24,14 @@ public class InputManager : MonoBehaviour {
 		DontDestroyOnLoad(this);
 	}
 	
+	public bool EnableInput{ get; private set; }
 	public event Action OnTranslate = ()=> { };
 	public event Action OnJump = ()=> { };
     public event Action mouseLeftClick = () => { };
     public event Action<float> mouseWheel = (_) => { };
 
     public event Action mouseRightDragStart = () => { };
-    public event Action<Vector3> mouseRightDragging = (_) => { };
+    public event Action<Vector3, Vector3> mouseRightDragging = (_, __) => { };
     public event Action mouseRightDragEnd = () => { };
 
 	public event Action firstSkill = () => { };
@@ -47,12 +48,24 @@ public class InputManager : MonoBehaviour {
 	float rightMouseTimeBucket = 0.0f;
 	bool rightMouseWasDown = false;
 
-
     // Update is called once per frame
+	public void DisableInput()
+	{
+		EnableInput = false;
+	}
+
+	public void AllowInput()
+	{
+		EnableInput = true;
+	}
+
     void Update () {
-		CheckInteractions();
-		CheckCharacterInputs();
-        CheckCameraInputs();
+		if(EnableInput)
+		{
+			CheckInteractions();
+			CheckCharacterInputs();
+        	CheckCameraInputs();
+		}
 	}
 
 	private void CheckInteractions()
@@ -79,6 +92,23 @@ public class InputManager : MonoBehaviour {
 		{
 			OnJump();
 		}
+		
+		if(Input.GetKey(KeyCode.Alpha1))
+		{
+			firstSkill();
+		}
+		if(Input.GetKey(KeyCode.Alpha2))
+		{
+			secondSkill();
+		}
+		if(Input.GetKey(KeyCode.Alpha3))
+		{
+			combinationSkill();
+		}
+	}
+	private void CheckCameraInputs()
+	{
+		mouseWheel(Input.mouseScrollDelta.y);
 		if(Input.GetMouseButtonDown(0))
 		{
 			leftMouseWasDown = true;
@@ -110,12 +140,12 @@ public class InputManager : MonoBehaviour {
 			{
 				if(rightMouseWasDown)
 				{
-					mouseRightDragStart();
 					mouseDragOriginPos = Input.mousePosition;
+					mouseRightDragStart();
 				}
 				else
 				{
-					mouseRightDragging(mouseDragOriginPos - Input.mousePosition);
+					mouseRightDragging(mouseDragOriginPos , mouseDragOriginPos - Input.mousePosition);
 				}
 				rightMouseWasDown = false;
 			}
@@ -131,21 +161,5 @@ public class InputManager : MonoBehaviour {
 				mouseRightDragEnd();
 			}
 		}
-		if(Input.GetKey(KeyCode.Alpha1))
-		{
-			firstSkill();
-		}
-		if(Input.GetKey(KeyCode.Alpha2))
-		{
-			secondSkill();
-		}
-		if(Input.GetKey(KeyCode.Alpha3))
-		{
-			combinationSkill();
-		}
-	}
-	private void CheckCameraInputs()
-	{
-		mouseWheel(Input.mouseScrollDelta.y);
 	}
 }

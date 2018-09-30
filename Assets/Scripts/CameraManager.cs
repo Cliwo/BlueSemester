@@ -9,6 +9,8 @@ public class CameraManager : MonoBehaviour {
     public float minDistance;
     public float maxDistance;
 
+    private Vector3 dragStartPos;
+
     public static CameraManager getInstance()
     {
         return instance;
@@ -30,6 +32,7 @@ public class CameraManager : MonoBehaviour {
         InputManager inst_Input = InputManager.getInstance();
         inst_Input.mouseWheel += OnScroll;
         inst_Input.mouseRightDragging += OnDragging;
+        inst_Input.mouseRightDragStart += OnDragStart;
 	}
 	
 	// Update is called once per frame
@@ -60,7 +63,11 @@ public class CameraManager : MonoBehaviour {
         }
     }
 
-    void OnDragging(Vector3 delta)
+    void OnDragStart()
+    {
+        dragStartPos = transform.position;
+    }
+    void OnDragging(Vector3 origin, Vector3 delta)
     {
         Debug.Log("MouseDragging");
         float y_axis_delta = delta.x;
