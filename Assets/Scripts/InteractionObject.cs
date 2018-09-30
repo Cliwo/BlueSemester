@@ -16,7 +16,7 @@ public abstract class InteractionObject : MonoBehaviour {
 		public Action startAction;
 		public Action cancelAction;
 	}
-	void Start() {
+	protected virtual void Start() {
 		inst_Animation = CharacterAnimationManager.getInstance();
 		inst_Input = InputManager.getInstance();
 		bundle = new InteractionEventBundle

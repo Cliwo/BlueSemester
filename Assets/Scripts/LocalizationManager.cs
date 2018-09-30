@@ -11,10 +11,35 @@ public class LocalizationManager : MonoBehaviour {
 	public LanguageKind TargetLanguage = LanguageKind.KOREAN;
 	
 	public Dictionary<string, string> textSet { get; private set;}
+	private static LocalizationManager instance;
+	public static LocalizationManager getInstance()
+	{
+		return instance;
+	}
 
 	void Awake() {
+		if(instance == null)
+		{
+			instance = this;
+		}
+		if(instance != this)
+		{
+			DestroyImmediate(this);
+		}
 		LoadJson();
 	}
+
+	public string GetText(string key)
+	{
+		string text;
+		textSet.TryGetValue(key, out text);
+		if(text == null || text == "")
+		{
+			Debug.LogError("Invalide Text Json Key");
+		}
+		return text;
+	}
+
 	private void LoadJson()
 	{
 		string targetPath = "";
@@ -29,7 +54,6 @@ public class LocalizationManager : MonoBehaviour {
 				break;
 		}
 		string path = "/Users/chan/BlueSemester/Assets/Resources/Language";
-		//Application.persistentDataPath+"//Assets//Resources//Language//"
 		StreamReader sr = new StreamReader(File.Open(path + "/" + targetPath, FileMode.Open));
 		using (sr)
 		{
@@ -37,11 +61,11 @@ public class LocalizationManager : MonoBehaviour {
 			textSet = JsonUtility.FromJson<Dictionary<string,string>>(file);
 
 			//Debug
-			foreach (var s in textSet.Values)
-			{
-				Debug.Log(s);
-			}
+			textSet = new Dictionary<string, string>();
+			textSet.Add("dummy00", "Hi");
+			textSet.Add("dummy01", "How are you?");
 		}
 	}
 	
+
 }

@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour {
 	
 	void Start() {
 		inst_conv = ConversationManager.getInstance();	
+		EnableInput = true;
 	}
 	public bool EnableInput{ get; private set; }
 	public event Action OnTranslate = ()=> { };
@@ -78,7 +79,15 @@ public class InputManager : MonoBehaviour {
 	{
 		if(Input.GetKey(KeyCode.KeypadEnter))
 		{
-			
+			if(inst_conv.isConversationBoxOpen)
+			{
+				inst_conv.NextConversation();
+			}
+		}
+		if(Input.GetKey(KeyCode.Escape))
+		{
+			if(currentInteraction != null)
+				currentInteraction.cancelAction();
 		}
 	}
 	private void CheckInteractions()

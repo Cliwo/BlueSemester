@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &229156484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -526,8 +526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd19fb5883134764bc4b47d700ac2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversationUI: {fileID: 440851237}
   isConversationBoxOpen: 0
+  conversationUI: {fileID: 229156483}
+  conversationTextBox: {fileID: 853847740}
 --- !u!1 &515942985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,6 +1552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f66ee881e3a643bbb85f8b63d508b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textKey: dummy
 --- !u!135 &1474664638
 SphereCollider:
   m_ObjectHideFlags: 0
