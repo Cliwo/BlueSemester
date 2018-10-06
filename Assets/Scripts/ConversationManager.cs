@@ -13,7 +13,7 @@ public class ConversationManager : MonoBehaviour {
 	}
 
 	private LocalizationManager inst_Local;
-
+	private InputManager inst_Input;
 	
 
 	[HideInInspector]
@@ -40,6 +40,7 @@ public class ConversationManager : MonoBehaviour {
 	}
 	void Start() {
 		inst_Local = LocalizationManager.getInstance();	
+		inst_Input = InputManager.getInstance();
 	}
 	public void StartConversation(string textKey)
 	{
@@ -51,6 +52,7 @@ public class ConversationManager : MonoBehaviour {
 
 	public void StartConversation(string textKey, Action endAction, Action cancelAction)
 	{
+		inst_Input.DisableInput();
 		this.endAction = endAction;
 		this.cancelAction = cancelAction;
 		StartConversation(textKey);
@@ -66,20 +68,24 @@ public class ConversationManager : MonoBehaviour {
 		}
 		else
 		{
-			//대화가 모두 끝난 경우 
-			EndConversation();
+			if(endAction != null)
+			{
+				endAction();
+			}
+			else
+			{
+				EndConversation();
+			}
 		}
 	}
 	
 	public void EndConversation()
 	{
-		endAction();
 		HideConversationBox();
 	}
 
 	public void CancelConversation()
 	{
-		cancelAction();
 		HideConversationBox();
 	}
 	private void ShowConversationBox()
@@ -90,6 +96,7 @@ public class ConversationManager : MonoBehaviour {
 
 	private void HideConversationBox()
 	{
+		inst_Input.AllowInput();
 		cancelAction = null;
 		endAction = null;
 		currentTextKey = null;

@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour {
 
 	private void CheckUIInputs()
 	{
-		if(Input.GetKey(KeyCode.KeypadEnter))
+		if(Input.GetKeyDown(KeyCode.Return))
 		{
 			if(inst_conv.isConversationBoxOpen)
 			{

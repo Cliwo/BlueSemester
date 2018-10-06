@@ -33,10 +33,6 @@ public class LocalizationManager : MonoBehaviour {
 	{
 		string text;
 		textSet.TryGetValue(key, out text);
-		if(text == null || text == "")
-		{
-			Debug.LogError("Invalide Text Json Key");
-		}
 		return text;
 	}
 
