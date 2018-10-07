@@ -84,10 +84,6 @@ public class ConversationManager : MonoBehaviour {
 		HideConversationBox();
 	}
 
-	public void CancelConversation()
-	{
-		HideConversationBox();
-	}
 	private void ShowConversationBox()
 	{
 		isConversationBoxOpen = true;

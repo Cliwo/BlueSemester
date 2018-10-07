@@ -32,7 +32,7 @@ public class InteractiveCharacter : InteractionObject {
     {
         base.OnInteractionCancel();
         Debug.Log("Conversation Canceld");
-        inst_Conv.CancelConversation();
+        inst_Conv.EndConversation();
     }
 
     protected override void OnInteractionEnd()
