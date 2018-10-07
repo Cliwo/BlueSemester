@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System.IO;
 
+using Newtonsoft.Json;
 
 public class LocalizationManager : MonoBehaviour {
 
@@ -49,19 +50,12 @@ public class LocalizationManager : MonoBehaviour {
 			targetPath = "en.json";
 				break;
 		}
-		string path = "/Users/chan/BlueSemester/Assets/Resources/Language";
+		string path = Application.dataPath + "/Resources/Language";
 		StreamReader sr = new StreamReader(File.Open(path + "/" + targetPath, FileMode.Open));
 		using (sr)
 		{
 			string file = sr.ReadToEnd();
-			textSet = JsonUtility.FromJson<Dictionary<string,string>>(file);
-
-			//Debug
-			textSet = new Dictionary<string, string>();
-			textSet.Add("dummy00", "Hi");
-			textSet.Add("dummy01", "How are you?");
+			textSet = JsonConvert.DeserializeObject<Dictionary<string,string>>(file);
 		}
 	}
-	
-
 }
