@@ -62,6 +62,7 @@ public class CharacterManager : MonoBehaviour {
         s_navAgent = GetComponent<NavMeshAgent>();
         s_characterController = GetComponent<CharacterController>();
 
+		inst_Input.OnStand += OnIdle;
 		inst_Input.OnTranslate += OnTranslate;
 		inst_Input.OnJump += OnJump;
 		inst_Input.mouseLeftClick += OnAttack;
@@ -84,11 +85,16 @@ public class CharacterManager : MonoBehaviour {
 
         NavigationCheck();
     }
-	
-	void OnTranslate()
+
+	void OnIdle()
 	{
-		float verticalWeight = Input.GetAxis("Vertical");
-		float horizontalWeight = Input.GetAxis("Horizontal");
+		moveDirection.x = 0;
+		moveDirection.z = 0;	
+	}
+	void OnTranslate(float horizontalWeight ,float verticalWeight)
+	{
+		verticalWeight *= 0.2f;
+		horizontalWeight *= 0.2f;
 
 		Vector3 rightUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(1, 0, 0);
 		Vector3 forwardUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(0, 0, 1);
@@ -97,10 +103,8 @@ public class CharacterManager : MonoBehaviour {
 		moveDirection.x = dir.x;
 		moveDirection.z = dir.z;
 
-		if(verticalWeight != 0f || horizontalWeight != 0f)
-		{
-			characterModel.transform.rotation = Quaternion.LookRotation(dir);
-		}
+		characterModel.transform.rotation = Quaternion.LookRotation(dir);
+
 	}
 
 	void OnJump()

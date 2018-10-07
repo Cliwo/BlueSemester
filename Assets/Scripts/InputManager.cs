@@ -31,7 +31,8 @@ public class InputManager : MonoBehaviour {
 		EnableInput = true;
 	}
 	public bool EnableInput{ get; private set; }
-	public event Action OnTranslate = ()=> { };
+	public event Action OnStand = ()=> { };
+	public event Action<float, float> OnTranslate = (_, __)=> { };
 	public event Action OnJump = ()=> { };
     public event Action mouseLeftClick = () => { };
     public event Action<float> mouseWheel = (_) => { };
@@ -64,7 +65,13 @@ public class InputManager : MonoBehaviour {
 	{
 		EnableInput = true;
 	}
-
+	void FixedUpdate()
+	{
+		if(EnableInput)
+		{
+			CheckFixedCharacterInputs();
+		}
+	}
     void Update () {
 		CheckUIInputs();
 		if(EnableInput)
@@ -107,14 +114,25 @@ public class InputManager : MonoBehaviour {
 			}
 		}
 	}
-	private void CheckCharacterInputs()
+	private void CheckFixedCharacterInputs()
 	{
-		OnTranslate();
+		float horizonWeight = Input.GetAxis("Horizontal");
+		float verticalWeight = Input.GetAxis("Vertical");
+		if(Mathf.Abs(horizonWeight) <= float.Epsilon && Mathf.Abs(verticalWeight) <= float.Epsilon)
+		{
+			OnStand();
+		}
+		else
+		{
+			OnTranslate(horizonWeight, verticalWeight);
+		}
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			OnJump();
 		}
-		
+	}
+	private void CheckCharacterInputs()
+	{
 		if(Input.GetKey(KeyCode.Alpha1))
 		{
 			firstSkill();
