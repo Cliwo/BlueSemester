@@ -10,6 +10,7 @@ public class CharacterManager : MonoBehaviour {
     public NavMeshAgent s_navAgent;
 
 	public float jumpWeightConst = 2.6f;
+	public float horizontalWeightConst = 0.2f;
 
     private CharacterController s_characterController;
     private CameraManager inst_Camera;
@@ -20,7 +21,6 @@ public class CharacterManager : MonoBehaviour {
     private bool navigationStarted = false;
 	private bool isJumped = false;
 	private const float gravity = -0.03f;
-	private const float horizontalWeightConst = 0.2f;
     private const float navigationEpslion = 0.4f;
     
     [SerializeField]
