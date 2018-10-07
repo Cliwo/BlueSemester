@@ -11,6 +11,8 @@ public class CharacterAnimationManager : MonoBehaviour {
 		return instance;
 	}
 
+	private InputManager inst_input;
+
 	void Awake()
     {
         if (instance == null)
@@ -23,6 +25,16 @@ public class CharacterAnimationManager : MonoBehaviour {
         }
         DontDestroyOnLoad(this);
     }
+
+	void Start()
+	{
+		inst_input = InputManager.getInstance();
+		inst_input.OnStand += ()=> {
+			animator.ResetTrigger(AnimatorTrigger.Walking);
+			TriggerAnimator(AnimatorTrigger.Idle);
+		};
+		inst_input.OnTranslate += (_, __) => TriggerAnimator(AnimatorTrigger.Walking);
+	}
 	
 	public void TriggerAnimator(string trigger)
 	{
