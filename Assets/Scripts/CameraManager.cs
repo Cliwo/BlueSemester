@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour {
     public float minDistance;
     public float maxDistance;
 
-    private Vector3 dragStartPos;
+    private Vector3 dragStartRotation;
 
     public static CameraManager getInstance()
     {
@@ -65,13 +65,16 @@ public class CameraManager : MonoBehaviour {
 
     void OnDragStart()
     {
-        dragStartPos = transform.position;
+        dragStartRotation = transform.rotation.eulerAngles;
     }
     void OnDragging(Vector3 origin, Vector3 delta)
     {
-        Debug.Log("MouseDragging");
-        float y_axis_delta = delta.x;
-        transform.RotateAround(character.transform.position, Vector3.up, y_axis_delta);
+        float y_axis_delta = delta.x / Screen.width;
+
+        float destinationAngle = y_axis_delta*(180.0f) + dragStartRotation.y;
+        float angle = destinationAngle - transform.rotation.eulerAngles.y;
+
+        transform.RotateAround(character.transform.position, Vector3.up, angle);
     }
 
     void OnDrawGizmos()

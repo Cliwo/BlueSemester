@@ -67,10 +67,7 @@ public class InputManager : MonoBehaviour {
 	}
 	void FixedUpdate()
 	{
-		if(EnableInput)
-		{
-			CheckFixedCharacterInputs();
-		}
+		CheckFixedCharacterInputs();
 	}
     void Update () {
 		CheckUIInputs();
@@ -101,12 +98,10 @@ public class InputManager : MonoBehaviour {
 	{
 		if(Input.GetKey(KeyCode.Escape) && currentInteraction != null)
 		{
-			//행동 취소
 			currentInteraction.cancelAction();
 		}
 		if(Input.GetKeyDown(KeyCode.F))
 		{
-			//행동 시작
 			if(currentInteraction == null && InteractionBundles.Count != 0)
 			{
 				currentInteraction = InteractionBundles[0];
@@ -124,7 +119,10 @@ public class InputManager : MonoBehaviour {
 		}
 		else
 		{
-			OnTranslate(horizonWeight, verticalWeight);
+			if(EnableInput)
+			{
+				OnTranslate(horizonWeight, verticalWeight);
+			}
 		}
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
@@ -185,7 +183,7 @@ public class InputManager : MonoBehaviour {
 				}
 				else
 				{
-					mouseRightDragging(mouseDragOriginPos , mouseDragOriginPos - Input.mousePosition);
+					mouseRightDragging(mouseDragOriginPos , Input.mousePosition - mouseDragOriginPos);
 				}
 				rightMouseWasDown = false;
 			}
@@ -194,7 +192,7 @@ public class InputManager : MonoBehaviour {
 		{
 			if(rightMouseWasDown)
 			{
-				rightMouseWasDown = false;
+				rightMouseWasDown = false; 
 			}
 			else
 			{

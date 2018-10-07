@@ -19,7 +19,8 @@ public class CharacterManager : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private bool navigationStarted = false;
 	private bool isJumped = false;
-	private const float gravity = -0.16f;
+	private const float gravity = -0.03f;
+	private const float horizontalWeightConst = 0.2f;
     private const float navigationEpslion = 0.4f;
     
     [SerializeField]
@@ -72,15 +73,7 @@ public class CharacterManager : MonoBehaviour {
 	}
 	void Update() 
 	{
-		if(!s_characterController.isGrounded)
-		{
-			moveDirection += Vector3.up * gravity;
-		}
-		else if (s_characterController.isGrounded && moveDirection.y < 0)
-		{
-			moveDirection.y = 0f;
-			isJumped = false;
-		}
+		moveDirection.y += gravity;
 		s_characterController.Move(moveDirection);
 
         NavigationCheck();
@@ -91,10 +84,10 @@ public class CharacterManager : MonoBehaviour {
 		moveDirection.x = 0;
 		moveDirection.z = 0;	
 	}
-	void OnTranslate(float horizontalWeight ,float verticalWeight)
+	void OnTranslate(float horizontalWeight , float verticalWeight)
 	{
-		verticalWeight *= 0.2f;
-		horizontalWeight *= 0.2f;
+		verticalWeight *= horizontalWeightConst;
+		horizontalWeight *= horizontalWeightConst;
 
 		Vector3 rightUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(1, 0, 0);
 		Vector3 forwardUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(0, 0, 1);
@@ -103,15 +96,14 @@ public class CharacterManager : MonoBehaviour {
 		moveDirection.x = dir.x;
 		moveDirection.z = dir.z;
 
-		characterModel.transform.rotation = Quaternion.LookRotation(dir);
-
+		characterModel.transform.rotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
 	}
 
 	void OnJump()
 	{
-		if(!isJumped)
+		if(s_characterController.isGrounded)
 		{
-			moveDirection += Vector3.up * jumpWeightConst;	
+			moveDirection = Vector3.up * jumpWeightConst;	
 			isJumped = true;
 		}
 	}

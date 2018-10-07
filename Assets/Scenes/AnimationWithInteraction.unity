@@ -1709,7 +1709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterModel: {fileID: 1804834985}
   s_navAgent: {fileID: 0}
-  jumpWeightConst: 2.6
+  jumpWeightConst: 0.5
   particles: {fileID: 0}
 --- !u!143 &2096699446
 CharacterController:
