@@ -18,7 +18,7 @@ public class InteractiveTree : InteractionObject
     }
 	protected override void OnInteracting()
 	{
-		Debug.Log("Tree!");
+        
 	}
     protected override void OnInteractionCancel()
     {
