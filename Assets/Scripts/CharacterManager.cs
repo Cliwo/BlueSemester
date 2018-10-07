@@ -37,6 +37,7 @@ public class CharacterManager : MonoBehaviour {
     {
         navigationStarted = true;
         s_navAgent.updatePosition = true;
+		s_navAgent.updateRotation = true;
         navigationDestination = worldPos;
         s_navAgent.destination = worldPos;
     }
@@ -70,6 +71,9 @@ public class CharacterManager : MonoBehaviour {
 		inst_Input.firstSkill += OnFirstSkill;
 		inst_Input.secondSkill += OnSecondSkill;
 		inst_Input.combinationSkill += OnCombinationSkill;
+
+		s_navAgent.updatePosition = false;
+		s_navAgent.updateRotation = false;
 	}
 	void Update() 
 	{
@@ -133,9 +137,12 @@ public class CharacterManager : MonoBehaviour {
     {
         if(navigationStarted)
         {
-            if((transform.position - navigationDestination).sqrMagnitude < navigationEpslion)
+			Vector2 characterXZ = new Vector2(transform.position.x, transform.position.z);
+			Vector2 dest = new Vector2(navigationDestination.x, navigationDestination.z);
+            if((characterXZ-dest).sqrMagnitude < float.Epsilon)
             {
                 s_navAgent.updatePosition = false;
+				s_navAgent.updateRotation = false;
                 navigationStarted = false;
             }
         }
