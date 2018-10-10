@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weakness : ICrowdControlSkill
+public class FireWater : ICrowdControlSkill
 {
-    private float attack = 5; // 공격력
-    private float range = 1; // 적용 범위
-    private float value = 10; // 약화 수치
-    private float activeTime = 5; // 적용되는 시간
+    private float attack = 20; // 공격력
+    private float range = 3; // 적용 범위
+
+    private Rigidbody target;
 
     public void Shoot(float range)
     {
         range = this.range;
-        Debug.Log("Weakness");
+        Debug.Log("FireWater");
     }
 
     public void GetTarget(Rigidbody rigidbody)
     {
+        target = rigidbody;
     }
 
     public float Damage(float hp)
     {
         Debug.Log("Before hp : " + hp);
         hp -= attack;
-        Debug.Log("Weakness Damaged // hp : " + hp);
+        Debug.Log("FireWater Damaged // hp : " + hp);
 
         return hp;
     }

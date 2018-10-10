@@ -14,7 +14,7 @@ public class Slow : ICrowdControlSkill
     {
     }
 
-    public void Shoot()
+    public void Shoot(float range)
     {
         Debug.Log("Slow");
     }
@@ -23,8 +23,9 @@ public class Slow : ICrowdControlSkill
     {
     }
 
-    public void Damage()
+    public float Damage(float hp)
     {
         Debug.Log("Slow Damaged");
+        return hp;
     }
 }

@@ -14,7 +14,7 @@ public class Poison : ICrowdControlSkill
     {
     }
 
-    public void Shoot()
+    public void Shoot(float range)
     {
         Debug.Log("Poison");
     }
@@ -23,8 +23,9 @@ public class Poison : ICrowdControlSkill
     {
     }
 
-    public void Damage()
+    public float Damage(float hp)
     {
         Debug.Log("Poison Damaged");
+        return hp;
     }
 }

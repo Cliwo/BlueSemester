@@ -20,6 +20,12 @@ public class CharacterManager : MonoBehaviour
     private const float gravity = -0.16f;
     private const float navigationEpslion = 0.4f;
 
+    private float hp = 1000;
+    private float attack = 10;
+    private float speed = 10;
+    private float cooldown = 5;
+    private float eveasion = 1;
+
     [SerializeField]
     private ParticleManager particles;
 
@@ -32,8 +38,12 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     private GameObject skill2;
 
+    [SerializeField]
+    private GameObject skill3;
+
     public Knockback skillFirst = new Knockback();
     public Weakness skillSecond = new Weakness();
+    public FireWater skillCombo = new FireWater();
 
     private static CharacterManager instance;
 
@@ -130,7 +140,8 @@ public class CharacterManager : MonoBehaviour
     {
         Debug.Log("First skill Dummy");
         Shoot(skill1);
-        skillFirst.Shoot();
+        SphereCollider collider = skill1.GetComponent<SphereCollider>();
+        skillFirst.Shoot(collider.radius);
         //particles.OnSkill();
     }
 
@@ -138,12 +149,16 @@ public class CharacterManager : MonoBehaviour
     {
         Debug.Log("Second skill Dummy");
         Shoot(skill2);
-        skillSecond.Shoot();
+        SphereCollider collider = skill2.GetComponent<SphereCollider>();
+        skillSecond.Shoot(collider.radius);
     }
 
     private void OnCombinationSkill()
     {
         Debug.Log("Combination skill Dummy");
+        Shoot(skill3);
+        SphereCollider collider = skill3.GetComponent<SphereCollider>();
+        skillCombo.Shoot(collider.radius);
     }
 
     private void Shoot(GameObject gameObject)

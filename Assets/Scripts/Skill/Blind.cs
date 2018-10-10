@@ -14,7 +14,7 @@ public class Blind : ICrowdControlSkill
     {
     }
 
-    public void Shoot()
+    public void Shoot(float range)
     {
         Debug.Log("Blind");
     }
@@ -23,8 +23,9 @@ public class Blind : ICrowdControlSkill
     {
     }
 
-    public void Damage()
+    public float Damage(float hp)
     {
         Debug.Log("Blind Damaged");
+        return hp;
     }
 }
