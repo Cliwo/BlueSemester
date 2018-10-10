@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class Knockback : ICrowdControlSkill
 {
+    private float attack = 5; // 공격력
+    private float range = 2; // 적용 범위
+    private float value = 10; //밀려나는 거리
+    private float activeTime = 2; // 적용되는 시간
+
     private Rigidbody target;
 
-    // Use this for initialization
-    private void Start()
+    public void Shoot(float range)
     {
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
-    public void Shoot()
-    {
+        range = this.range;
         Debug.Log("Knockback");
     }
 
@@ -26,10 +22,14 @@ public class Knockback : ICrowdControlSkill
         target = rigidbody;
     }
 
-    public void Damage()
+    public float Damage(float hp)
     {
-        Debug.Log("Knockback Damaged");
+        Debug.Log("Before hp : " + hp);
         OnDamage();
+        hp -= attack;
+        Debug.Log("Knockback Damaged // hp : " + hp);
+
+        return hp;
     }
 
     private IEnumerator OnDamage()

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Bullet
+  - Fairy
+  - Skill1
+  - Skill2
+  - Skill3
   layers:
   - Default
   - TransparentFX
@@ -14,10 +20,10 @@ TagManager:
   - 
   - 
   - PostProcessing
+  - Player
   - Enemy
-  - 
-  - 
-  - 
+  - Bullet
+  - Fairy
   - 
   - 
   - 

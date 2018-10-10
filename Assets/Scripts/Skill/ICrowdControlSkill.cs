@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface ICrowdControlSkill
 {
-    void Shoot();
+    void Shoot(float range);
 
     void GetTarget(Rigidbody rigidbody);
 
-    void Damage();
+    float Damage(float hp);
 }
