@@ -10,6 +10,12 @@ public class Enemy : MonoBehaviour
 
     private ICrowdControlSkill skillFirst;
     private ICrowdControlSkill skillSecond;
+    private ICrowdControlSkill skillCombo;
+
+    private float hp = 500;
+    private float attack = 10;
+    private float speed = 9;
+    private float atkSpeed = 10;
 
     private Rigidbody rigidbody;
 
@@ -38,8 +44,10 @@ public class Enemy : MonoBehaviour
     {
         inst_Character = CharacterManager.getInstance();
         rigidbody = GetComponent<Rigidbody>();
+
         skillFirst = inst_Character.skillFirst;
         skillSecond = inst_Character.skillSecond;
+        skillCombo = inst_Character.skillCombo;
 
         ChangeState(new IdleState());
     }
@@ -75,14 +83,20 @@ public class Enemy : MonoBehaviour
             Debug.Log("Trigger Damaged Skill1");
             Destroy(other.gameObject);
             skillFirst.GetTarget(rigidbody);
-            skillFirst.Damage();
+            hp = skillFirst.Damage(hp);
         }
         if (other.gameObject.tag == "Skill2")
         {
             Debug.Log("Trigger Damaged Skill2");
             Destroy(other.gameObject);
             skillSecond.GetTarget(rigidbody);
-            skillSecond.Damage();
+            hp = skillSecond.Damage(hp);
+        }
+        if (other.gameObject.tag == "Skill3")
+        {
+            Debug.Log("Trigger Damaged Skill3");
+            Destroy(other.gameObject);
+            hp = skillCombo.Damage(hp);
         }
     }
 }
