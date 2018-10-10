@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Weakness : ICrowdControlSkill
 {
-    private float attack = 5; // 공격력
-    private float range = 1; // 적용 범위
-    private float value = 10; // 약화 수치
-    private float activeTime = 5; // 적용되는 시간
-
-    public void Shoot(float range)
+    // Use this for initialization
+    private void Start()
     {
-        range = this.range;
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+    }
+
+    public void Shoot()
+    {
         Debug.Log("Weakness");
     }
 
@@ -19,12 +23,8 @@ public class Weakness : ICrowdControlSkill
     {
     }
 
-    public float Damage(float hp)
+    public void Damage()
     {
-        Debug.Log("Before hp : " + hp);
-        hp -= attack;
-        Debug.Log("Weakness Damaged // hp : " + hp);
-
-        return hp;
+        Debug.Log("Weakness Damaged");
     }
 }

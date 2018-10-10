@@ -14,7 +14,7 @@ public class Snare : ICrowdControlSkill
     {
     }
 
-    public void Shoot(float range)
+    public void Shoot()
     {
         Debug.Log("Snare");
     }
@@ -23,9 +23,8 @@ public class Snare : ICrowdControlSkill
     {
     }
 
-    public float Damage(float hp)
+    public void Damage()
     {
         Debug.Log("Snare Damaged");
-        return hp;
     }
 }

@@ -14,7 +14,7 @@ public class Stun : ICrowdControlSkill
     {
     }
 
-    public void Shoot(float range)
+    public void Shoot()
     {
         Debug.Log("Stun");
     }
@@ -23,9 +23,8 @@ public class Stun : ICrowdControlSkill
     {
     }
 
-    public float Damage(float hp)
+    public void Damage()
     {
         Debug.Log("Stun Damaged");
-        return hp;
     }
 }
