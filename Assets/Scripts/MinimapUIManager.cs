@@ -24,10 +24,8 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     {
         MinimapRect = GetComponent<RectTransform>();
         MinimapCamera = MinimapCamera_g.GetComponent<Camera>();
-
-        verticalMinimapScale = MinimapCamera.orthographicSize;
-        horizontalMinimapScale = MinimapCamera.aspect * verticalMinimapScale;
-
+        
+        UpdateMinimapScale();
     }
     void Start()
     {
@@ -41,6 +39,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
             return;
         }
         MinimapCamera.orthographicSize += 2;
+        UpdateMinimapScale();
     }
 
     public void Magnify()
@@ -50,6 +49,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
             return;
         }
         MinimapCamera.orthographicSize -= 2;
+        UpdateMinimapScale();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -73,4 +73,9 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
         return new Vector2(horiz * 2 - 1, vert * 2 - 1); //[-1,+1] , [-1,+1]
     }
 
+    void UpdateMinimapScale()
+    {
+        verticalMinimapScale = MinimapCamera.orthographicSize;
+        horizontalMinimapScale = MinimapCamera.aspect * verticalMinimapScale;
+    }
 }
