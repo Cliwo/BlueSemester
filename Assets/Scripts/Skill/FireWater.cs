@@ -9,9 +9,9 @@ public class FireWater : ICrowdControlSkill
 
     private Rigidbody target;
 
-    public void Shoot(float range)
+    public void Shoot(SphereCollider range)
     {
-        range = this.range;
+        range.radius = this.range;
         Debug.Log("FireWater");
     }
 

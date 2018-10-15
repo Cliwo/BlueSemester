@@ -14,7 +14,7 @@ public class Stun : ICrowdControlSkill
     {
     }
 
-    public void Shoot(float range)
+    public void Shoot(SphereCollider range)
     {
         Debug.Log("Stun");
     }

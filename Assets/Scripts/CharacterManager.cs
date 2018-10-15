@@ -141,7 +141,7 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("First skill Dummy");
         Shoot(skill1);
         SphereCollider collider = skill1.GetComponent<SphereCollider>();
-        skillFirst.Shoot(collider.radius);
+        skillFirst.Shoot(collider);
         //particles.OnSkill();
     }
 
@@ -150,7 +150,7 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("Second skill Dummy");
         Shoot(skill2);
         SphereCollider collider = skill2.GetComponent<SphereCollider>();
-        skillSecond.Shoot(collider.radius);
+        skillSecond.Shoot(collider);
     }
 
     private void OnCombinationSkill()
@@ -158,7 +158,7 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("Combination skill Dummy");
         Shoot(skill3);
         SphereCollider collider = skill3.GetComponent<SphereCollider>();
-        skillCombo.Shoot(collider.radius);
+        skillCombo.Shoot(collider);
     }
 
     private void Shoot(GameObject gameObject)

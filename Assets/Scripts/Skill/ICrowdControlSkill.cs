@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ICrowdControlSkill
 {
-    void Shoot(float range);
+    void Shoot(SphereCollider range);
 
     void GetTarget(Rigidbody rigidbody);
 

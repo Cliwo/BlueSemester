@@ -14,7 +14,7 @@ public class Poison : ICrowdControlSkill
     {
     }
 
-    public void Shoot(float range)
+    public void Shoot(SphereCollider range)
     {
         Debug.Log("Poison");
     }

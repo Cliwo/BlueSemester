@@ -14,7 +14,7 @@ public class Slow : ICrowdControlSkill
     {
     }
 
-    public void Shoot(float range)
+    public void Shoot(SphereCollider range)
     {
         Debug.Log("Slow");
     }

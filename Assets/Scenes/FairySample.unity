@@ -9974,6 +9974,7 @@ MonoBehaviour:
   bullet: {fileID: 1868041138861788, guid: 01532f6a04472b847b208d9e37ed2dec, type: 2}
   skill1: {fileID: 1970685653658356, guid: ca6d16c41b60b4c43a1a8b0ebaa21c85, type: 2}
   skill2: {fileID: 1273934440242786, guid: db04b04ce69f9f94faa8978604c4abd3, type: 2}
+  skill3: {fileID: 1273934440242786, guid: 1a59b919d0317d84cb7ce373f42799c5, type: 2}
 --- !u!143 &2096699446
 CharacterController:
   m_ObjectHideFlags: 0

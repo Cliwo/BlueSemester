@@ -9,9 +9,9 @@ public class Weakness : ICrowdControlSkill
     private float value = 10; // 약화 수치
     private float activeTime = 5; // 적용되는 시간
 
-    public void Shoot(float range)
+    public void Shoot(SphereCollider range)
     {
-        range = this.range;
+        range.radius = this.range;
         Debug.Log("Weakness");
     }
 
