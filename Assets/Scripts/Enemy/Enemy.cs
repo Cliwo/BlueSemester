@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private CharacterManager inst_Character;
 
-    private IEnemyState currentState;
+    //private IEnemyState currentState;
 
     private ICrowdControlSkill skillFirst;
     private ICrowdControlSkill skillSecond;
@@ -14,9 +14,14 @@ public class Enemy : MonoBehaviour
 
     private float maxHP = 50;
     private float attack = 10;
-    private float speed = 9;
+    private float speed = 5;
     private float atkSpeed = 10;
     private float currentHP;
+
+    [SerializeField]
+    private Transform[] patrolPoints;
+
+    private int currentPoint;
 
     private Rigidbody rigidbody;
 
@@ -51,25 +56,41 @@ public class Enemy : MonoBehaviour
         skillCombo = inst_Character.skillCombo;
 
         currentHP = maxHP;
-        ChangeState(new IdleState());
+        //ChangeState(new IdleState());
+        transform.position = patrolPoints[0].position;
+        currentPoint = 0;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        currentState.Execute();
+        Patrol();
+        //currentState.Execute();
     }
 
-    public void ChangeState(IEnemyState newState)
+    //public void ChangeState(IEnemyState newState)
+    //{
+    //    if (currentState != null)
+    //    {
+    //        currentState.Exit();
+    //    }
+
+    //    currentState = newState;
+
+    //    currentState.Enter(this);
+    //}
+
+    private void Patrol()
     {
-        if (currentState != null)
+        if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
         {
-            currentState.Exit();
+            currentPoint++;
         }
-
-        currentState = newState;
-
-        currentState.Enter(this);
+        if (currentPoint >= patrolPoints.Length)
+        {
+            currentPoint = 0;
+        }
+        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
