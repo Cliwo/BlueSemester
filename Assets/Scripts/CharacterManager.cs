@@ -38,7 +38,6 @@ public class CharacterManager : MonoBehaviour {
     {
         navigationStarted = true;
         s_navAgent.updatePosition = true;
-		//s_navAgent.updateRotation = true;
         navigationDestination = worldPos;
         s_navAgent.destination = worldPos;
 
@@ -46,6 +45,7 @@ public class CharacterManager : MonoBehaviour {
 		
 		inst_Anim.animator.ResetTrigger(CharacterAnimationManager.AnimatorTrigger.Idle);
 		inst_Anim.TriggerAnimator(CharacterAnimationManager.AnimatorTrigger.Walking);
+
 		Vector3 forward = worldPos - transform.position;
 		characterModel.transform.rotation = Quaternion.LookRotation(forward);
     }
@@ -55,7 +55,6 @@ public class CharacterManager : MonoBehaviour {
 		{
 			navigationStarted = false;
 			s_navAgent.updatePosition = false;
-			//s_navAgent.updateRotation = false;
 
 			s_characterController.enabled = true;
 			inst_Anim.animator.ResetTrigger(CharacterAnimationManager.AnimatorTrigger.Walking);
@@ -168,7 +167,6 @@ public class CharacterManager : MonoBehaviour {
             if((characterXZ-dest).sqrMagnitude < float.Epsilon)
             {
                 s_navAgent.updatePosition = false;
-				//s_navAgent.updateRotation = false;
                 navigationStarted = false;
 
 				s_characterController.enabled =true;
