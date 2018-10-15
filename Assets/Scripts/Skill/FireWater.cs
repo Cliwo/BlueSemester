@@ -22,9 +22,9 @@ public class FireWater : ICrowdControlSkill
 
     public float Damage(float hp)
     {
-        Debug.Log("Before hp : " + hp);
         hp -= attack;
-        Debug.Log("FireWater Damaged // hp : " + hp);
+        Debug.Log("FireWater Damaged");
+        Debug.Log("attack " + attack + "// hp " + hp);
 
         return hp;
     }

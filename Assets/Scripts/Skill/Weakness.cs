@@ -21,9 +21,9 @@ public class Weakness : ICrowdControlSkill
 
     public float Damage(float hp)
     {
-        Debug.Log("Before hp : " + hp);
         hp -= attack;
-        Debug.Log("Weakness Damaged // hp : " + hp);
+        Debug.Log("Weakness Damaged");
+        Debug.Log("attack " + attack + "// hp " + hp);
 
         return hp;
     }

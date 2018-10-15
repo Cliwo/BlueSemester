@@ -20,7 +20,7 @@ public class CharacterManager : MonoBehaviour
     private const float gravity = -0.16f;
     private const float navigationEpslion = 0.4f;
 
-    private float hp = 1000;
+    private float hp = 500;
     private float attack = 10;
     private float speed = 10;
     private float cooldown = 5;

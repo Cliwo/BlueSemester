@@ -24,10 +24,10 @@ public class Knockback : ICrowdControlSkill
 
     public float Damage(float hp)
     {
-        Debug.Log("Before hp : " + hp);
         OnDamage();
         hp -= attack;
-        Debug.Log("Knockback Damaged // hp : " + hp);
+        Debug.Log("Knockback Damaged");
+        Debug.Log("attack " + attack + "// hp " + hp);
 
         return hp;
     }
