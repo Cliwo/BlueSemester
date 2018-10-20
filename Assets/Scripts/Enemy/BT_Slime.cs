@@ -6,10 +6,15 @@ public class BT_Slime : MonoBehaviour
 {
     private Sequence root = new Sequence();
     private Sequence seqDeath = new Sequence();
+    private Sequence seqChase = new Sequence();
+
+    private Selector selector = new Selector();
 
     private Patrol patrol = new Patrol();
     private IsDead isDead = new IsDead();
     private Death death = new Death();
+    private InSight inSight = new InSight();
+    private Chase chase = new Chase();
 
     private MonsterController monController;
 
@@ -28,12 +33,20 @@ public class BT_Slime : MonoBehaviour
         patrol.MonController = monController;
         isDead.MonController = monController;
         death.MonController = monController;
+        inSight.MonController = monController;
+        chase.MonController = monController;
+
+        seqChase.AddChild(chase);
+        seqChase.AddChild(inSight);
+
+        selector.AddChild(patrol);
+        selector.AddChild(seqChase);
 
         seqDeath.AddChild(death);
         seqDeath.AddChild(isDead);
 
         root.AddChild(seqDeath);
-        root.AddChild(patrol);
+        root.AddChild(selector);
     }
 
     private IEnumerator BehaviorProcess()

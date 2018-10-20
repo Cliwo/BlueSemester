@@ -114,3 +114,44 @@ public class Death : Node
         return true;
     }
 }
+
+public class InSight : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        if (monController.InSight())
+        {
+            Debug.Log("InSight true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("InSight false");
+            return false;
+        }
+    }
+}
+
+public class Chase : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Chase true");
+        monController.Chase();
+        return true;
+    }
+}

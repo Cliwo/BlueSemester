@@ -22,11 +22,15 @@ public class MonsterController : MonoBehaviour
     private int currentPoint;
 
     private Rigidbody rigidbody;
+    private Sight sight;
+    private Transform target;
 
     private void Start()
     {
         inst_Character = CharacterManager.getInstance();
         rigidbody = GetComponent<Rigidbody>();
+        sight = transform.Find("Sight").GetComponent<Sight>();
+        target = inst_Character.transform;
 
         skillFirst = inst_Character.skillFirst;
         skillSecond = inst_Character.skillSecond;
@@ -101,5 +105,22 @@ public class MonsterController : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+    public bool InSight()
+    {
+        if (sight.inSight)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Chase()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 }
