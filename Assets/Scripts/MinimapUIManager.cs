@@ -9,9 +9,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     public int MaxMinimapSize;
     public int MinMinimapSize;
 
-    public GameObject MinimapCamera_g;
-    public Canvas Canvas;
-
+    Canvas canvas;
     Camera MinimapCamera;
     RectTransform MinimapRect;
 
@@ -23,7 +21,8 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     void Awake()
     {
         MinimapRect = GetComponent<RectTransform>();
-        MinimapCamera = MinimapCamera_g.GetComponent<Camera>();
+        canvas = GetComponentInParent<Canvas>();
+        MinimapCamera = canvas.worldCamera;
         
         UpdateMinimapScale();
     }

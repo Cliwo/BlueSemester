@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class MinimapRect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
@@ -8,13 +9,20 @@ public class MinimapRect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	private bool IsExpandEnable;
 	private bool IsExpanding;
 
-	private Vector2 screenSpaceAnchorPosition;
+	public RectTransform realMinimap;
+
+	private Image image; 
 	private RectTransform rect;
+
+	private Vector2 screenSpaceAnchorPosition;
 	private CursorManager inst_cursor;
 
 	void Start() {
 		inst_cursor = CursorManager.getInstance();
-		rect = GetComponent<RectTransform>(); 
+		
+		rect = GetComponent<RectTransform>();
+		image = GetComponent<Image>();
+		image.alphaHitTestMinimumThreshold = 0.6f;
 	}
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -44,10 +52,12 @@ public class MinimapRect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         IsExpanding = false;
     }
 
-	void Update() {
+	void Update() 
+	{
 		if(IsExpanding)
 		{
 			Vector2 diff = screenSpaceAnchorPosition - new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+			realMinimap.sizeDelta = diff;
 			rect.sizeDelta = diff;
 		}	
 	}
