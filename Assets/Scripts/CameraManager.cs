@@ -5,10 +5,13 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour {
 
     private static CameraManager instance;
+
     public GameObject character;
     public float minDistance;
     public float maxDistance;
 
+    [SerializeField]
+    private CameraEffect_Cinema cinemaEffect;
     private Vector3 dragStartRotation;
 
     public static CameraManager getInstance()
@@ -40,7 +43,16 @@ public class CameraManager : MonoBehaviour {
     {
 
 	}
+    public void StartCinema(float waitTime = float.PositiveInfinity)
+    {
+        cinemaEffect.StartAnimation(waitTime);
+    }
 
+    public void CancelCinema()
+    {
+        cinemaEffect.CancelAnimation();
+    }
+    
     public void StartShake(float duration, float magnitude = 0.08f)
     {
         StartCoroutine(Shake(duration, magnitude));
