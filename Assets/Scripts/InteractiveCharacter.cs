@@ -23,6 +23,7 @@ public class InteractiveCharacter : InteractionObject {
 
     protected override void OnInteractionStart()
 	{
+        CameraManager.getInstance().StartShake(2.0f);
         base.OnInteractionStart();
 		transform.LookAt(inst_Char.transform.position);
         inst_Conv.StartConversation(textKey, OnInteractionEnd, OnInteractionCancel);
