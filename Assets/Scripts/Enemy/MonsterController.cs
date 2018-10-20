@@ -25,11 +25,15 @@ public class MonsterController : MonoBehaviour
     private Sight sight;
     private Transform target;
 
+    private void Awake()
+    {
+        sight = transform.Find("Sight").GetComponent<Sight>();
+    }
+
     private void Start()
     {
         inst_Character = CharacterManager.getInstance();
         rigidbody = GetComponent<Rigidbody>();
-        sight = transform.Find("Sight").GetComponent<Sight>();
         target = inst_Character.transform;
 
         skillFirst = inst_Character.skillFirst;
@@ -43,10 +47,9 @@ public class MonsterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Wand")
         {
-            Debug.Log("Trigger Damaged Bullet");
-            Destroy(other.gameObject);
+            Debug.Log("Trigger Damaged Wand");
         }
 
         if (other.gameObject.tag == "Skill1")

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -30,9 +31,6 @@ public class CharacterManager : MonoBehaviour
     private ParticleManager particles;
 
     [SerializeField]
-    private GameObject bullet;
-
-    [SerializeField]
     private GameObject skill1;
 
     [SerializeField]
@@ -44,6 +42,8 @@ public class CharacterManager : MonoBehaviour
     public Knockback skillFirst = new Knockback();
     public Weakness skillSecond = new Weakness();
     public FireWater skillCombo = new FireWater();
+
+    private Hit wand;
 
     private static CharacterManager instance;
 
@@ -84,9 +84,12 @@ public class CharacterManager : MonoBehaviour
         inst_Input.OnTranslate += OnTranslate;
         inst_Input.OnJump += OnJump;
         inst_Input.mouseLeftClick += OnAttack;
+        inst_Input.mouseLeftClickOff += OffAttack;
         inst_Input.firstSkill += OnFirstSkill;
         inst_Input.secondSkill += OnSecondSkill;
         inst_Input.combinationSkill += OnCombinationSkill;
+
+        wand = transform.Find("Wand").GetComponent<Hit>();
 
         //skillFirst = new Knockback();
         //skillSecond = new Weakness();
@@ -133,7 +136,19 @@ public class CharacterManager : MonoBehaviour
     private void OnAttack()
     {
         Debug.Log("Attack!");
-        Shoot(bullet);
+        wand.GetComponent<CapsuleCollider>().enabled = true;
+        StartCoroutine("AttackDelay");
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(3);
+        wand.GetComponent<CapsuleCollider>().enabled = false;
+        Debug.Log("OffAttack");
+    }
+
+    private void OffAttack()
+    {
     }
 
     private void OnFirstSkill()

@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Sight : MonoBehaviour
 {
-    private SphereCollider sight;
     public bool inSight;
 
     private void Start()
     {
-        sight = GetComponent<SphereCollider>();
         inSight = false;
     }
 
