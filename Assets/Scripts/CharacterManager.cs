@@ -84,7 +84,6 @@ public class CharacterManager : MonoBehaviour
         inst_Input.OnTranslate += OnTranslate;
         inst_Input.OnJump += OnJump;
         inst_Input.mouseLeftClick += OnAttack;
-        inst_Input.mouseLeftClickOff += OffAttack;
         inst_Input.firstSkill += OnFirstSkill;
         inst_Input.secondSkill += OnSecondSkill;
         inst_Input.combinationSkill += OnCombinationSkill;
@@ -145,10 +144,6 @@ public class CharacterManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         wand.GetComponent<CapsuleCollider>().enabled = false;
         Debug.Log("OffAttack");
-    }
-
-    private void OffAttack()
-    {
     }
 
     private void OnFirstSkill()
