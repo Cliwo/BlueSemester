@@ -5104,6 +5104,7 @@ GameObject:
   - component: {fileID: 1328758903}
   - component: {fileID: 1328758902}
   - component: {fileID: 1328758906}
+  - component: {fileID: 1328758908}
   - component: {fileID: 1328758907}
   m_Layer: 10
   m_Name: Enemy
@@ -5202,7 +5203,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1328758901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d54c5ee0c740921489b07d52cbf90259, type: 3}
+  m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1328758908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1328758901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637e678064b645a4680f8a04b1c7b994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPoints:

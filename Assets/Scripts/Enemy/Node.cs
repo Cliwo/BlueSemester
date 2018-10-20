@@ -56,3 +56,61 @@ public class Sequence : CompositeNode
         return true;
     }
 }
+
+public class IsDead : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        if (monController.IsDead())
+        {
+            Debug.Log("IsDead true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("IsDead false");
+            return false;
+        }
+    }
+}
+
+public class Patrol : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Patrol true");
+        monController.Patrol();
+        return true;
+    }
+}
+
+public class Death : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Death true");
+        monController.Death();
+        return true;
+    }
+}

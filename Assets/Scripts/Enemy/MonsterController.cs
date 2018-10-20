@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class MonsterController : MonoBehaviour
 {
     private CharacterManager inst_Character;
 
@@ -23,26 +23,6 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody rigidbody;
 
-    private static Enemy instance;
-
-    public static Enemy getInstance()
-    {
-        return instance;
-    }
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        if (instance != this)
-        {
-            DestroyImmediate(this);
-        }
-        DontDestroyOnLoad(this);
-    }
-
     private void Start()
     {
         inst_Character = CharacterManager.getInstance();
@@ -55,24 +35,6 @@ public class Enemy : MonoBehaviour
         currentHP = maxHP;
         transform.position = patrolPoints[0].position;
         currentPoint = 0;
-    }
-
-    private void Update()
-    {
-        Patrol();
-    }
-
-    private void Patrol()
-    {
-        if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
-        {
-            currentPoint++;
-        }
-        if (currentPoint >= patrolPoints.Length)
-        {
-            currentPoint = 0;
-        }
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -103,11 +65,41 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             currentHP = skillCombo.Damage(currentHP);
         }
+    }
 
+    public void Init()
+    {
+        Debug.Log("MonsterController Init");
+        currentHP = maxHP;
+    }
+
+    public bool IsDead()
+    {
         if (currentHP <= 0)
         {
-            Debug.Log("Death");
-            Destroy(gameObject);
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Patrol()
+    {
+        if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
+        {
+            currentPoint++;
+        }
+        if (currentPoint >= patrolPoints.Length)
+        {
+            currentPoint = 0;
+        }
+        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
     }
 }
