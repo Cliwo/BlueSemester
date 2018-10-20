@@ -42,9 +42,8 @@ public class CharacterManager : MonoBehaviour {
         s_navAgent.destination = worldPos;
 
 		s_characterController.enabled = false;
-		
-		inst_Anim.animator.ResetTrigger(CharacterAnimationManager.AnimatorTrigger.Idle);
-		inst_Anim.TriggerAnimator(CharacterAnimationManager.AnimatorTrigger.Walking);
+		inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.9f);
+		inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
 
 		Vector3 forward = worldPos - transform.position;
 		characterModel.transform.rotation = Quaternion.LookRotation(forward);
@@ -57,8 +56,8 @@ public class CharacterManager : MonoBehaviour {
 			s_navAgent.updatePosition = false;
 
 			s_characterController.enabled = true;
-			inst_Anim.animator.ResetTrigger(CharacterAnimationManager.AnimatorTrigger.Walking);
-			inst_Anim.TriggerAnimator(CharacterAnimationManager.AnimatorTrigger.Idle);
+			inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.0f);
+			inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
 		}
 	}
 
@@ -111,9 +110,16 @@ public class CharacterManager : MonoBehaviour {
 	{
 		moveDirection.x = 0;
 		moveDirection.z = 0;	
+
+		inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.0f);
+		inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
+
 	}
 	void OnTranslate(float horizontalWeight , float verticalWeight)
 	{
+		inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, Mathf.Abs(horizontalWeight) + Mathf.Abs(verticalWeight));
+		inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
+
 		verticalWeight *= horizontalWeightConst;
 		horizontalWeight *= horizontalWeightConst;
 
@@ -131,7 +137,7 @@ public class CharacterManager : MonoBehaviour {
 	{
 		if(s_characterController.isGrounded)
 		{
-			moveDirection = Vector3.up * jumpWeightConst;	
+			moveDirection = Vector3.up * jumpWeightConst;
 			isJumped = true;
 		}
 	}
@@ -170,8 +176,8 @@ public class CharacterManager : MonoBehaviour {
                 navigationStarted = false;
 
 				s_characterController.enabled =true;
-				inst_Anim.animator.ResetTrigger(CharacterAnimationManager.AnimatorTrigger.Walking);
-				inst_Anim.TriggerAnimator(CharacterAnimationManager.AnimatorTrigger.Idle);
+				inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.0f);
+				inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
             }
         }
 		if(s_navAgent.updatePosition == false)

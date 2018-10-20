@@ -29,11 +29,6 @@ public class CharacterAnimationManager : MonoBehaviour {
 	void Start()
 	{
 		inst_input = InputManager.getInstance();
-		inst_input.OnStand += ()=> {
-			animator.ResetTrigger(AnimatorTrigger.Walking);
-			TriggerAnimator(AnimatorTrigger.Idle);
-		};
-		inst_input.OnTranslate += (_, __) => TriggerAnimator(AnimatorTrigger.Walking);
 	}
 	
 	public void TriggerAnimator(string trigger)
@@ -45,7 +40,6 @@ public class CharacterAnimationManager : MonoBehaviour {
 	{
 		public const string Punch = "Punch";
 		public const string Idle = "Idle";
-		public const string Walking = "Walk";
-
+		public const string Translation = "TranslationMagnitude";
 	}
 }
