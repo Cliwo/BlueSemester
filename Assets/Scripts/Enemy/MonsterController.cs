@@ -6,10 +6,6 @@ public class MonsterController : MonoBehaviour
 {
     private CharacterManager inst_Character;
 
-    private ICrowdControlSkill skillFirst;
-    private ICrowdControlSkill skillSecond;
-    private ICrowdControlSkill skillCombo;
-
     private float maxHP = 50;
     private float attack = 10;
     private float speed = 5;
@@ -21,9 +17,9 @@ public class MonsterController : MonoBehaviour
 
     private int currentPoint;
 
-    private Rigidbody rigidbody;
     private Sight sight;
     private Transform target;
+    private ICrowdControlSkill skill;
 
     private void Awake()
     {
@@ -33,12 +29,7 @@ public class MonsterController : MonoBehaviour
     private void Start()
     {
         inst_Character = CharacterManager.getInstance();
-        rigidbody = GetComponent<Rigidbody>();
         target = inst_Character.transform;
-
-        skillFirst = inst_Character.skillFirst;
-        skillSecond = inst_Character.skillSecond;
-        skillCombo = inst_Character.skillCombo;
 
         currentHP = maxHP;
         transform.position = patrolPoints[0].position;
@@ -47,30 +38,10 @@ public class MonsterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Wand")
+        if (other.gameObject.tag == "Bullet")
         {
-            Debug.Log("Trigger Damaged Wand");
-        }
-
-        if (other.gameObject.tag == "Skill1")
-        {
-            Debug.Log("Trigger Damaged Skill1");
-            Destroy(other.gameObject);
-            skillFirst.GetTarget(rigidbody);
-            currentHP = skillFirst.Damage(currentHP);
-        }
-        if (other.gameObject.tag == "Skill2")
-        {
-            Debug.Log("Trigger Damaged Skill2");
-            Destroy(other.gameObject);
-            skillSecond.GetTarget(rigidbody);
-            currentHP = skillSecond.Damage(currentHP);
-        }
-        if (other.gameObject.tag == "Skill3")
-        {
-            Debug.Log("Trigger Damaged Skill3");
-            Destroy(other.gameObject);
-            currentHP = skillCombo.Damage(currentHP);
+            skill = other.gameObject.GetComponent<BulletManager>().skill;
+            currentHP = skill.Damage(currentHP);
         }
     }
 
@@ -125,5 +96,17 @@ public class MonsterController : MonoBehaviour
     public void Chase()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+    }
+
+    public bool IsDamaged()
+    {
+        if (currentHP < maxHP)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -7,6 +7,7 @@ public class BT_Slime : MonoBehaviour
     private Sequence root = new Sequence();
     private Sequence seqDeath = new Sequence();
     private Sequence seqChase = new Sequence();
+    private Sequence seqDamage = new Sequence();
 
     private Selector selector = new Selector();
 
@@ -15,6 +16,7 @@ public class BT_Slime : MonoBehaviour
     private Death death = new Death();
     private InSight inSight = new InSight();
     private Chase chase = new Chase();
+    private IsDamaged isDamaged = new IsDamaged();
 
     private MonsterController monController;
 
@@ -35,12 +37,17 @@ public class BT_Slime : MonoBehaviour
         death.MonController = monController;
         inSight.MonController = monController;
         chase.MonController = monController;
+        isDamaged.MonController = monController;
+
+        seqDamage.AddChild(chase);
+        seqDamage.AddChild(isDamaged);
 
         seqChase.AddChild(chase);
         seqChase.AddChild(inSight);
 
         selector.AddChild(patrol);
         selector.AddChild(seqChase);
+        selector.AddChild(seqDamage);
 
         seqDeath.AddChild(death);
         seqDeath.AddChild(isDead);

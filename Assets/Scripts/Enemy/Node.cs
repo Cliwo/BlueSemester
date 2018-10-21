@@ -155,3 +155,27 @@ public class Chase : Node
         return true;
     }
 }
+
+public class IsDamaged : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        if (monController.IsDamaged())
+        {
+            Debug.Log("IsDamaged true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("IsDamaged false");
+            return false;
+        }
+    }
+}

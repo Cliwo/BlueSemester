@@ -30,21 +30,17 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     private ParticleManager particles;
 
-    [SerializeField]
-    private GameObject skill1;
-
-    [SerializeField]
-    private GameObject skill2;
-
-    [SerializeField]
-    private GameObject skill3;
-
     public Knockback skillFirst = new Knockback();
     public Weakness skillSecond = new Weakness();
     public FireWater skillCombo = new FireWater();
 
     private Hit wand;
     private SphereCollider myCollider;
+
+    [SerializeField]
+    private GameObject bullet;
+
+    private BulletManager bulletManager;
 
     private static CharacterManager instance;
 
@@ -91,9 +87,6 @@ public class CharacterManager : MonoBehaviour
 
         wand = transform.Find("Wand").GetComponent<Hit>();
         myCollider = GetComponent<SphereCollider>();
-
-        //skillFirst = new Knockback();
-        //skillSecond = new Weakness();
     }
 
     private void Update()
@@ -136,6 +129,26 @@ public class CharacterManager : MonoBehaviour
 
     private void OnAttack()
     {
+        MeleeAttack();
+    }
+
+    private void OnFirstSkill()
+    {
+        RangeAttack(skillFirst);
+    }
+
+    private void OnSecondSkill()
+    {
+        RangeAttack(skillSecond);
+    }
+
+    private void OnCombinationSkill()
+    {
+        RangeAttack(skillCombo);
+    }
+
+    private void MeleeAttack()
+    {
         Debug.Log("Attack!");
         wand.GetComponent<CapsuleCollider>().enabled = true;
         StartCoroutine("AttackDelay");
@@ -148,34 +161,12 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("OffAttack");
     }
 
-    private void OnFirstSkill()
+    private void RangeAttack(ICrowdControlSkill skill)
     {
-        Debug.Log("First skill Dummy");
-        Shoot(skill1);
-        SphereCollider collider = skill1.GetComponent<SphereCollider>();
-        skillFirst.Shoot(collider);
-        //particles.OnSkill();
-    }
-
-    private void OnSecondSkill()
-    {
-        Debug.Log("Second skill Dummy");
-        Shoot(skill2);
-        SphereCollider collider = skill2.GetComponent<SphereCollider>();
-        skillSecond.Shoot(collider);
-    }
-
-    private void OnCombinationSkill()
-    {
-        Debug.Log("Combination skill Dummy");
-        Shoot(skill3);
-        SphereCollider collider = skill3.GetComponent<SphereCollider>();
-        skillCombo.Shoot(collider);
-    }
-
-    private void Shoot(GameObject gameObject)
-    {
-        Instantiate(gameObject, this.transform.position, this.transform.rotation);
+        Debug.Log("Attack - " + skill);
+        GameObject go = Instantiate(bullet, this.transform.position, this.transform.rotation);
+        bulletManager = go.GetComponent<BulletManager>();
+        bulletManager.skill = skill;
     }
 
     private void NavigationCheck()
