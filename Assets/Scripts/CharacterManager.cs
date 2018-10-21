@@ -44,6 +44,7 @@ public class CharacterManager : MonoBehaviour
     public FireWater skillCombo = new FireWater();
 
     private Hit wand;
+    private SphereCollider myCollider;
 
     private static CharacterManager instance;
 
@@ -89,6 +90,7 @@ public class CharacterManager : MonoBehaviour
         inst_Input.combinationSkill += OnCombinationSkill;
 
         wand = transform.Find("Wand").GetComponent<Hit>();
+        myCollider = GetComponent<SphereCollider>();
 
         //skillFirst = new Knockback();
         //skillSecond = new Weakness();
@@ -186,5 +188,25 @@ public class CharacterManager : MonoBehaviour
                 navigationStarted = false;
             }
         }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("player Damaged!!!!!!!!!!!!!!!!!");
+            myCollider.isTrigger = true;
+            collision.collider.isTrigger = true;
+            collision.rigidbody.isKinematic = true;
+            DamageDelay(collision);
+        }
+    }
+
+    private IEnumerator DamageDelay(Collision collision)
+    {
+        yield return new WaitForSeconds(1);
+        myCollider.isTrigger = false;
+        collision.collider.isTrigger = false;
+        collision.rigidbody.isKinematic = false;
     }
 }
