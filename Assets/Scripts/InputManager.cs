@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour {
 	}
 	
 	private ConversationManager inst_conv;
+	private CharacterManager inst_char;
 
 	void Awake()
 	{
@@ -28,6 +29,7 @@ public class InputManager : MonoBehaviour {
 	
 	void Start() {
 		inst_conv = ConversationManager.getInstance();	
+		inst_char = CharacterManager.getInstance();
 		EnableInput = true;
 	}
 	public bool EnableInput{ get; private set; }
@@ -115,7 +117,10 @@ public class InputManager : MonoBehaviour {
 		float verticalWeight = Input.GetAxis("Vertical");
 		if(Mathf.Abs(horizonWeight) <= float.Epsilon && Mathf.Abs(verticalWeight) <= float.Epsilon)
 		{
-			OnStand();
+			if(!inst_char.IsNavigationStarted)
+			{
+				OnStand();
+			}
 		}
 		else
 		{

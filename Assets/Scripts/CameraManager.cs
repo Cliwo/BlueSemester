@@ -5,10 +5,13 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour {
 
     private static CameraManager instance;
+
     public GameObject character;
     public float minDistance;
     public float maxDistance;
 
+    [SerializeField]
+    private CameraEffect_Cinema cinemaEffect;
     private Vector3 dragStartRotation;
 
     public static CameraManager getInstance()
@@ -40,6 +43,20 @@ public class CameraManager : MonoBehaviour {
     {
 
 	}
+    public void StartCinema(float waitTime = float.PositiveInfinity)
+    {
+        cinemaEffect.StartAnimation(waitTime);
+    }
+
+    public void CancelCinema()
+    {
+        cinemaEffect.CancelAnimation();
+    }
+    
+    public void StartShake(float duration, float magnitude = 0.08f)
+    {
+        StartCoroutine(Shake(duration, magnitude));
+    }
 
     void OnScroll(float delta)
     {
@@ -67,6 +84,7 @@ public class CameraManager : MonoBehaviour {
     {
         dragStartRotation = transform.rotation.eulerAngles;
     }
+
     void OnDragging(Vector3 origin, Vector3 delta)
     {
         float y_axis_delta = delta.x / Screen.width;
@@ -89,4 +107,25 @@ public class CameraManager : MonoBehaviour {
         UnityEditor.Handles.DrawWireDisc(discCenter, Vector3.up, radius);
 
     }
+
+    IEnumerator Shake (float duration, float magnitude)
+    {
+        Vector3 originalPos = transform.localPosition;
+
+        float elapsed =0.0f;
+
+        while(elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y , originalPos.z);
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.localPosition = originalPos;
+    }
+
 }

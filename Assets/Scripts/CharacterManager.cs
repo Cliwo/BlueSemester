@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class CharacterManager : MonoBehaviour {
     
 	public GameObject characterModel;
-    //TODO(0916) : NavMeshAgent를 적용하고나서 점프가 작동이 이상함.
     [HideInInspector]
     public NavMeshAgent s_navAgent;
 
@@ -15,10 +14,12 @@ public class CharacterManager : MonoBehaviour {
     private CharacterController s_characterController;
     private CameraManager inst_Camera;
     private InputManager inst_Input;
+	private CharacterAnimationManager inst_Anim;
 
     private Vector3 navigationDestination;
     private Vector3 moveDirection = Vector3.zero;
     private bool navigationStarted = false;
+	public bool IsNavigationStarted {get {return navigationStarted;} }
 	private bool isJumped = false;
 	private const float gravity = -0.03f;
     private const float navigationEpslion = 0.4f;
@@ -37,10 +38,28 @@ public class CharacterManager : MonoBehaviour {
     {
         navigationStarted = true;
         s_navAgent.updatePosition = true;
-		s_navAgent.updateRotation = true;
         navigationDestination = worldPos;
         s_navAgent.destination = worldPos;
+
+		s_characterController.enabled = false;
+		inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.9f);
+		inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
+
+		Vector3 forward = worldPos - transform.position;
+		characterModel.transform.rotation = Quaternion.LookRotation(forward);
     }
+	public void NavigationCancel()
+	{
+		if(navigationStarted)
+		{
+			navigationStarted = false;
+			s_navAgent.updatePosition = false;
+
+			s_characterController.enabled = true;
+			inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.0f);
+			inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
+		}
+	}
 
     void Awake()
     {
@@ -60,12 +79,14 @@ public class CharacterManager : MonoBehaviour {
 	{
 		inst_Camera = CameraManager.getInstance();
 		inst_Input = InputManager.getInstance();
+		inst_Anim = CharacterAnimationManager.getInstance();
 
         s_navAgent = GetComponent<NavMeshAgent>();
         s_characterController = GetComponent<CharacterController>();
 
 		inst_Input.OnStand += OnIdle;
 		inst_Input.OnTranslate += OnTranslate;
+		inst_Input.OnTranslate += (_, __) => NavigationCancel();
 		inst_Input.OnJump += OnJump;
 		inst_Input.mouseLeftClick += OnAttack;
 		inst_Input.firstSkill += OnFirstSkill;
@@ -78,8 +99,10 @@ public class CharacterManager : MonoBehaviour {
 	void Update() 
 	{
 		moveDirection.y += gravity;
-		s_characterController.Move(moveDirection);
-
+		if(s_characterController.enabled)
+		{
+			s_characterController.Move(moveDirection);
+		}
         NavigationCheck();
     }
 
@@ -87,9 +110,16 @@ public class CharacterManager : MonoBehaviour {
 	{
 		moveDirection.x = 0;
 		moveDirection.z = 0;	
+
+		inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.0f);
+		inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
+
 	}
 	void OnTranslate(float horizontalWeight , float verticalWeight)
 	{
+		inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, Mathf.Abs(horizontalWeight) + Mathf.Abs(verticalWeight));
+		inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
+
 		verticalWeight *= horizontalWeightConst;
 		horizontalWeight *= horizontalWeightConst;
 
@@ -107,7 +137,7 @@ public class CharacterManager : MonoBehaviour {
 	{
 		if(s_characterController.isGrounded)
 		{
-			moveDirection = Vector3.up * jumpWeightConst;	
+			moveDirection = Vector3.up * jumpWeightConst;
 			isJumped = true;
 		}
 	}
@@ -139,12 +169,20 @@ public class CharacterManager : MonoBehaviour {
         {
 			Vector2 characterXZ = new Vector2(transform.position.x, transform.position.z);
 			Vector2 dest = new Vector2(navigationDestination.x, navigationDestination.z);
+
             if((characterXZ-dest).sqrMagnitude < float.Epsilon)
             {
                 s_navAgent.updatePosition = false;
-				s_navAgent.updateRotation = false;
                 navigationStarted = false;
+
+				s_characterController.enabled =true;
+				inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, 0.0f);
+				inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
             }
         }
+		if(s_navAgent.updatePosition == false)
+		{
+			s_navAgent.nextPosition = transform.position;
+		}
     }
 }

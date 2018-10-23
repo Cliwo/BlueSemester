@@ -7,6 +7,7 @@ public class InteractiveCharacter : InteractionObject {
     public string textKey;
     private static ConversationManager inst_Conv;
 	private static CharacterManager inst_Char;
+    private static CameraManager inst_Cam;
     public override float InteractingTime
     {
         get
@@ -19,10 +20,13 @@ public class InteractiveCharacter : InteractionObject {
         base.Start();
         inst_Conv = ConversationManager.getInstance();
         inst_Char = CharacterManager.getInstance();
+        inst_Cam = CameraManager.getInstance();
     }
 
     protected override void OnInteractionStart()
 	{
+        inst_Cam.StartShake(2.0f);
+        inst_Cam.StartCinema();
         base.OnInteractionStart();
 		transform.LookAt(inst_Char.transform.position);
         inst_Conv.StartConversation(textKey, OnInteractionEnd, OnInteractionCancel);
@@ -31,6 +35,7 @@ public class InteractiveCharacter : InteractionObject {
     protected override void OnInteractionCancel()
     {
         base.OnInteractionCancel();
+        inst_Cam.CancelCinema();
         Debug.Log("Conversation Canceld");
         inst_Conv.EndConversation();
     }
@@ -38,6 +43,7 @@ public class InteractiveCharacter : InteractionObject {
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
+        inst_Cam.CancelCinema();
         Debug.Log("Conversation End");
         inst_Conv.EndConversation();
     }
