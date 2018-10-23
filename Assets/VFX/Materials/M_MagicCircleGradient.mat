@@ -18,6 +18,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _TextureSample0:
         m_Texture: {fileID: 2800000, guid: 9d16a53b25c7ad44993f0bb90b6ee645, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -29,6 +37,11 @@ Material:
     m_Floats:
     - _Cutoff: 0.5
     - _Gradiant: 1
+    - _NoiseMapStrength: 0
     - _Slider: 0
     - __dirty: 0
-    m_Colors: []
+    m_Colors:
+    - _NoiseMapPannerSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _NoiseMapSize: {r: 512, g: 512, b: 0, a: 0}
+    - _RingPannerSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _Tint: {r: 0, g: 0, b: 0, a: 0}
