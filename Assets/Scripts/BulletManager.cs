@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
-    private float speed = 0.1f;
+    private float speed = 0.05f;
     private float lifespan = 5.0f;
     private Vector3 dir;
     private CameraManager inst_Camera;
@@ -26,6 +26,6 @@ public class BulletManager : MonoBehaviour
 
     private void Update()
     {
-        this.transform.Translate(dir * speed * Time.deltaTime);
+        this.transform.Translate(new Vector3(dir.x, 10, dir.z) * speed * Time.deltaTime);
     }
 }
