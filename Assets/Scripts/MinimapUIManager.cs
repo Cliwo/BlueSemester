@@ -9,9 +9,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     public int MaxMinimapSize;
     public int MinMinimapSize;
 
-    public GameObject MinimapCamera_g;
-    public Canvas Canvas;
-
+    Canvas canvas;
     Camera MinimapCamera;
     RectTransform MinimapRect;
 
@@ -23,11 +21,10 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     void Awake()
     {
         MinimapRect = GetComponent<RectTransform>();
-        MinimapCamera = MinimapCamera_g.GetComponent<Camera>();
-
-        verticalMinimapScale = MinimapCamera.orthographicSize;
-        horizontalMinimapScale = MinimapCamera.aspect * verticalMinimapScale;
-
+        canvas = GetComponentInParent<Canvas>();
+        MinimapCamera = canvas.worldCamera;
+        
+        UpdateMinimapScale();
     }
     void Start()
     {
@@ -41,6 +38,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
             return;
         }
         MinimapCamera.orthographicSize += 2;
+        UpdateMinimapScale();
     }
 
     public void Magnify()
@@ -50,6 +48,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
             return;
         }
         MinimapCamera.orthographicSize -= 2;
+        UpdateMinimapScale();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -73,4 +72,9 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
         return new Vector2(horiz * 2 - 1, vert * 2 - 1); //[-1,+1] , [-1,+1]
     }
 
+    void UpdateMinimapScale()
+    {
+        verticalMinimapScale = MinimapCamera.orthographicSize;
+        horizontalMinimapScale = MinimapCamera.aspect * verticalMinimapScale;
+    }
 }
