@@ -23,9 +23,26 @@ public class CharacterManager : MonoBehaviour {
 	private bool isJumped = false;
 	private const float gravity = -0.03f;
     private const float navigationEpslion = 0.4f;
-    
+	private float hp = 500;
+    private float attack = 10;
+    private float speed = 10;
+    private float cooldown = 5;
+    private float eveasion = 1;
+
     [SerializeField]
     private ParticleManager particles;
+    
+    public Knockback skillFirst = new Knockback();
+    public Weakness skillSecond = new Weakness();
+    public FireWater skillCombo = new FireWater();
+
+    private Hit wand;
+    private SphereCollider myCollider;
+
+    [SerializeField]
+    private GameObject bullet;
+
+    private BulletManager bulletManager;
 
 
     private static CharacterManager instance;
@@ -142,26 +159,6 @@ public class CharacterManager : MonoBehaviour {
 		}
 	}
 
-	void OnAttack()
-	{
-		Debug.Log("Attack!");
-	}
-	
-	void OnFirstSkill()
-	{
-		Debug.Log("First skill Dummy");
-        particles.OnSkill();
-	}
-
-	void OnSecondSkill()
-	{
-		Debug.Log("Second skill Dummy");
-	}
-	
-	void OnCombinationSkill()
-	{
-		Debug.Log("Combination skill Dummy");
-	}
 
     void NavigationCheck()
     {
@@ -185,4 +182,68 @@ public class CharacterManager : MonoBehaviour {
 			s_navAgent.nextPosition = transform.position;
 		}
     }
+
+	    private void OnAttack()
+    {
+        MeleeAttack();
+    }
+
+    private void OnFirstSkill()
+    {
+        RangeAttack(skillFirst);
+    }
+
+    private void OnSecondSkill()
+    {
+        RangeAttack(skillSecond);
+    }
+
+    private void OnCombinationSkill()
+    {
+        RangeAttack(skillCombo);
+    }
+
+    private void MeleeAttack()
+    {
+        Debug.Log("Attack!");
+        wand.GetComponent<CapsuleCollider>().enabled = true;
+        StartCoroutine("AttackDelay");
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(3);
+        wand.GetComponent<CapsuleCollider>().enabled = false;
+        Debug.Log("OffAttack");
+    }
+
+    private void RangeAttack(ICrowdControlSkill skill)
+    {
+        Debug.Log("Attack - " + skill);
+        GameObject go = Instantiate(bullet, this.transform.position, this.transform.rotation);
+        bulletManager = go.GetComponent<BulletManager>();
+        bulletManager.skill = skill;
+    }
+
+	public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("player Damaged!!!!!!!!!!!!!!!!!");
+            myCollider.isTrigger = true;
+            collision.collider.isTrigger = true;
+            collision.rigidbody.isKinematic = true;
+            StartCoroutine(DamageDelay(collision));
+		}
+	}
+
+	private IEnumerator DamageDelay(Collision collision)
+    {
+        yield return new WaitForSeconds(1);
+        myCollider.isTrigger = false;
+        collision.collider.isTrigger = false;
+        collision.rigidbody.isKinematic = false;
+    }
 }
+
+

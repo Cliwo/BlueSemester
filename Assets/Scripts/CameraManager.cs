@@ -9,6 +9,8 @@ public class CameraManager : MonoBehaviour {
     public GameObject character;
     public float minDistance;
     public float maxDistance;
+    public float currentDistance;
+
 
     [SerializeField]
     private CameraEffect_Cinema cinemaEffect;
@@ -78,6 +80,7 @@ public class CameraManager : MonoBehaviour {
         {
             transform.Translate(dis.normalized * delta, Space.World);
         }
+        currentDistance = currentSqrMag;
     }
 
     void OnDragStart()
