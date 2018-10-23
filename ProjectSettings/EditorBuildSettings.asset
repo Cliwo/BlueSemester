@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Title.unity
+    guid: 62941ddddd5c84551a701d1cfe21b122
+  - enabled: 1
+    path: Assets/LowpolyDungeonAssets/Demo Scene/Demo Scene Test.unity
+    guid: 2af71e59e87863849ae479dfa2aae16f
   m_configObjects: {}

@@ -33,5 +33,6 @@ public class CursorManager : MonoBehaviour {
 	{
 		public const int NORMAL = 0;
 		public const int EXPAND = 1;
+		public const int ROTATION = 2;
 	}
 }
