@@ -8,9 +8,8 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
 {
     public int MaxMinimapSize;
     public int MinMinimapSize;
-
+    public Camera MinimapCamera;
     Canvas canvas;
-    Camera MinimapCamera;
     RectTransform MinimapRect;
 
     MinimapManager inst_Minimap;
@@ -22,7 +21,6 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     {
         MinimapRect = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
-        MinimapCamera = canvas.worldCamera;
         
         UpdateMinimapScale();
     }
@@ -67,7 +65,7 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     Vector2 ClampClickPosition(Vector2 pos)
     {
         float vert = (pos.y + MinimapRect.rect.height) / MinimapRect.rect.height;
-        float horiz = (pos.x + MinimapRect.rect.width) / MinimapRect.rect.width;
+        float horiz = (pos.x + MinimapRect.rect.width) / MinimapRect.rect.width ;
 
         return new Vector2(horiz * 2 - 1, vert * 2 - 1); //[-1,+1] , [-1,+1]
     }

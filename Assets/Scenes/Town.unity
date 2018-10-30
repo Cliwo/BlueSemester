@@ -239,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxMinimapSize: 12
   MinMinimapSize: 4
+  MinimapCamera: {fileID: 183859037}
 --- !u!114 &21113582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,6 +744,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c16e4f9e8d5feea48b5c25b00e76fd0a, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c16e4f9e8d5feea48b5c25b00e76fd0a, type: 3}
   m_IsPrefabAsset: 0
@@ -1163,6 +1168,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 35a72d4b280a37d4aa47823c4a74dba6,
     type: 3}
   m_PrefabInternal: {fileID: 173383968}
+--- !u!20 &183859037 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20722161421587214, guid: 7a6f1db62330142f49091c3966c8e1dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 2066443101}
 --- !u!1001 &246011115
 Prefab:
   m_ObjectHideFlags: 0
@@ -2410,6 +2420,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   realMinimap: {fileID: 21113580}
+  MaximumRectSize: 600
+  MinimumRectSize: 300
 --- !u!222 &747203862
 CanvasRenderer:
   m_ObjectHideFlags: 0
