@@ -56,8 +56,12 @@ public class SpawnArea : MonoBehaviour {
 				{
 					GameObject instantiated = GameObject.Instantiate(Resource);
 					instantiated.gameObject.transform.position = newPos;
-					instantiated.transform.parent = transform;
 					Resources.Add(instantiated);
+
+					instantiated.transform.parent = transform;
+					Collider instantiatedCol = instantiated.GetComponent<Collider>();
+					instantiatedCol.enabled = false;
+					instantiatedCol.enabled = true;
 				}
 				else
 				{	
@@ -94,7 +98,17 @@ public class SpawnArea : MonoBehaviour {
 				break;
 			}
 		}
-		while(Resources.Any( (g) => new Bounds(copy, colSize).Intersects(g.GetComponent<Collider>().bounds) ) && index < tryCount);
+		while(Resources.Any( (g) => {
+			Bounds testBounds = new Bounds(copy, colSize);
+			Collider exsistingCollider = g.GetComponent<Collider>();
+		
+			Bounds exsistingBounds = exsistingCollider.bounds;
+
+			Debug.DrawRay(exsistingBounds.center, Vector3.up * 3.0f, Color.cyan, 1.0f);
+			
+			bool temp = testBounds.Intersects(exsistingBounds);
+			return temp;
+			 }) && index < tryCount);
 		// 개선 가능 : 아에 Resources 의 bounds만 따로 저장하기
 
 		if(index == tryCount)
@@ -103,6 +117,8 @@ public class SpawnArea : MonoBehaviour {
 			return false;
 		}
 		
+		Mesh mesh = Resource.GetComponent<MeshFilter>().mesh;
+		pos.y += mesh.bounds.extents.y * Resource.transform.localScale.y;
 		return true;
 	}
 }
