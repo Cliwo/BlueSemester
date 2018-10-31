@@ -13,14 +13,15 @@ public class SpawnArea : MonoBehaviour {
 	public int GeneratingCountAtOnce; /* 한 번에 생성 갯수 */
 	public float UpdateInterval; /* 업데이트 주기 */
 
-	private List<GameObject> InstantiatedResources;
-	private List<Collider> OccupiedArea;
-	public GameObject Resource; //Manager가 생기면 옮길 수도
+	public List<GameObject> ResourceTemplates; //Manager가 생기면 옮길 수도
 	public SpawnObjectKind kind; //Manager가 생기면 옮길 수도
 	public enum SpawnObjectKind //Manager가 생기면 옮길 수도
 	{
 		TREE, SHELL, IRON_ORE, SULFUR,
 	}
+	private List<GameObject> InstantiatedResources;
+	private List<Collider> OccupiedArea;
+	
 
 	float minWorldX;
 	float maxWorldX;
@@ -68,12 +69,13 @@ public class SpawnArea : MonoBehaviour {
 	{
 		for(int i = 0 ; i < count ; i++)
 		{	
-			Collider col = Resource.GetComponent<Collider>();
+			int randomIndex = Random.Range(0, ResourceTemplates.Count);
+			Collider col = ResourceTemplates[randomIndex].GetComponent<Collider>();
 			Vector3 newPos;
 			float desiredSize = Random.Range(minimumScale, maximumScale);
-			if(GetRandomValidPosition(out newPos, col.bounds.size * desiredSize))
+			if(GetRandomValidPosition(out newPos, col.bounds.size * desiredSize, GetMeshHalfHeight(ResourceTemplates[randomIndex])))
 			{
-				GameObject instantiated = GameObject.Instantiate(Resource);
+				GameObject instantiated = GameObject.Instantiate(ResourceTemplates[randomIndex]);
 				instantiated.gameObject.transform.position = newPos;
 				instantiated.gameObject.transform.localScale *= desiredSize;
 				InstantiatedResources.Add(instantiated);
@@ -92,7 +94,7 @@ public class SpawnArea : MonoBehaviour {
 			}
 		}
 	}
-	private bool GetRandomValidPosition(out Vector3 pos, Vector3 colSize, int tryCount = 1000)
+	private bool GetRandomValidPosition(out Vector3 pos, Vector3 colSize, float halfHeight, int tryCount = 1000)
 	{
 		Vector3 copy;
 		int index = 0; 
@@ -121,7 +123,7 @@ public class SpawnArea : MonoBehaviour {
 			return false;
 		}
 		
-		pos.y += GetMeshHalfHeight(Resource);
+		pos.y += halfHeight;
 		return true;
 	}
 
