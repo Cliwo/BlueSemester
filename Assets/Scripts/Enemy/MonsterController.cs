@@ -8,7 +8,7 @@ public class MonsterController : MonoBehaviour
 
     private float maxHP = 50;
     private float attack = 10;
-    private float speed = 5;
+    private float speed = 1;
     private float atkSpeed = 10;
     private float currentHP;
 
@@ -16,14 +16,17 @@ public class MonsterController : MonoBehaviour
     private Transform[] patrolPoints;
 
     private int currentPoint;
+    private int beforePoint;
 
     private Sight sight;
     private Transform target;
     private ICrowdControlSkill skill;
+    private EffectManager effectManager;
 
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
+        effectManager = GetComponentInChildren<EffectManager>();
     }
 
     private void Start()
@@ -34,14 +37,24 @@ public class MonsterController : MonoBehaviour
         currentHP = maxHP;
         transform.position = patrolPoints[0].position;
         currentPoint = 0;
+        effectManager.StartEffects("MagicCircle");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
         {
+            effectManager.StartEffects("SkillFire");
             skill = other.gameObject.GetComponent<BulletManager>().skill;
             currentHP = skill.Damage(currentHP);
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            effectManager.StartEffects("SlimeAttack");
         }
     }
 
@@ -74,6 +87,7 @@ public class MonsterController : MonoBehaviour
             currentPoint = 0;
         }
         transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
+        transform.LookAt(patrolPoints[currentPoint].position);
     }
 
     public void Death()
@@ -96,6 +110,7 @@ public class MonsterController : MonoBehaviour
     public void Chase()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        transform.LookAt(target.position);
     }
 
     public bool IsDamaged()
