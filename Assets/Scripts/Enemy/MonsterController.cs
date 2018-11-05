@@ -8,12 +8,16 @@ public class MonsterController : MonoBehaviour
 
     private float maxHP = 50;
     private float attack = 10;
-    private float speed = 5;
+    private float speed = 1;
     private float atkSpeed = 10;
     private float currentHP;
 
     [SerializeField]
     private Transform[] patrolPoints;
+
+    private EffectManager effectManager;
+
+    //public Transform spawnPoint;
 
     private int currentPoint;
 
@@ -24,6 +28,7 @@ public class MonsterController : MonoBehaviour
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
+        effectManager = GetComponentInChildren<EffectManager>();
     }
 
     private void Start()
@@ -32,6 +37,7 @@ public class MonsterController : MonoBehaviour
         target = inst_Character.transform;
 
         currentHP = maxHP;
+        //patrolPoints[0].position = spawnPoint.position;
         transform.position = patrolPoints[0].position;
         currentPoint = 0;
     }
@@ -40,8 +46,17 @@ public class MonsterController : MonoBehaviour
     {
         if (other.gameObject.tag == "Bullet")
         {
+            effectManager.StartEffect("FireSkill");
             skill = other.gameObject.GetComponent<BulletManager>().skill;
             currentHP = skill.Damage(currentHP);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            effectManager.StartEffect("SlimeAttack");
         }
     }
 
