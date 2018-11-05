@@ -454,6 +454,7 @@ MonoBehaviour:
   MaximumCount: 20
   GeneratingCountAtOnce: 5
   UpdateInterval: 1
+  objectInterval: 3
   ResourceTemplates:
   - {fileID: 1775569332}
   - {fileID: 310754921}

@@ -12,6 +12,7 @@ public class SpawnArea : MonoBehaviour {
 	public int MaximumCount; /* 최대 자원 갯수 */
 	public int GeneratingCountAtOnce; /* 한 번에 생성 갯수 */
 	public float UpdateInterval; /* 업데이트 주기 */
+	public float objectInterval; /* 오브젝트 사이에 일괄적으로 부여할 간격 */
 
 	public List<GameObject> ResourceTemplates; //Manager가 생기면 옮길 수도
 	public SpawnObjectKind kind; //Manager가 생기면 옮길 수도
@@ -20,7 +21,7 @@ public class SpawnArea : MonoBehaviour {
 		TREE, SHELL, IRON_ORE, SULFUR,
 	}
 	private List<GameObject> InstantiatedResources;
-	private List<Collider> OccupiedArea;
+	private List<Bounds> OccupiedArea;
 	
 
 	float minWorldX;
@@ -32,7 +33,7 @@ public class SpawnArea : MonoBehaviour {
 	void Start() 
 	{
 		InstantiatedResources = new List<GameObject>();
-		OccupiedArea = new List<Collider>();
+		OccupiedArea = new List<Bounds>();
 
 		Collider instantiateAvailableArea = GetComponent<Collider>(); 
 		GetComponent<MeshRenderer>().enabled = false;
@@ -60,7 +61,7 @@ public class SpawnArea : MonoBehaviour {
 	}
 	public void RemoveGameObject(GameObject g)
 	{
-		OccupiedArea.Remove(g.GetComponent<Collider>());
+		OccupiedArea.Remove(g.GetComponent<MeshRenderer>().bounds);
 		InstantiatedResources.Remove(g);
 		DestroyImmediate(g);
 	}
@@ -70,10 +71,10 @@ public class SpawnArea : MonoBehaviour {
 		for(int i = 0 ; i < count ; i++)
 		{	
 			int randomIndex = Random.Range(0, ResourceTemplates.Count);
-			Collider col = ResourceTemplates[randomIndex].GetComponent<Collider>();
+			MeshRenderer m_renderer = ResourceTemplates[randomIndex].GetComponent<MeshRenderer>();
 			Vector3 newPos;
 			float desiredSize = Random.Range(minimumScale, maximumScale);
-			if(GetRandomValidPosition(out newPos, col.bounds.size * desiredSize, GetMeshHalfHeight(ResourceTemplates[randomIndex])))
+			if(GetRandomValidPosition(out newPos, m_renderer.bounds.size * desiredSize * objectInterval, GetMeshHalfHeight(ResourceTemplates[randomIndex])))
 			{
 				GameObject instantiated = GameObject.Instantiate(ResourceTemplates[randomIndex]);
 				instantiated.gameObject.transform.position = newPos;
@@ -82,10 +83,10 @@ public class SpawnArea : MonoBehaviour {
 
 				instantiated.transform.parent = transform;
 				
-				Collider instantiatedCol = instantiated.GetComponent<Collider>();
-				instantiatedCol.enabled = false; /* 18.10.31 currently this is for unity bug */
-				instantiatedCol.enabled = true;
-				OccupiedArea.Add(instantiatedCol);
+				MeshRenderer instantiatedRenderer = instantiated.GetComponent<MeshRenderer>();
+				instantiatedRenderer.enabled = false; /* 18.10.31 currently this is for unity bug */
+				instantiatedRenderer.enabled = true;
+				OccupiedArea.Add(instantiatedRenderer.bounds);
 			}
 			else
 			{	
@@ -115,7 +116,7 @@ public class SpawnArea : MonoBehaviour {
 				break;
 			}
 		}
-		while(OccupiedArea.Any( (g) => new Bounds(copy, colSize).Intersects(g.bounds)) && index < tryCount);
+		while(OccupiedArea.Any( (g) => new Bounds(copy, colSize).Intersects(g)) && index < tryCount);
 
 		if(index == tryCount)
 		{
