@@ -10,6 +10,8 @@ public class MinimapRect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	private bool IsExpanding;
 
 	public RectTransform realMinimap;
+	public int MaximumRectSize;
+	public int MinimumRectSize;
 
 	private Image image; 
 	private RectTransform rect;
@@ -55,9 +57,14 @@ public class MinimapRect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	void Update() 
 	{
 		if(IsExpanding)
-		{
+		{	
 			Vector2 diff = screenSpaceAnchorPosition - new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
-			realMinimap.sizeDelta = diff;
+			diff.x = Mathf.Clamp(diff.x, MinimumRectSize, MaximumRectSize);
+			diff.y = Mathf.Clamp(diff.y, MinimumRectSize, MaximumRectSize);
+
+			Vector2 minimapDiff = new Vector2(diff.x - 100f, diff.y - 100f); //100f 는 처음 미니맵 width height와 border 의 width height의 차이
+			
+			realMinimap.sizeDelta = minimapDiff;
 			rect.sizeDelta = diff;
 		}	
 	}
