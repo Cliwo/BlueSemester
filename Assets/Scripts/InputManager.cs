@@ -45,7 +45,9 @@ public class InputManager : MonoBehaviour
 
     public event Action OnJump = () => { };
 
-    public event Action mouseLeftClick = () => { };
+    public event Action mouseLeftClickDown = () => { };
+
+    public event Action mouseLeftClickUp = () => { };
 
     public event Action<float> mouseWheel = (_) => { };
 
@@ -65,6 +67,7 @@ public class InputManager : MonoBehaviour
     public InteractionObject.InteractionEventBundle currentInteraction;
 
     private Vector3 mouseDragOriginPos;
+    private Vector3 mouseClickOriginPos;
     private const float eventUpdateInterval = 0.3333f;
     private float leftMouseTimeBucket = 0.0f;
     private bool leftMouseWasDown = false;
@@ -175,6 +178,8 @@ public class InputManager : MonoBehaviour
         mouseWheel(Input.mouseScrollDelta.y);
         if (Input.GetMouseButtonDown(0))
         {
+            mouseClickOriginPos = Input.mousePosition;
+            mouseLeftClickDown();
             leftMouseWasDown = true;
             leftMouseTimeBucket = Time.time;
         }
@@ -189,7 +194,7 @@ public class InputManager : MonoBehaviour
         {
             if (leftMouseWasDown)
             {
-                mouseLeftClick();
+                mouseLeftClickUp();
                 leftMouseWasDown = false;
             }
         }

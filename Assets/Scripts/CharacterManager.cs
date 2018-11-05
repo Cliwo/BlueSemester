@@ -111,7 +111,8 @@ public class CharacterManager : MonoBehaviour
         inst_Input.OnTranslate += OnTranslate;
         inst_Input.OnTranslate += (_, __) => NavigationCancel();
         inst_Input.OnJump += OnJump;
-        inst_Input.mouseLeftClick += OnAttack;
+        inst_Input.mouseLeftClickDown += OnArrow;
+        inst_Input.mouseLeftClickUp += OnAttack;
         inst_Input.firstSkill += OnFirstSkill;
         inst_Input.secondSkill += OnSecondSkill;
         inst_Input.combinationSkill += OnCombinationSkill;
@@ -187,6 +188,15 @@ public class CharacterManager : MonoBehaviour
         {
             s_navAgent.nextPosition = transform.position;
         }
+    }
+
+    private void OnArrow()
+    {
+        DrawArrow();
+    }
+
+    private void DrawArrow()
+    {
     }
 
     private void OnAttack()
