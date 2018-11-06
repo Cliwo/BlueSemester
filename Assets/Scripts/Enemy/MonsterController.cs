@@ -25,10 +25,12 @@ public class MonsterController : MonoBehaviour
     private Sight sight;
     private Transform target;
     private ICrowdControlSkill skill;
+    private AttackRange attackRange;
 
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
+        attackRange = transform.Find("AttackRange").GetComponent<AttackRange>();
         effectManager = GetComponentInChildren<EffectManager>();
     }
 
@@ -39,9 +41,12 @@ public class MonsterController : MonoBehaviour
 
         currentHP = maxHP;
         //patrolPoints[0].position = spawnPoint.position;
-        transform.position = patrolPoints[0].position;
+        if (patrolPoints.Length > 0)
+        {
+            transform.position = patrolPoints[0].position;
+        }
         currentPoint = 0;
-        effectManager.StartEffects("MagicCircle");
+        //effectManager.StartEffects("MagicCircle");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,13 +64,20 @@ public class MonsterController : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("SlimeAttack");
-            effectManager.StartEffects("SlimeAttack");
+            //effectManager.StartEffects("SlimeAttack");
+            StartCoroutine("StopMove");
         }
+    }
+
+    private IEnumerator StopMove()
+    {
+        Debug.Log("stop");
+        speed = 0;
+        yield return new WaitForSeconds(3);
     }
 
     public void Init()
     {
-        Debug.Log("MonsterController Init");
         currentHP = maxHP;
     }
 
@@ -83,16 +95,19 @@ public class MonsterController : MonoBehaviour
 
     public void Patrol()
     {
-        if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
+        if (patrolPoints.Length > 0)
         {
-            currentPoint++;
+            if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
+            {
+                currentPoint++;
+            }
+            if (currentPoint >= patrolPoints.Length)
+            {
+                currentPoint = 0;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
+            transform.LookAt(patrolPoints[currentPoint].position);
         }
-        if (currentPoint >= patrolPoints.Length)
-        {
-            currentPoint = 0;
-        }
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
-        transform.LookAt(patrolPoints[currentPoint].position);
     }
 
     public void Death()
@@ -128,5 +143,23 @@ public class MonsterController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool InAttackRange()
+    {
+        Debug.Log("attackrange? : " + attackRange.inAttackRange);
+        if (attackRange.inAttackRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Monster Attacked");
     }
 }

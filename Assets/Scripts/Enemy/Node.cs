@@ -179,3 +179,44 @@ public class IsDamaged : Node
         }
     }
 }
+
+public class InAttackRange : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        if (monController.InAttackRange())
+        {
+            Debug.Log("InAttackRange true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("InAttackRange false");
+            return false;
+        }
+    }
+}
+
+public class Attack : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Attack true");
+        monController.Attack();
+        return true;
+    }
+}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireWater : ICrowdControlSkill
 {
     private float attack = 20; // 공격력
-    private float range = 3; // 적용 범위
+    private float range = 0.15f; // 적용 범위
 
     public void Shoot(SphereCollider range)
     {

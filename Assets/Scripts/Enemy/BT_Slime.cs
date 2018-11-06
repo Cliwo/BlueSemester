@@ -8,6 +8,7 @@ public class BT_Slime : MonoBehaviour
     private Sequence seqDeath = new Sequence();
     private Sequence seqChase = new Sequence();
     private Sequence seqDamage = new Sequence();
+    private Sequence seqAttack = new Sequence();
 
     private Selector selector = new Selector();
 
@@ -17,6 +18,8 @@ public class BT_Slime : MonoBehaviour
     private InSight inSight = new InSight();
     private Chase chase = new Chase();
     private IsDamaged isDamaged = new IsDamaged();
+    private InAttackRange inAttackRange = new InAttackRange();
+    private Attack attack = new Attack();
 
     private MonsterController monController;
 
@@ -28,7 +31,6 @@ public class BT_Slime : MonoBehaviour
 
     private void Init()
     {
-        Debug.Log("BT_Slime Init");
         monController = gameObject.GetComponent<MonsterController>();
         monController.Init();
 
@@ -38,9 +40,14 @@ public class BT_Slime : MonoBehaviour
         inSight.MonController = monController;
         chase.MonController = monController;
         isDamaged.MonController = monController;
+        inAttackRange.MonController = monController;
+        attack.MonController = monController;
 
         seqDamage.AddChild(chase);
         seqDamage.AddChild(isDamaged);
+
+        seqAttack.AddChild(attack);
+        seqAttack.AddChild(inAttackRange);
 
         seqChase.AddChild(chase);
         seqChase.AddChild(inSight);
@@ -53,6 +60,7 @@ public class BT_Slime : MonoBehaviour
         seqDeath.AddChild(isDead);
 
         root.AddChild(seqDeath);
+        root.AddChild(seqAttack);
         root.AddChild(selector);
     }
 

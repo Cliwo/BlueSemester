@@ -258,13 +258,20 @@ public class CharacterManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            effectManager.StartEffects("PlayerHit");
+            //effectManager.StartEffects("PlayerHit");
             Debug.Log("player Damaged!!!!!!!!!!!!!!!!!");
+            StartCoroutine("StopMove");
             myCollider.isTrigger = true;
             collision.collider.isTrigger = true;
             collision.rigidbody.isKinematic = true;
             StartCoroutine(DamageDelay(collision));
         }
+    }
+
+    private IEnumerator StopMove()
+    {
+        speed = 0;
+        yield return new WaitForSeconds(3);
     }
 
     private IEnumerator DamageDelay(Collision collision)

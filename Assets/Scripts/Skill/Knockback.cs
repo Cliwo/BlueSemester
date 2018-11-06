@@ -5,7 +5,7 @@ using UnityEngine;
 public class Knockback : ICrowdControlSkill
 {
     private float attack = 5; // 공격력
-    private float range = 2; // 적용 범위
+    private float range = 0.15f; // 적용 범위
     private float value = 10; //밀려나는 거리
     private float activeTime = 2; // 적용되는 시간
 
