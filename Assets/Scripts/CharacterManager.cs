@@ -111,7 +111,8 @@ public class CharacterManager : MonoBehaviour
         inst_Input.OnTranslate += OnTranslate;
         inst_Input.OnTranslate += (_, __) => NavigationCancel();
         inst_Input.OnJump += OnJump;
-        inst_Input.mouseLeftClick += OnAttack;
+        inst_Input.mouseLeftClickDown += OnArrow;
+        inst_Input.mouseLeftClickUp += OnAttack;
         inst_Input.firstSkill += OnFirstSkill;
         inst_Input.secondSkill += OnSecondSkill;
         inst_Input.combinationSkill += OnCombinationSkill;
@@ -189,6 +190,15 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    private void OnArrow()
+    {
+        DrawArrow();
+    }
+
+    private void DrawArrow()
+    {
+    }
+
     private void OnAttack()
     {
         MeleeAttack();
@@ -196,16 +206,22 @@ public class CharacterManager : MonoBehaviour
 
     private void OnFirstSkill()
     {
+        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill1);
+        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
         RangeAttack(skillFirst);
     }
 
     private void OnSecondSkill()
     {
+        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill2);
+        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
         RangeAttack(skillSecond);
     }
 
     private void OnCombinationSkill()
     {
+        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill3);
+        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
         RangeAttack(skillCombo);
     }
 
@@ -242,7 +258,7 @@ public class CharacterManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            effectManager.StartEffect("PlayerHit");
+            effectManager.StartEffects("PlayerHit");
             Debug.Log("player Damaged!!!!!!!!!!!!!!!!!");
             myCollider.isTrigger = true;
             collision.collider.isTrigger = true;
