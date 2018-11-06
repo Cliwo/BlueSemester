@@ -25,7 +25,6 @@ public class MonsterController : MonoBehaviour
     private Sight sight;
     private Transform target;
     private ICrowdControlSkill skill;
-    private EffectManager effectManager;
 
     private void Awake()
     {
@@ -49,7 +48,7 @@ public class MonsterController : MonoBehaviour
     {
         if (other.gameObject.tag == "Bullet")
         {
-            effectManager.StartEffect("FireSkill");
+            effectManager.StartEffects("FireSkill");
             skill = other.gameObject.GetComponent<BulletManager>().skill;
             currentHP = skill.Damage(currentHP);
         }
