@@ -58,6 +58,7 @@ public class MonsterController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("SlimeAttack");
             effectManager.StartEffects("SlimeAttack");
         }
     }
@@ -113,8 +114,8 @@ public class MonsterController : MonoBehaviour
 
     public void Chase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        transform.LookAt(target.position);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), speed * Time.deltaTime);
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
     }
 
     public bool IsDamaged()
