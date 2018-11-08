@@ -870,25 +870,6 @@ Prefab:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 114709550282275312, guid: b8c5149fb0df10a43ad3f426e6afe366,
-        type: 2}
-      propertyPath: inSight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1884722070919692, guid: b8c5149fb0df10a43ad3f426e6afe366, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 135107130504255588, guid: b8c5149fb0df10a43ad3f426e6afe366,
-        type: 2}
-      propertyPath: m_Radius
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 135496317900902800, guid: b8c5149fb0df10a43ad3f426e6afe366,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8c5149fb0df10a43ad3f426e6afe366, type: 2}
   m_IsPrefabAsset: 0
@@ -1933,31 +1914,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 1520330594810438, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
-      propertyPath: m_Name
-      value: Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 143032765083488618, guid: 7a6f1db62330142f49091c3966c8e1dd,
-        type: 2}
-      propertyPath: m_Center.y
-      value: 0.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 143032765083488618, guid: 7a6f1db62330142f49091c3966c8e1dd,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 143032765083488618, guid: 7a6f1db62330142f49091c3966c8e1dd,
-        type: 2}
-      propertyPath: m_Height
-      value: 1.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 114250884921038080, guid: 7a6f1db62330142f49091c3966c8e1dd,
-        type: 2}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 1692682540450454, guid: cccd2b1d1f1f84548933489ff318fe5a,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
   m_IsPrefabAsset: 0

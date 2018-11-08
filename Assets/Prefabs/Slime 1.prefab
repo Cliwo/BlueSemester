@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 114172844951224636}
   - component: {fileID: 114833168380622680}
   - component: {fileID: 136456839266742078}
+  - component: {fileID: 136356020351336932}
   m_Layer: 0
   m_Name: Slime 1
   m_TagString: Enemy
@@ -355,7 +356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1968501050955980
 GameObject:
   m_ObjectHideFlags: 1
@@ -882,7 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cfd42248211fb4d94240f7ad39e501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inSight: 1
+  inSight: 0
 --- !u!114 &114833168380622680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -904,7 +905,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 300
+  m_Radius: 350
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135496317900902800
 SphereCollider:
@@ -913,11 +914,24 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1368989298309804}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 100
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136356020351336932
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1744631465900634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 68.9
+  m_Height: 93.6366
+  m_Direction: 1
+  m_Center: {x: 0, y: -6, z: 0.0000019073486}
 --- !u!136 &136456839266742078
 CapsuleCollider:
   m_ObjectHideFlags: 1

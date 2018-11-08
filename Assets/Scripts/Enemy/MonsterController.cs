@@ -26,6 +26,7 @@ public class MonsterController : MonoBehaviour
     private Transform target;
     private ICrowdControlSkill skill;
     private AttackRange attackRange;
+    private CapsuleCollider collider;
 
     private void Awake()
     {
@@ -39,6 +40,8 @@ public class MonsterController : MonoBehaviour
         inst_Character = CharacterManager.getInstance();
         target = inst_Character.transform;
 
+        collider = GetComponent<CapsuleCollider>();
+
         currentHP = maxHP;
         //patrolPoints[0].position = spawnPoint.position;
         if (patrolPoints.Length > 0)
@@ -51,29 +54,17 @@ public class MonsterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(collider, other);
+        }
+
         if (other.gameObject.tag == "Bullet")
         {
             effectManager.StartEffects("FireSkill");
             skill = other.gameObject.GetComponent<BulletManager>().skill;
             currentHP = skill.Damage(currentHP);
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("SlimeAttack");
-            //effectManager.StartEffects("SlimeAttack");
-            StartCoroutine("StopMove");
-        }
-    }
-
-    private IEnumerator StopMove()
-    {
-        Debug.Log("stop");
-        speed = 0;
-        yield return new WaitForSeconds(3);
     }
 
     public void Init()

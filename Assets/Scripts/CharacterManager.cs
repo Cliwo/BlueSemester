@@ -41,7 +41,6 @@ public class CharacterManager : MonoBehaviour
     public FireWater skillCombo = new FireWater();
 
     private Hit wand;
-    private SphereCollider myCollider;
 
     [SerializeField]
     private GameObject bullet;
@@ -254,31 +253,19 @@ public class CharacterManager : MonoBehaviour
         bulletManager.skill = skill;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Player damaged by enemy");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
             //effectManager.StartEffects("PlayerHit");
-            Debug.Log("player Damaged!!!!!!!!!!!!!!!!!");
-            StartCoroutine("StopMove");
-            myCollider.isTrigger = true;
-            collision.collider.isTrigger = true;
-            collision.rigidbody.isKinematic = true;
-            StartCoroutine(DamageDelay(collision));
         }
-    }
-
-    private IEnumerator StopMove()
-    {
-        speed = 0;
-        yield return new WaitForSeconds(3);
-    }
-
-    private IEnumerator DamageDelay(Collision collision)
-    {
-        yield return new WaitForSeconds(1);
-        myCollider.isTrigger = false;
-        collision.collider.isTrigger = false;
-        collision.rigidbody.isKinematic = false;
     }
 }
