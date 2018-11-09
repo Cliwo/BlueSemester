@@ -153,4 +153,42 @@ public class MonsterController : MonoBehaviour
     {
         Debug.Log("Monster Attacked");
     }
+
+    public void Tornado()
+    {
+    }
+
+    public void ThunderStroke()
+    {
+    }
+
+    public void Wield()
+    {
+    }
+
+    public void Pierce()
+    {
+    }
+
+    public void Summon()
+    {
+    }
+
+    public bool IsCorrectSkill()
+    {
+        // true, false 분기 지정 필요
+        return true;
+    }
+
+    public bool IsRestOver()
+    {
+        // true, false 분기 지정 필요
+        // 스킬간의 간격이 길 경우 텀을 주기 위해
+        return true;
+    }
+
+    public void RestInit()
+    {
+        // 스킬간의 간격이 길 경우 텀을 주기 위해
+    }
 }
