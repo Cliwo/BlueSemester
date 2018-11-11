@@ -66,7 +66,7 @@ public class CameraManager : MonoBehaviour
     {
         Vector3 dis = character.transform.position - transform.position;
         float currentSqrMag = dis.sqrMagnitude;
-        Debug.Log(currentSqrMag); // 스크롤이 안먹는다.18.11.05
+        // Debug.Log(currentSqrMag); // 스크롤이 안먹는다.18.11.05
         if (currentSqrMag < minDistance * minDistance && delta > 0 || currentSqrMag > maxDistance * maxDistance && delta < 0)
         {
             return;

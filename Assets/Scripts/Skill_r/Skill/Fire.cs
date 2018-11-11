@@ -2,15 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+public class Fire : Skill
+{
 	
-	// Update is called once per frame
-	void Update () {
-		
+    public override string SoundEffectID
+    {
+        get
+        {
+            return "FireSkill";
+        }
+    }
+
+    public override float SkillActiveDuration
+    {
+        get
+        {
+            return 2.0f;
+        }
+    }
+
+    public override float SkillPreDelay
+    {
+        get
+        {
+            return 0.0f;
+        }
+    }
+
+    public override float SkillPostDelay
+	{
+		get
+		{
+			return 0.0f;
+		}
 	}
+
+    public override float SkillCoolDownTime
+	{
+		get
+		{
+			return 0.0f;
+		}
+	}
+
+    protected override void ApplyCC(Pawn target)
+    {
+        target.states.Add(new KnockBack(target));
+    }
 }

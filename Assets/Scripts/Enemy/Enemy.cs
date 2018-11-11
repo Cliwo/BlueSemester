@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         inst_Character = CharacterManager.getInstance();
         rigidbody = GetComponent<Rigidbody>();
 
-        skillFirst = inst_Character.skillFirst;
+        // skillFirst = inst_Character.skillFirst;
         skillSecond = inst_Character.skillSecond;
         skillCombo = inst_Character.skillCombo;
 

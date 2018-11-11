@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KnockBack : ICrowdControl
 {
-	private static float knockBackMagnitude = 2.0f;
+	private static float knockBackMagnitude = 0.2f;
     public KnockBack(Pawn owner) : base(owner)
     {
     }

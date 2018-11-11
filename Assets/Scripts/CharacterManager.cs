@@ -36,7 +36,7 @@ public class CharacterManager : MonoBehaviour
 
     private EffectManager effectManager;
 
-    public Knockback skillFirst = new Knockback();
+    //public Knockback skillFirst = new Knockback();
     public Weakness skillSecond = new Weakness();
     public FireWater skillCombo = new FireWater();
 
@@ -47,6 +47,11 @@ public class CharacterManager : MonoBehaviour
     private GameObject bullet;
 
     private BulletManager bulletManager;
+
+    [SerializeField]
+    private GameObject fireSkillForDebug;
+
+    public Transform targetForSkillDebug;
 
     private static CharacterManager instance;
 
@@ -206,9 +211,7 @@ public class CharacterManager : MonoBehaviour
 
     private void OnFirstSkill()
     {
-        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill1);
-        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
-        RangeAttack(skillFirst);
+        Skill.GenerateSkill(fireSkillForDebug, targetForSkillDebug.position, Quaternion.identity);
     }
 
     private void OnSecondSkill()
@@ -227,9 +230,9 @@ public class CharacterManager : MonoBehaviour
 
     private void MeleeAttack()
     {
-        Debug.Log("Attack!");
-        wand.GetComponent<CapsuleCollider>().enabled = true;
-        StartCoroutine("AttackDelay");
+        // Debug.Log("Attack!");
+        // wand.GetComponent<CapsuleCollider>().enabled = true;
+        // StartCoroutine("AttackDelay");
     }
 
     private IEnumerator AttackDelay()
