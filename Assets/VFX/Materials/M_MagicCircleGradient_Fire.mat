@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: M_MagicCircleGradient
+  m_Name: M_MagicCircleGradient_Fire
   m_Shader: {fileID: 4800000, guid: e3cc62ef3c6ec9946ba73ebf116c480e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
