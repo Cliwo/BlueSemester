@@ -17,7 +17,7 @@ public class Fire : Skill
     {
         get
         {
-            return 2.0f;
+            return 3.0f;
         }
     }
 

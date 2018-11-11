@@ -26,8 +26,8 @@ public abstract class ICrowdControl {
 	{
 		if(Time.time > instantiatedTime + ActiveDuration)
 		{
-			owner.states.Remove(this); // 이걸 여기서 하는게 맞나? 
 			OnDeactivate();
+			isDirty = true;
 		}
 	}
 

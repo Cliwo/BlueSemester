@@ -13,6 +13,7 @@ public class CharacterManager : MonoBehaviour
     public float jumpWeightConst = 2.6f;
     public float horizontalWeightConst = 0.2f;
 
+    private Pawn s_Pawn;
     private CharacterController s_characterController;
     private CameraManager inst_Camera;
     private InputManager inst_Input;
@@ -24,12 +25,7 @@ public class CharacterManager : MonoBehaviour
     public bool IsNavigationStarted { get { return navigationStarted; } }
     private bool isJumped = false;
     private const float gravity = -0.03f;
-    private const float navigationEpslion = 0.4f;
-    private float hp = 500;
-    private float attack = 10;
-    private float speed = 10;
-    private float cooldown = 5;
-    private float eveasion = 1;
+
 
     [SerializeField]
     private ParticleManager particles;
@@ -111,6 +107,7 @@ public class CharacterManager : MonoBehaviour
 
         s_navAgent = GetComponent<NavMeshAgent>();
         s_characterController = GetComponent<CharacterController>();
+        s_Pawn = GetComponent<Pawn>();
 
         inst_Input.OnStand += OnIdle;
         inst_Input.OnTranslate += OnTranslate;
@@ -129,9 +126,9 @@ public class CharacterManager : MonoBehaviour
     private void Update()
     {
         moveDirection.y += gravity;
-        if (s_characterController.enabled)
+        if (s_characterController.enabled && !s_Pawn.lockOtherComponentInfluenceOnTransform)
         {
-            s_characterController.Move(moveDirection);
+            s_characterController.Move(moveDirection); //TODO : input에서는 Fixed에서 Update하는데 얘는 Update에서 함
         }
         NavigationCheck();
     }

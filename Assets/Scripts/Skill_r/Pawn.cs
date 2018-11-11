@@ -21,14 +21,19 @@ public class Pawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		List<ICrowdControl> dirtyLists = new List<ICrowdControl>();
 		foreach(var state in states)
 		{
-			state.Update(); //states가 update도중 지워질수있다..! 문제!
+			state.Update();
+			if(state.isDirty)
+			{
+				dirtyLists.Add(state);
+			}
+		}
+		foreach(var state in dirtyLists)
+		{
+			states.Remove(state);
 		}
 	}
 
-	void KnockBack()
-	{
-
-	}
 }

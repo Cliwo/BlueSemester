@@ -13,7 +13,7 @@ public class KnockBack : ICrowdControl
     {
         get
         {
-            return 0.5f;
+            return 0.1f;
         }
     }
 
@@ -30,6 +30,6 @@ public class KnockBack : ICrowdControl
     public override void Update()
     {
         CheckDeactivate();
-		owner.transform.Translate(Vector3.back * knockBackMagnitude);
+		owner.transform.Translate(Vector3.forward * knockBackMagnitude);
     }
 }
