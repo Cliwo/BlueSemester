@@ -259,6 +259,11 @@ public class CharacterManager : MonoBehaviour
         {
             Debug.Log("Player damaged by enemy");
         }
+
+        if (other.gameObject.tag == "EnemySkill")
+        {
+            Debug.Log("Player damaged by enemy skill");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

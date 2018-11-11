@@ -8,6 +8,7 @@ TagManager:
   - Fairy
   - Wand
   - Bullet
+  - EnemySkill
   layers:
   - Default
   - TransparentFX

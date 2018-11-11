@@ -20,6 +20,9 @@ public class RaidMonster : MonoBehaviour
     [SerializeField]
     private GameObject rangedSpell;
 
+    [SerializeField]
+    private GameObject hitEffect;
+
     private void Start()
     {
         inst_Character = CharacterManager.getInstance();
@@ -70,6 +73,7 @@ public class RaidMonster : MonoBehaviour
                 Pierce();
                 break;
         }
+
         currentSkill++;
         if (currentSkill >= skillSet.Length)
         {
@@ -87,8 +91,7 @@ public class RaidMonster : MonoBehaviour
     private void ThunderStroke()
     {
         Debug.Log("ThunderStroke");
-        GameObject clone = Instantiate(rangedSpell, this.transform.position, this.transform.rotation);
-        clone.GetComponent<RangedSpell>().target = targetPlayer;
+        StartEffect();
     }
 
     private void Wield()
@@ -101,8 +104,7 @@ public class RaidMonster : MonoBehaviour
     private void Summon()
     {
         Debug.Log("Summon");
-        GameObject clone = Instantiate(rangedSpell, this.transform.position, this.transform.rotation);
-        clone.GetComponent<RangedSpell>().target = targetPlayer;
+        StartEffect();
     }
 
     private void Pierce()
@@ -110,5 +112,12 @@ public class RaidMonster : MonoBehaviour
         Debug.Log("Pierce");
         GameObject clone = Instantiate(rangedSpell, this.transform.position, this.transform.rotation);
         clone.GetComponent<RangedSpell>().target = targetPlayer;
+    }
+
+    private void StartEffect()
+    {
+        Vector3 pos = new Vector3(targetPlayer.position.x, targetPlayer.position.y + 1.0f, targetPlayer.position.z);
+        GameObject effect = Instantiate(hitEffect, pos, targetPlayer.rotation);
+        Destroy(effect, 5.0f);
     }
 }
