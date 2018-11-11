@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviour //Manager 클래스가 아님, 모든 monster에 붙음 
 {
     private CharacterManager inst_Character;
 
@@ -34,18 +34,19 @@ public class MonsterController : MonoBehaviour
         inst_Character = CharacterManager.getInstance();
         target = inst_Character.transform;
 
-        currentHP = maxHP;
+        currentHP = maxHP; 
         transform.position = patrolPoints[0].position;
         currentPoint = 0;
-        effectManager.StartEffects("MagicCircle");
+        effectManager.StartEffects("MagicCircle"); //맵에 존재하는 모든 몬스터에 일괄적으로 effect를 발동시킨다.  
+        //개별로 생성될 때 effect가 필요하지 않나? (SpawnManager가 필요)
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //bullet 과 충돌 시 
     {
         if (other.gameObject.tag == "Bullet")
         {
             effectManager.StartEffects("SkillFire");
-            skill = other.gameObject.GetComponent<BulletManager>().skill;
+            skill = other.gameObject.GetComponent<BulletManager>().skill; //!? 모든 bullet에 bulletManager가 붙어있음.. 
             currentHP = skill.Damage(currentHP);
         }
     }
@@ -54,7 +55,7 @@ public class MonsterController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            effectManager.StartEffects("SlimeAttack");
+            effectManager.StartEffects("SlimeAttack"); // 슬라임의 '타격' 처리 (유저의 '피격')
         }
     }
 
@@ -64,7 +65,7 @@ public class MonsterController : MonoBehaviour
         currentHP = maxHP;
     }
 
-    public bool IsDead()
+    public bool IsDead() //Dead 시 움직임을 막을 수 있어야함. BT 코드안에 있을 수 있음. 
     {
         if (currentHP <= 0)
         {
