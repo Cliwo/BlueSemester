@@ -57,6 +57,13 @@ public class Water : Skill
             return "WaterSkill";
         }
     }
+    protected override int targetLayer
+    {
+        get
+        {
+            return ENEMY_LAYER;
+        }
+    }
 
     override protected void ApplyCC(Pawn target)
     {

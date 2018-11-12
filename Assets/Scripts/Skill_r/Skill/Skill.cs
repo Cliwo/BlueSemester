@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Internal;
 public abstract class Skill : MonoBehaviour{
+	protected const int PLAYER_LAYER = 9;
+	protected const int ENEMY_LAYER = 10;
 
+	protected abstract int targetLayer { get; }
 	[SerializeField]
 	protected GameObject Particle;
 	[SerializeField]
@@ -40,7 +43,7 @@ public abstract class Skill : MonoBehaviour{
 	{
 		//TODO : Layer를 설정해서 몬스터의 스킬은 몬스터들끼리는 맞지 않고, 캐릭터 본인의 스킬은 본인이 안맞도록해야함
 		Pawn pawnScript = other.GetComponent<Pawn>();
-		if(pawnScript != null)
+		if(pawnScript != null && pawnScript.gameObject.layer == targetLayer)
 		{
 			ApplyCC(pawnScript);
 		}

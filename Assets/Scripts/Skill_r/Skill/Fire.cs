@@ -57,6 +57,14 @@ public class Fire : Skill
 		}
 	}
 
+    protected override int targetLayer
+    {
+        get
+        {
+            return PLAYER_LAYER;
+        }
+    }
+
     protected override void ApplyCC(Pawn target)
     {
         target.states.Add(new KnockBack(target));
