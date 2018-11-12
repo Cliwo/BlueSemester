@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class Fire : Skill
 {
-	
+    /* 스킬 종류별로 쿨타임이 달라야하기 때문 */
+	private static float LastTime;
+    public override float SkillLastUsedTimePerKind 
+    {
+        get
+        {
+            return LastTime;
+        }
+        protected set
+        {
+            LastTime = value;
+        }
+    }
     public override string SoundEffectID
     {
         get
@@ -41,7 +53,7 @@ public class Fire : Skill
 	{
 		get
 		{
-			return 0.0f;
+			return 2.0f;
 		}
 	}
 

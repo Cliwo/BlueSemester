@@ -46,6 +46,8 @@ public class CharacterManager : MonoBehaviour
 
     [SerializeField]
     private GameObject fireSkillForDebug;
+    [SerializeField]
+    private GameObject secondSkillForDebug;
 
     public Transform targetForSkillDebug;
 
@@ -213,9 +215,7 @@ public class CharacterManager : MonoBehaviour
 
     private void OnSecondSkill()
     {
-        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill2);
-        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
-        RangeAttack(skillSecond);
+        Skill.GenerateSkill(secondSkillForDebug, transform.position, Quaternion.identity);
     }
 
     private void OnCombinationSkill()

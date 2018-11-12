@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class Water : Skill
 {
+    private float Speed = 10f;
+    /* 스킬 종류별로 쿨타임이 달라야하기 때문 */
+	private static float LastTime;
+    public override float SkillLastUsedTimePerKind 
+    {
+        get
+        {
+            return LastTime;
+        }
+        protected set
+        {
+            LastTime = value;
+        }
+    }
     public override float SkillPreDelay
     {
         get
         {
-            throw new System.NotImplementedException();
+            return 0.0f;
         }
     }
 
@@ -16,7 +30,7 @@ public class Water : Skill
     {
         get
         {
-            throw new System.NotImplementedException();
+            return 0.0f;
         }
     }
 
@@ -24,7 +38,7 @@ public class Water : Skill
     {
         get
         {
-            throw new System.NotImplementedException();
+            return 1.0f;
         }
     }
 
@@ -44,8 +58,14 @@ public class Water : Skill
         }
     }
 
-    protected override void ApplyCC(Pawn target)
+    override protected void ApplyCC(Pawn target)
     {
-        throw new System.NotImplementedException();
+        target.states.Add(new Slow(target));
+    }
+    
+    override protected void Update()
+    {
+        base.Update();
+        transform.Translate(Vector3.forward * Time.deltaTime * Speed);
     }
 }
