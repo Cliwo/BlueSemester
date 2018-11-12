@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
-    private float speed = 0.1f;
+    private float speed = 0.05f;
     private float lifespan = 5.0f;
     private Vector3 dir;
     private CameraManager inst_Camera;

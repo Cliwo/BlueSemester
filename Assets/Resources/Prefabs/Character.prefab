@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 114250884921038080}
   - component: {fileID: 143032765083488618}
   - component: {fileID: 195913798738085688}
+  - component: {fileID: 136475993923655220}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -1010,7 +1011,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520330594810438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.35, y: 0.04, z: -10.54}
+  m_LocalPosition: {x: -0.53, y: 2.6, z: -17.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4187186417456174}
@@ -1778,7 +1779,7 @@ MonoBehaviour:
   jumpWeightConst: 0.31
   horizontalWeightConst: 0.08
   particles: {fileID: 0}
-  bullet: {fileID: 0}
+  bullet: {fileID: 1692682540450454, guid: cccd2b1d1f1f84548933489ff318fe5a, type: 2}
 --- !u!114 &114449668915004518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1795,6 +1796,19 @@ MonoBehaviour:
   maxDistance: 12
   currentDistance: 0
   cinemaEffect: {fileID: 0}
+--- !u!136 &136475993923655220
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520330594810438}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.28
+  m_Height: 1.34
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.61, z: 0}
 --- !u!137 &137039942133247460
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2162,13 +2176,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.4
-  m_Radius: 0.5
+  m_Height: 1.3
+  m_Radius: 0.24
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.2, z: 0}
+  m_Center: {x: 0, y: 0.61, z: 0}
 --- !u!195 &195913798738085688
 NavMeshAgent:
   m_ObjectHideFlags: 1

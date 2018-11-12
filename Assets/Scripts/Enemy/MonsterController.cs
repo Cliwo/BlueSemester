@@ -15,17 +15,23 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
     [SerializeField]
     private Transform[] patrolPoints;
 
+    private EffectManager effectManager;
+
+    //public Transform spawnPoint;
+
     private int currentPoint;
     private int beforePoint;
 
     private Sight sight;
     private Transform target;
     private ICrowdControlSkill skill;
-    private EffectManager effectManager;
+    private AttackRange attackRange;
+    private CapsuleCollider collider;
 
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
+        attackRange = transform.Find("AttackRange").GetComponent<AttackRange>();
         effectManager = GetComponentInChildren<EffectManager>();
     }
 
@@ -34,34 +40,53 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
         inst_Character = CharacterManager.getInstance();
         target = inst_Character.transform;
 
+<<<<<<< HEAD
         currentHP = maxHP; 
         transform.position = patrolPoints[0].position;
         currentPoint = 0;
         effectManager.StartEffects("MagicCircle"); //맵에 존재하는 모든 몬스터에 일괄적으로 effect를 발동시킨다.  
         //개별로 생성될 때 effect가 필요하지 않나? (SpawnManager가 필요)
+=======
+        collider = GetComponent<CapsuleCollider>();
+
+        currentHP = maxHP;
+        //patrolPoints[0].position = spawnPoint.position;
+        if (patrolPoints.Length > 0)
+        {
+            transform.position = patrolPoints[0].position;
+        }
+        currentPoint = 0;
+        //effectManager.StartEffects("MagicCircle");
+>>>>>>> master
     }
 
     private void OnTriggerEnter(Collider other) //bullet 과 충돌 시 
     {
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Player")
         {
+<<<<<<< HEAD
             effectManager.StartEffects("SkillFire");
             skill = other.gameObject.GetComponent<BulletManager>().skill; //!? 모든 bullet에 bulletManager가 붙어있음.. 
             currentHP = skill.Damage(currentHP);
+=======
+            Physics.IgnoreCollision(collider, other);
+>>>>>>> master
         }
-    }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Bullet")
         {
+<<<<<<< HEAD
             effectManager.StartEffects("SlimeAttack"); // 슬라임의 '타격' 처리 (유저의 '피격')
+=======
+            effectManager.StartEffects("FireSkill");
+            skill = other.gameObject.GetComponent<BulletManager>().skill;
+            currentHP = skill.Damage(currentHP);
+>>>>>>> master
         }
     }
 
     public void Init()
     {
-        Debug.Log("MonsterController Init");
         currentHP = maxHP;
     }
 
@@ -79,16 +104,19 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
 
     public void Patrol()
     {
-        if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
+        if (patrolPoints.Length > 0)
         {
-            currentPoint++;
+            if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
+            {
+                currentPoint++;
+            }
+            if (currentPoint >= patrolPoints.Length)
+            {
+                currentPoint = 0;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
+            transform.LookAt(patrolPoints[currentPoint].position);
         }
-        if (currentPoint >= patrolPoints.Length)
-        {
-            currentPoint = 0;
-        }
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
-        transform.LookAt(patrolPoints[currentPoint].position);
     }
 
     public void Death()
@@ -110,8 +138,8 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
 
     public void Chase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        transform.LookAt(target.position);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), speed * Time.deltaTime);
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
     }
 
     public bool IsDamaged()
@@ -124,5 +152,61 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
         {
             return false;
         }
+    }
+
+    public bool InAttackRange()
+    {
+        Debug.Log("attackrange? : " + attackRange.inAttackRange);
+        if (attackRange.inAttackRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Monster Attacked");
+    }
+
+    public void Tornado()
+    {
+    }
+
+    public void ThunderStroke()
+    {
+    }
+
+    public void Wield()
+    {
+    }
+
+    public void Pierce()
+    {
+    }
+
+    public void Summon()
+    {
+    }
+
+    public bool IsCorrectSkill()
+    {
+        // true, false 분기 지정 필요
+        return true;
+    }
+
+    public bool IsRestOver()
+    {
+        // true, false 분기 지정 필요
+        // 스킬간의 간격이 길 경우 텀을 주기 위해
+        return true;
+    }
+
+    public void RestInit()
+    {
+        // 스킬간의 간격이 길 경우 텀을 주기 위해
     }
 }

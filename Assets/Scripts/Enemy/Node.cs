@@ -179,3 +179,194 @@ public class IsDamaged : Node
         }
     }
 }
+
+public class InAttackRange : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        if (monController.InAttackRange())
+        {
+            Debug.Log("InAttackRange true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("InAttackRange false");
+            return false;
+        }
+    }
+}
+
+public class Attack : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Attack true");
+        monController.Attack();
+        return true;
+    }
+}
+
+public class Tornado : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Tornado true");
+        monController.Tornado();
+        return true;
+    }
+}
+
+public class ThunderStroke : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("ThunderStroke true");
+        monController.ThunderStroke();
+        return true;
+    }
+}
+
+public class Wield : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Wield true");
+        monController.Wield();
+        return true;
+    }
+}
+
+public class Pierce : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Pierce true");
+        monController.Pierce();
+        return true;
+    }
+}
+
+public class Summon : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("Summon true");
+        monController.Summon();
+        return true;
+    }
+}
+
+public class IsCorrectSkill : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        if (monController.IsCorrectSkill())
+        {
+            Debug.Log("IsCorrectSkill true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("IsCorrectSkill false");
+            return false;
+        }
+    }
+}
+
+public class IsRestOver : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        if (monController.IsRestOver())
+        {
+            Debug.Log("IsRestOver true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("IsRestOver false");
+            return false;
+        }
+    }
+}
+
+public class RestInit : Node
+{
+    private MonsterController monController;
+
+    public MonsterController MonController
+    {
+        set { monController = value; }
+    }
+
+    public override bool Invoke()
+    {
+        Debug.Log("RestInit true");
+        monController.RestInit();
+        return true;
+    }
+}

@@ -37,7 +37,6 @@ public class CharacterManager : MonoBehaviour
     public FireWater skillCombo = new FireWater();
 
     private Hit wand;
-    private SphereCollider myCollider;
 
     [SerializeField]
     private GameObject bullet;
@@ -227,15 +226,28 @@ public class CharacterManager : MonoBehaviour
 
     private void MeleeAttack()
     {
+<<<<<<< HEAD
         // Debug.Log("Attack!");
         // wand.GetComponent<CapsuleCollider>().enabled = true;
         // StartCoroutine("AttackDelay");
+=======
+        Debug.Log("Attack!");
+        if (wand)
+        {
+            wand = transform.Find("Wand").GetComponent<Hit>();
+            wand.GetComponent<CapsuleCollider>().enabled = true;
+        }
+        StartCoroutine("AttackDelay");
+>>>>>>> master
     }
 
     private IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(3);
-        wand.GetComponent<CapsuleCollider>().enabled = false;
+        if (wand)
+        {
+            wand.GetComponent<CapsuleCollider>().enabled = false;
+        }
         Debug.Log("OffAttack");
     }
 
@@ -247,24 +259,24 @@ public class CharacterManager : MonoBehaviour
         bulletManager.skill = skill;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
-            effectManager.StartEffects("PlayerHit");
-            Debug.Log("player Damaged!!!!!!!!!!!!!!!!!");
-            myCollider.isTrigger = true;
-            collision.collider.isTrigger = true;
-            collision.rigidbody.isKinematic = true;
-            StartCoroutine(DamageDelay(collision));
+            Debug.Log("Player damaged by enemy");
+        }
+
+        if (other.gameObject.tag == "EnemySkill")
+        {
+            Debug.Log("Player damaged by enemy skill");
         }
     }
 
-    private IEnumerator DamageDelay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        yield return new WaitForSeconds(1);
-        myCollider.isTrigger = false;
-        collision.collider.isTrigger = false;
-        collision.rigidbody.isKinematic = false;
+        if (collision.gameObject.tag == "Enemy")
+        {
+            //effectManager.StartEffects("PlayerHit");
+        }
     }
 }
