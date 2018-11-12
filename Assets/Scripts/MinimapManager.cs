@@ -48,6 +48,7 @@ public class MinimapManager : MonoBehaviour {
     {
         //후에 삭제할 것 
         GameObject point = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        point.transform.localScale *=0.5f;
         point.transform.position = pos;
         point.GetComponent<SphereCollider>().enabled = false;
     }

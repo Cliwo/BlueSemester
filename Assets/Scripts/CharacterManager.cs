@@ -41,7 +41,6 @@ public class CharacterManager : MonoBehaviour
     public FireWater skillCombo = new FireWater();
 
     private Hit wand;
-    private SphereCollider myCollider;
 
     [SerializeField]
     private GameObject bullet;
@@ -111,7 +110,8 @@ public class CharacterManager : MonoBehaviour
         inst_Input.OnTranslate += OnTranslate;
         inst_Input.OnTranslate += (_, __) => NavigationCancel();
         inst_Input.OnJump += OnJump;
-        inst_Input.mouseLeftClick += OnAttack;
+        inst_Input.mouseLeftClickDown += OnArrow;
+        inst_Input.mouseLeftClickUp += OnAttack;
         inst_Input.firstSkill += OnFirstSkill;
         inst_Input.secondSkill += OnSecondSkill;
         inst_Input.combinationSkill += OnCombinationSkill;
@@ -189,6 +189,15 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    private void OnArrow()
+    {
+        DrawArrow();
+    }
+
+    private void DrawArrow()
+    {
+    }
+
     private void OnAttack()
     {
         MeleeAttack();
@@ -196,16 +205,22 @@ public class CharacterManager : MonoBehaviour
 
     private void OnFirstSkill()
     {
+        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill1);
+        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
         RangeAttack(skillFirst);
     }
 
     private void OnSecondSkill()
     {
+        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill2);
+        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
         RangeAttack(skillSecond);
     }
 
     private void OnCombinationSkill()
     {
+        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill3);
+        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
         RangeAttack(skillCombo);
     }
 
@@ -238,24 +253,24 @@ public class CharacterManager : MonoBehaviour
         bulletManager.skill = skill;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
-            effectManager.StartEffect("PlayerHit");
-            Debug.Log("player Damaged!!!!!!!!!!!!!!!!!");
-            myCollider.isTrigger = true;
-            collision.collider.isTrigger = true;
-            collision.rigidbody.isKinematic = true;
-            StartCoroutine(DamageDelay(collision));
+            Debug.Log("Player damaged by enemy");
+        }
+
+        if (other.gameObject.tag == "EnemySkill")
+        {
+            Debug.Log("Player damaged by enemy skill");
         }
     }
 
-    private IEnumerator DamageDelay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        yield return new WaitForSeconds(1);
-        myCollider.isTrigger = false;
-        collision.collider.isTrigger = false;
-        collision.rigidbody.isKinematic = false;
+        if (collision.gameObject.tag == "Enemy")
+        {
+            //effectManager.StartEffects("PlayerHit");
+        }
     }
 }

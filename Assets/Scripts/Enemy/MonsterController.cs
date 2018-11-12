@@ -20,14 +20,18 @@ public class MonsterController : MonoBehaviour
     //public Transform spawnPoint;
 
     private int currentPoint;
+    private int beforePoint;
 
     private Sight sight;
     private Transform target;
     private ICrowdControlSkill skill;
+    private AttackRange attackRange;
+    private CapsuleCollider collider;
 
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
+        attackRange = transform.Find("AttackRange").GetComponent<AttackRange>();
         effectManager = GetComponentInChildren<EffectManager>();
     }
 
@@ -36,33 +40,35 @@ public class MonsterController : MonoBehaviour
         inst_Character = CharacterManager.getInstance();
         target = inst_Character.transform;
 
+        collider = GetComponent<CapsuleCollider>();
+
         currentHP = maxHP;
         //patrolPoints[0].position = spawnPoint.position;
-        transform.position = patrolPoints[0].position;
+        if (patrolPoints.Length > 0)
+        {
+            transform.position = patrolPoints[0].position;
+        }
         currentPoint = 0;
+        //effectManager.StartEffects("MagicCircle");
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(collider, other);
+        }
+
         if (other.gameObject.tag == "Bullet")
         {
-            effectManager.StartEffect("FireSkill");
+            effectManager.StartEffects("FireSkill");
             skill = other.gameObject.GetComponent<BulletManager>().skill;
             currentHP = skill.Damage(currentHP);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            effectManager.StartEffect("SlimeAttack");
-        }
-    }
-
     public void Init()
     {
-        Debug.Log("MonsterController Init");
         currentHP = maxHP;
     }
 
@@ -80,15 +86,19 @@ public class MonsterController : MonoBehaviour
 
     public void Patrol()
     {
-        if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
+        if (patrolPoints.Length > 0)
         {
-            currentPoint++;
+            if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
+            {
+                currentPoint++;
+            }
+            if (currentPoint >= patrolPoints.Length)
+            {
+                currentPoint = 0;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
+            transform.LookAt(patrolPoints[currentPoint].position);
         }
-        if (currentPoint >= patrolPoints.Length)
-        {
-            currentPoint = 0;
-        }
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
     }
 
     public void Death()
@@ -110,7 +120,8 @@ public class MonsterController : MonoBehaviour
 
     public void Chase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), speed * Time.deltaTime);
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
     }
 
     public bool IsDamaged()
@@ -123,5 +134,61 @@ public class MonsterController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool InAttackRange()
+    {
+        Debug.Log("attackrange? : " + attackRange.inAttackRange);
+        if (attackRange.inAttackRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Monster Attacked");
+    }
+
+    public void Tornado()
+    {
+    }
+
+    public void ThunderStroke()
+    {
+    }
+
+    public void Wield()
+    {
+    }
+
+    public void Pierce()
+    {
+    }
+
+    public void Summon()
+    {
+    }
+
+    public bool IsCorrectSkill()
+    {
+        // true, false 분기 지정 필요
+        return true;
+    }
+
+    public bool IsRestOver()
+    {
+        // true, false 분기 지정 필요
+        // 스킬간의 간격이 길 경우 텀을 주기 위해
+        return true;
+    }
+
+    public void RestInit()
+    {
+        // 스킬간의 간격이 길 경우 텀을 주기 위해
     }
 }

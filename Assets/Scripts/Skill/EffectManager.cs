@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class EffectManager : MonoBehaviour
 {
     public List<Transform> effects;
 
-    public void StartEffect(string effectName)
+    public void StartEffects(string effectName)
     {
         for (int i = 0; i < effects.Count; i++)
         {
