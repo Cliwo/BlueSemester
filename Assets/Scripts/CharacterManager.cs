@@ -226,11 +226,6 @@ public class CharacterManager : MonoBehaviour
 
     private void MeleeAttack()
     {
-<<<<<<< HEAD
-        // Debug.Log("Attack!");
-        // wand.GetComponent<CapsuleCollider>().enabled = true;
-        // StartCoroutine("AttackDelay");
-=======
         Debug.Log("Attack!");
         if (wand)
         {
@@ -238,7 +233,6 @@ public class CharacterManager : MonoBehaviour
             wand.GetComponent<CapsuleCollider>().enabled = true;
         }
         StartCoroutine("AttackDelay");
->>>>>>> master
     }
 
     private IEnumerator AttackDelay()

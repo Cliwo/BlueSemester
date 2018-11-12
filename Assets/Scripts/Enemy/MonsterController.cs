@@ -40,13 +40,6 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
         inst_Character = CharacterManager.getInstance();
         target = inst_Character.transform;
 
-<<<<<<< HEAD
-        currentHP = maxHP; 
-        transform.position = patrolPoints[0].position;
-        currentPoint = 0;
-        effectManager.StartEffects("MagicCircle"); //맵에 존재하는 모든 몬스터에 일괄적으로 effect를 발동시킨다.  
-        //개별로 생성될 때 effect가 필요하지 않나? (SpawnManager가 필요)
-=======
         collider = GetComponent<CapsuleCollider>();
 
         currentHP = maxHP;
@@ -57,31 +50,24 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
         }
         currentPoint = 0;
         //effectManager.StartEffects("MagicCircle");
->>>>>>> master
     }
 
     private void OnTriggerEnter(Collider other) //bullet 과 충돌 시 
     {
         if (other.gameObject.tag == "Player")
         {
-<<<<<<< HEAD
             effectManager.StartEffects("SkillFire");
             skill = other.gameObject.GetComponent<BulletManager>().skill; //!? 모든 bullet에 bulletManager가 붙어있음.. 
             currentHP = skill.Damage(currentHP);
-=======
             Physics.IgnoreCollision(collider, other);
->>>>>>> master
         }
 
         if (other.gameObject.tag == "Bullet")
         {
-<<<<<<< HEAD
             effectManager.StartEffects("SlimeAttack"); // 슬라임의 '타격' 처리 (유저의 '피격')
-=======
             effectManager.StartEffects("FireSkill");
             skill = other.gameObject.GetComponent<BulletManager>().skill;
             currentHP = skill.Damage(currentHP);
->>>>>>> master
         }
     }
 
