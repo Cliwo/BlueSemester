@@ -65,6 +65,14 @@ public class Fire : Skill
         }
     }
 
+    protected override bool isProjectile
+    {
+        get
+        {
+            return false;
+        }
+    }
+
     protected override void ApplyCC(Pawn target)
     {
         target.states.Add(new KnockBack(target));

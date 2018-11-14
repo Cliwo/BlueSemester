@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.496413, b: 0.5748175, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,32 +152,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 143032765083488618, guid: 7a6f1db62330142f49091c3966c8e1dd,
-        type: 2}
-      propertyPath: m_Center.y
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114250884921038080, guid: 7a6f1db62330142f49091c3966c8e1dd,
-        type: 2}
-      propertyPath: fireSkillForDebug
-      value: 
-      objectReference: {fileID: 1703314762443654, guid: 5f07aec8fa9847a4b8c2d9b6126378d0,
-        type: 2}
     - target: {fileID: 114250884921038080, guid: 7a6f1db62330142f49091c3966c8e1dd,
         type: 2}
       propertyPath: targetForSkillDebug
       value: 
       objectReference: {fileID: 1103919847}
-    - target: {fileID: 114250884921038080, guid: 7a6f1db62330142f49091c3966c8e1dd,
-        type: 2}
-      propertyPath: secondSkillForDebug
-      value: 
-      objectReference: {fileID: 1254790426769018, guid: 51b309db00c161d4a9e51c5376fa7eeb,
-        type: 2}
-    - target: {fileID: 1520330594810438, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
   m_IsPrefabAsset: 0
@@ -371,7 +350,7 @@ GameObject:
   - component: {fileID: 719731621}
   - component: {fileID: 719731620}
   - component: {fileID: 719731619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,30 +426,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &860267091 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1520330594810438, guid: 7a6f1db62330142f49091c3966c8e1dd,
-    type: 2}
-  m_PrefabInternal: {fileID: 66975078}
 --- !u!4 &860267092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd,
     type: 2}
   m_PrefabInternal: {fileID: 66975078}
---- !u!114 &860267096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 860267091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 143f729e731d94e36adc12d27de9b825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  hp: 0
-  lockOtherComponentInfluenceOnTransform: 0
 --- !u!1 &1103919842
 GameObject:
   m_ObjectHideFlags: 0

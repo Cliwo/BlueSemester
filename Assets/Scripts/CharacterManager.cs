@@ -209,12 +209,12 @@ public class CharacterManager : MonoBehaviour
 
     private void OnFirstSkill()
     {
-        Skill.GenerateSkill(fireSkillForDebug, targetForSkillDebug.position, Quaternion.identity);
+        Skill.GenerateSkill(fireSkillForDebug, targetForSkillDebug.position);
     }
 
     private void OnSecondSkill()
     {
-        Skill.GenerateSkill(secondSkillForDebug, transform.position, Quaternion.identity);
+        Skill.GenerateSkill(secondSkillForDebug, transform.position);
     }
 
     private void OnCombinationSkill()

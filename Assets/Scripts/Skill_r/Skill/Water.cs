@@ -38,7 +38,7 @@ public class Water : Skill
     {
         get
         {
-            return 1.0f;
+            return 0.0f;
         }
     }
 
@@ -65,6 +65,14 @@ public class Water : Skill
         }
     }
 
+    protected override bool isProjectile
+    {
+        get
+        {
+            return true;
+        }
+    }
+
     override protected void ApplyCC(Pawn target)
     {
         target.states.Add(new Slow(target));
@@ -73,6 +81,7 @@ public class Water : Skill
     override protected void Update()
     {
         base.Update();
+        //transform.Translate(marchingDirection * Time.deltaTime * Speed);
         transform.Translate(Vector3.forward * Time.deltaTime * Speed);
     }
 }
