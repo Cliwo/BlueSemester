@@ -9,6 +9,7 @@ TagManager:
   - Wand
   - Bullet
   - EnemySkill
+  - ItemDatabase
   layers:
   - Default
   - TransparentFX
