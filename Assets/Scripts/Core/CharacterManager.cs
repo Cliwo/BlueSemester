@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CharacterManager : MonoBehaviour
+public class CharacterManager : Pawn
 {
     public GameObject characterModel;
 
@@ -13,7 +13,6 @@ public class CharacterManager : MonoBehaviour
     public float jumpWeightConst = 2.6f;
     public float horizontalWeightConst = 0.2f;
 
-    private Pawn s_Pawn;
     private CharacterController s_characterController;
     private CameraManager inst_Camera;
     private InputManager inst_Input;
@@ -30,18 +29,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     private ParticleManager particles;
 
-    private EffectManager effectManager;
-
-    //public Knockback skillFirst = new Knockback();
-    public Weakness skillSecond = new Weakness();
-    public FireWater skillCombo = new FireWater();
-
     private Hit wand;
-
-    [SerializeField]
-    private GameObject bullet;
-
-    private BulletManager bulletManager;
 
     [SerializeField]
     private GameObject fireSkillForDebug;
@@ -97,7 +85,7 @@ public class CharacterManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
-        effectManager = GetComponentInChildren<EffectManager>();
+        // effectManager = GetComponentInChildren<EffectManager>();
     }
 
     private void Start()
@@ -108,7 +96,6 @@ public class CharacterManager : MonoBehaviour
 
         s_navAgent = GetComponent<NavMeshAgent>();
         s_characterController = GetComponent<CharacterController>();
-        s_Pawn = GetComponent<Pawn>();
 
         inst_Input.OnStand += OnIdle;
         inst_Input.OnTranslate += OnTranslate;
@@ -124,10 +111,11 @@ public class CharacterManager : MonoBehaviour
         s_navAgent.updateRotation = false;
     }
 
-    private void Update()
+    override protected void Update()
     {
+        base.Update();
         moveDirection.y += gravity;
-        if (s_characterController.enabled && !s_Pawn.lockOtherComponentInfluenceOnTransform)
+        if (s_characterController.enabled && !lockOtherComponentInfluenceOnTransform)
         {
             s_characterController.Move(moveDirection); //TODO : input에서는 Fixed에서 Update하는데 얘는 Update에서 함
         }
@@ -219,9 +207,7 @@ public class CharacterManager : MonoBehaviour
 
     private void OnCombinationSkill()
     {
-        inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.Skill3);
-        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
-        RangeAttack(skillCombo);
+
     }
 
     private void MeleeAttack()
@@ -245,32 +231,4 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("OffAttack");
     }
 
-    private void RangeAttack(ICrowdControlSkill skill)
-    {
-        Debug.Log("Attack - " + skill);
-        GameObject go = Instantiate(bullet, this.transform.position, this.transform.rotation);
-        bulletManager = go.GetComponent<BulletManager>();
-        bulletManager.skill = skill;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Debug.Log("Player damaged by enemy");
-        }
-
-        if (other.gameObject.tag == "EnemySkill")
-        {
-            Debug.Log("Player damaged by enemy skill");
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            //effectManager.StartEffects("PlayerHit");
-        }
-    }
 }

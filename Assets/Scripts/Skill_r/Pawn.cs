@@ -20,7 +20,7 @@ public class Pawn : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	virtual protected void Update () {
 		List<ICrowdControl> dirtyLists = new List<ICrowdControl>();
 		foreach(var state in states)
 		{

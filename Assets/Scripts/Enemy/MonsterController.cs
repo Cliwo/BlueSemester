@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterController : MonoBehaviour //Manager 클래스가 아님, 모든 monster에 붙음 
+public class MonsterController : Pawn
 {
     private CharacterManager inst_Character;
 
@@ -14,7 +14,6 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
 
     [SerializeField]
     private Transform[] patrolPoints;
-
     private EffectManager effectManager;
 
     //public Transform spawnPoint;
@@ -24,7 +23,6 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
 
     private Sight sight;
     private Transform target;
-    private ICrowdControlSkill skill;
     private AttackRange attackRange;
     private CapsuleCollider collider;
 
@@ -51,24 +49,20 @@ public class MonsterController : MonoBehaviour //Manager 클래스가 아님, �
         currentPoint = 0;
         //effectManager.StartEffects("MagicCircle");
     }
-
     private void OnTriggerEnter(Collider other) //bullet 과 충돌 시 
     {
-        if (other.gameObject.tag == "Player")
-        {
-            effectManager.StartEffects("SkillFire");
-            skill = other.gameObject.GetComponent<BulletManager>().skill; //!? 모든 bullet에 bulletManager가 붙어있음.. 
-            currentHP = skill.Damage(currentHP);
-            Physics.IgnoreCollision(collider, other);
-        }
+        // TODO 1115 이 부분 현재 수정 필요. 충돌판정을 이 스크립트에서 하지 않아야함. Skill 에서 해야함.
+        // if (other.gameObject.tag == "Player")
+        // {
+        //     effectManager.StartEffects("SkillFire");
+        //     Physics.IgnoreCollision(collider, other);
+        // }
 
-        if (other.gameObject.tag == "Bullet")
-        {
-            effectManager.StartEffects("SlimeAttack"); // 슬라임의 '타격' 처리 (유저의 '피격')
-            effectManager.StartEffects("FireSkill");
-            skill = other.gameObject.GetComponent<BulletManager>().skill;
-            currentHP = skill.Damage(currentHP);
-        }
+        // if (other.gameObject.tag == "Bullet")
+        // {
+        //     effectManager.StartEffects("SlimeAttack");
+        //     effectManager.StartEffects("FireSkill");
+        // }
     }
 
     public void Init()

@@ -18,6 +18,7 @@ public abstract class Skill : MonoBehaviour{
 	public abstract float SkillPostDelay { get; }
 	public abstract float SkillCoolDownTime { get; }
 	public abstract float SkillActiveDuration { get; }
+	public abstract float Damage { get; }
 	public abstract string SoundEffectID{ get; }
 	protected abstract int targetLayer { get; }
 	protected abstract bool isProjectile { get; }
@@ -47,6 +48,7 @@ public abstract class Skill : MonoBehaviour{
 		if(pawnScript != null && pawnScript.gameObject.layer == targetLayer)
 		{
 			ApplyCC(pawnScript);
+			ApplyDamage(pawnScript);
 		}
 	}
 
@@ -59,6 +61,11 @@ public abstract class Skill : MonoBehaviour{
 	}
 
 	abstract protected void ApplyCC(Pawn target);
+	
+	private void ApplyDamage(Pawn target)
+	{
+		target.hp -= Damage;
+	}
 
 	static private Vector3 CalcMouseDirectionInWorldSpace()
 	{

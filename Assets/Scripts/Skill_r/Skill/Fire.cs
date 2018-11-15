@@ -57,11 +57,19 @@ public class Fire : Skill
 		}
 	}
 
+    public override float Damage
+    {
+        get
+        {
+            return 3.0f;
+        }
+    }
+
     protected override int targetLayer
     {
         get
         {
-            return PLAYER_LAYER;
+            return ENEMY_LAYER;
         }
     }
 

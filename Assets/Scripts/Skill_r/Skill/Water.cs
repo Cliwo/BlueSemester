@@ -49,6 +49,13 @@ public class Water : Skill
             return 1.0f;
         }
     }
+    public override float Damage
+    {
+        get
+        {
+            return 1.0f;
+        }
+    }
 
     public override string SoundEffectID
     {
@@ -72,6 +79,7 @@ public class Water : Skill
             return true;
         }
     }
+
 
     override protected void ApplyCC(Pawn target)
     {

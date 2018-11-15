@@ -6,7 +6,7 @@ public class EffectManager : MonoBehaviour
 {
     public List<Transform> effects;
 
-    public void StartEffects(string effectName) //TODO(1107) : string compare는 연산효율이 좋지 않다. 
+    public void StartEffects(string effectName) 
     {
         for (int i = 0; i < effects.Count; i++)
         {
