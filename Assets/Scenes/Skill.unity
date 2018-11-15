@@ -426,11 +426,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &860267092 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd,
-    type: 2}
-  m_PrefabInternal: {fileID: 66975078}
 --- !u!1 &1103919842
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +439,6 @@ GameObject:
   - component: {fileID: 1103919844}
   - component: {fileID: 1103919843}
   - component: {fileID: 1103919848}
-  - component: {fileID: 1103919849}
   m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
@@ -548,20 +542,6 @@ MonoBehaviour:
   speed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
---- !u!114 &1103919849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1103919842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be9599464dfdced4b88ec891033bbc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 860267092}
-  skill: {fileID: 1703314762443654, guid: 5f07aec8fa9847a4b8c2d9b6126378d0, type: 2}
-  waitFor: 2
 --- !u!1001 &1523510060
 Prefab:
   m_ObjectHideFlags: 0
