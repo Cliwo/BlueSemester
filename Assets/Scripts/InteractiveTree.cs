@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractiveTree : InteractionObject
-{   
+{
     [SerializeField]
-    private Animator animator; 
+    private Animator animator;
+
     [SerializeField]
     private ParticleSystem particle_rock;
-    [SerializeField] 
+
+    [SerializeField]
     private ParticleSystem particle_dust;
+
+    private ItemDrop itemDrop;
 
     public override float InteractingTime
     {
@@ -18,6 +22,7 @@ public class InteractiveTree : InteractionObject
             return 2.0f;
         }
     }
+
     protected override void OnInteractionStart()
     {
         base.OnInteractionStart();
@@ -26,20 +31,26 @@ public class InteractiveTree : InteractionObject
         particle_dust.Play();
         particle_rock.Play();
     }
-	protected override void OnInteracting()
-	{
-        
-	}
+
+    protected override void OnInteracting()
+    {
+    }
+
     protected override void OnInteractionCancel()
     {
         base.OnInteractionCancel();
         inst_Animation.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
     }
+
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
         inst_Animation.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
-        
+
+        itemDrop = GetComponent<ItemDrop>();
+        itemDrop.canDrop = true;
+        //Destroy(this.gameObject, 2f); //파티클 시스템이 사라진다고 오류뜸. 해결 필요
+
         animator.SetTrigger("Fall");
     }
 }
