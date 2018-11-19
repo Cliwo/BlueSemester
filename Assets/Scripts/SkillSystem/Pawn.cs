@@ -12,7 +12,7 @@ public abstract class Pawn : MonoBehaviour {
 	public float hp;
 	[HideInInspector]
 	/* if true, AI or User Input will be ignored */
-	public bool lockOtherComponentInfluenceOnTransform = false; //TODO : 이걸 이용해서 Ai나 User Input 블락해야함 
+	public bool lockOtherComponentInfluenceOnTransform = false; 
 
 	// Use this for initialization
 	virtual protected void Start () {

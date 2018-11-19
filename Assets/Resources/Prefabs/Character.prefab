@@ -330,7 +330,6 @@ GameObject:
   - component: {fileID: 143032765083488618}
   - component: {fileID: 195913798738085688}
   - component: {fileID: 136475993923655220}
-  - component: {fileID: 114913202545108412}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -1775,12 +1774,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5439fd188f0b1b640ac64a8de8f0f65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
   characterModel: {fileID: 1943921311148842}
   s_navAgent: {fileID: 0}
   jumpWeightConst: 0.31
-  horizontalWeightConst: 0.08
-  particles: {fileID: 0}
-  bullet: {fileID: 1692682540450454, guid: cccd2b1d1f1f84548933489ff318fe5a, type: 2}
   fireSkillForDebug: {fileID: 1703314762443654, guid: 5f07aec8fa9847a4b8c2d9b6126378d0,
     type: 2}
   secondSkillForDebug: {fileID: 1254790426769018, guid: 51b309db00c161d4a9e51c5376fa7eeb,
@@ -1802,20 +1801,6 @@ MonoBehaviour:
   maxDistance: 12
   currentDistance: 0
   cinemaEffect: {fileID: 0}
---- !u!114 &114913202545108412
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1520330594810438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 143f729e731d94e36adc12d27de9b825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  hp: 0
-  lockOtherComponentInfluenceOnTransform: 0
 --- !u!136 &136475993923655220
 CapsuleCollider:
   m_ObjectHideFlags: 1

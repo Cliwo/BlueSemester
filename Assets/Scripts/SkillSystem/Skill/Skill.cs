@@ -50,6 +50,7 @@ public abstract class Skill : MonoBehaviour{
 		{
 			ApplyCC(pawnScript);
 			ApplyDamage(pawnScript);
+			Destroy(gameObject); //이거 분리해야할듯, Collider만 끄는 방식 / 모든 이펙트와 함께 사라지는 방식으로 나뉘어야함. 
 		}
 	}
 

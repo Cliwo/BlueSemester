@@ -53,7 +53,7 @@ public class Water : Skill
     {
         get
         {
-            return 1.0f;
+            return 3.0f;
         }
     }
 

@@ -6,7 +6,7 @@ public class MonsterController : Pawn
 {
     private CharacterManager inst_Character;
 
-    private float maxHP = 50;
+    private float maxHP = 12;
     private float attack = 10;
     private float atkSpeed = 10;
 
