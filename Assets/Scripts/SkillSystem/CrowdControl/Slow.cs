@@ -18,12 +18,12 @@ public class Slow : ICrowdControl
 
     public override void OnActivate()
     {
-        owner.speed -= 0.5f;
+        owner.horizontalSpeed -= 0.1f;
     }
 
     public override void OnDeactivate()
     {
-        owner.speed += 0.5f;
+        owner.horizontalSpeed += 0.1f;
     }
 
     public override void Update()

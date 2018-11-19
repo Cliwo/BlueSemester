@@ -147,7 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Particle: {fileID: 1641541224801190}
   Collider: {fileID: 136465997620438868}
-  Speed: 0.5
 --- !u!136 &136465997620438868
 CapsuleCollider:
   m_ObjectHideFlags: 1

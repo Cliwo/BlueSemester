@@ -11,6 +11,7 @@ public abstract class Skill : MonoBehaviour{
 	protected Collider Collider;
 	private float GeneratedTime;
 	private static CharacterManager inst_character;
+	private static MinimapManager inst_minimap;
 
 	/* 이 아래들을 abstract로 안하고, 생성자에서 init후, 기본 생성자가 없으면 무조건 해당 생성자를 override하는 조건을 이용해서 해결할 수 있지 않을까 */
 	public abstract float SkillLastUsedTimePerKind { get; protected set; }
@@ -73,6 +74,10 @@ public abstract class Skill : MonoBehaviour{
 		{
 			inst_character = CharacterManager.getInstance();
 		}
+		if(inst_minimap == null)
+		{
+			inst_minimap = MinimapManager.getInstance();
+		}
 		Vector3 clippedPos = Input.mousePosition;
 		clippedPos.x = Mathf.Clamp(clippedPos.x , 0, Screen.width);
 		clippedPos.y = Mathf.Clamp(clippedPos.y , 0, Screen.height);
@@ -80,12 +85,13 @@ public abstract class Skill : MonoBehaviour{
 		Ray ray = Camera.main.ScreenPointToRay(clippedPos);
 		
 		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit)) // TODO : Layer 가 추가되어야 할 듯 
+		int mask = 1<<inst_minimap.layerMask;
+		if(Physics.Raycast(ray, out hit , float.MaxValue , mask)) 
 		{
 			return (hit.point - inst_character.transform.position).normalized;
 		}
 
-		//Trouble!
+		//이 아래줄은 실행되면 안 됨. 스킬은 어떤 경우에서도 나가야하므로.  
 		return Vector3.zero;
 	}
 

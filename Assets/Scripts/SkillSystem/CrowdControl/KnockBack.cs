@@ -30,6 +30,6 @@ public class KnockBack : ICrowdControl
     public override void Update()
     {
         CheckDeactivate();
-		owner.transform.Translate(Vector3.forward * knockBackMagnitude);
+		owner.transform.Translate(Vector3.back * knockBackMagnitude);
     }
 }

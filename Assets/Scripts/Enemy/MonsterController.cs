@@ -8,9 +8,7 @@ public class MonsterController : Pawn
 
     private float maxHP = 50;
     private float attack = 10;
-    private float speed = 1;
     private float atkSpeed = 10;
-    private float currentHP;
 
     [SerializeField]
     private Transform[] patrolPoints;
@@ -26,6 +24,12 @@ public class MonsterController : Pawn
     private AttackRange attackRange;
     private CapsuleCollider collider;
 
+    override protected void InitStatus()
+    {
+        hp = maxHP;
+        horizontalSpeed = 1.0f;
+    }
+
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
@@ -33,14 +37,15 @@ public class MonsterController : Pawn
         effectManager = GetComponentInChildren<EffectManager>();
     }
 
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
         inst_Character = CharacterManager.getInstance();
         target = inst_Character.transform;
 
         collider = GetComponent<CapsuleCollider>();
 
-        currentHP = maxHP;
+        hp = maxHP;
         //patrolPoints[0].position = spawnPoint.position;
         if (patrolPoints.Length > 0)
         {
@@ -67,12 +72,12 @@ public class MonsterController : Pawn
 
     public void Init()
     {
-        currentHP = maxHP;
+        hp = maxHP;
     }
 
-    public bool IsDead() //Dead 시 움직임을 막을 수 있어야함. BT 코드안에 있을 수 있음. 
+    public bool IsDead()
     {
-        if (currentHP <= 0)
+        if (hp <= 0)
         {
             return true;
         }
@@ -84,7 +89,7 @@ public class MonsterController : Pawn
 
     public void Patrol()
     {
-        if (patrolPoints.Length > 0)
+        if (patrolPoints.Length > 0 && !lockOtherComponentInfluenceOnTransform)
         {
             if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.5f)
             {
@@ -94,7 +99,7 @@ public class MonsterController : Pawn
             {
                 currentPoint = 0;
             }
-            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, horizontalSpeed * Time.deltaTime);
             transform.LookAt(patrolPoints[currentPoint].position);
         }
     }
@@ -118,13 +123,15 @@ public class MonsterController : Pawn
 
     public void Chase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), speed * Time.deltaTime);
+        if(lockOtherComponentInfluenceOnTransform)
+            return;
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), horizontalSpeed * Time.deltaTime);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
     }
 
     public bool IsDamaged()
     {
-        if (currentHP < maxHP)
+        if (hp < maxHP)
         {
             return true;
         }
@@ -189,4 +196,6 @@ public class MonsterController : Pawn
     {
         // 스킬간의 간격이 길 경우 텀을 주기 위해
     }
+
+    
 }

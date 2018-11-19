@@ -11,7 +11,6 @@ public class CharacterManager : Pawn
     public NavMeshAgent s_navAgent;
 
     public float jumpWeightConst = 2.6f;
-    public float horizontalWeightConst = 0.2f;
 
     private CharacterController s_characterController;
     private CameraManager inst_Camera;
@@ -24,10 +23,6 @@ public class CharacterManager : Pawn
     public bool IsNavigationStarted { get { return navigationStarted; } }
     private bool isJumped = false;
     private const float gravity = -0.03f;
-
-
-    [SerializeField]
-    private ParticleManager particles;
 
     private Hit wand;
 
@@ -72,7 +67,11 @@ public class CharacterManager : Pawn
             inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
         }
     }
-
+    override protected void InitStatus()
+    {
+        hp = 10f;
+        horizontalSpeed = 0.2f;
+    }
     private void Awake()
     {
         if (instance == null)
@@ -88,8 +87,9 @@ public class CharacterManager : Pawn
         // effectManager = GetComponentInChildren<EffectManager>();
     }
 
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
         inst_Camera = CameraManager.getInstance();
         inst_Input = InputManager.getInstance();
         inst_Anim = CharacterAnimationManager.getInstance();
@@ -115,7 +115,11 @@ public class CharacterManager : Pawn
     {
         base.Update();
         moveDirection.y += gravity;
-        if (s_characterController.enabled && !lockOtherComponentInfluenceOnTransform)
+        if(lockOtherComponentInfluenceOnTransform)
+        {
+            return; //Navaigation 과 입력이동을 모두 막는다.
+        }
+        if (s_characterController.enabled)
         {
             s_characterController.Move(moveDirection); //TODO : input에서는 Fixed에서 Update하는데 얘는 Update에서 함
         }
@@ -136,8 +140,8 @@ public class CharacterManager : Pawn
         inst_Anim.animator.SetFloat(CharacterAnimationManager.AnimatorTrigger.Translation, Mathf.Abs(horizontalWeight) + Mathf.Abs(verticalWeight));
         inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
 
-        verticalWeight *= horizontalWeightConst;
-        horizontalWeight *= horizontalWeightConst;
+        verticalWeight *= horizontalSpeed;
+        horizontalWeight *= horizontalSpeed;
 
         Vector3 rightUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(1, 0, 0);
         Vector3 forwardUnitVec = inst_Camera.transform.localToWorldMatrix * new Vector4(0, 0, 1);
