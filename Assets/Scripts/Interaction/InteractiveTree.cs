@@ -49,8 +49,9 @@ public class InteractiveTree : InteractionObject
 
         itemDrop = GetComponent<ItemDrop>();
         itemDrop.canDrop = true;
-        //Destroy(this.gameObject, 2f); //파티클 시스템이 사라진다고 오류뜸. 해결 필요
-
+        Destroy(this.gameObject, 1f);
+        inst_Input.InteractionBundles.Remove(bundle);
+        Debug.Log("Bundle Removed");
         animator.SetTrigger("Fall");
     }
 }
