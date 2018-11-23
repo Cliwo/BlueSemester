@@ -20,4 +20,28 @@ public class ItemDatabase : MonoBehaviour
         items.Add(new Item("Fire Fairy", "FireFairy", 0201, "This is a fire fairy", Item.ItemType.Fairy));
         items.Add(new Item("Water Fairy", "WaterFairy", 0202, "This is a water fairy", Item.ItemType.Fairy));
     }
+
+    public string GetName(int id)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (id == items[i].itemID)
+            {
+                return items[i].itemName;
+            }
+        }
+        return "Error : Not Found";
+    }
+
+    public int GetID(string name)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (name.Contains(items[i].itemName))
+            {
+                return items[i].itemID;
+            }
+        }
+        return 99999;
+    }
 }
