@@ -6,7 +6,8 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour {
 
 	public List<SpawnLevel> levels;
-	private int currentLevel;
+	private bool isStarted = false;
+	private int currentLevel = -1;
 
 	public event Action ConsumeEvents = () => { };
 	public event Action PersistEvents = ()=> { };
@@ -18,10 +19,21 @@ public class SpawnEnemy : MonoBehaviour {
 
 		ConsumeEvents = () => {};
 	}
+	public void StartStage()
+	{
+		isStarted = true;
+		currentLevel = 0;
+		levels[currentLevel].StartLevel();
+	}
 
+	void Start()
+	{
+		//Debug
+		StartStage();
+	}
 	void Update()
 	{
-		if(levels[currentLevel].IsClear())
+		if(levels[currentLevel].IsClear() && isStarted)
 		{
 			if(currentLevel == levels.Count -1 )
 			{
