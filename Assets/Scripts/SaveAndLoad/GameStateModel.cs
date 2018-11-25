@@ -11,26 +11,29 @@ using System.Text;
 using Newtonsoft.Json;
 
 
-public class GameStateModel {
+public class GameStateModel : ISavable {
 	public SerializableVector3 lastPosition;
 	public Dictionary<string, int> itemList;	//아이템 코드와 갯수
-	public bool FireDungeonCleared;
 	public float currentHP;
 
 	private static string EncryptionKey = "Banana";
     private static readonly byte[] SALT = new byte[] { 0x26, 0xdc, 0xff, 0x00, 0xad, 0xed, 0x7a, 0xee, 0xc5, 0xfe, 0x07, 0xaf, 0x4d, 0x08, 0x22, 0x3c };
     //https://stackoverflow.com/questions/6482883/how-to-generate-rijndael-key-and-iv-using-a-passphrase
 
-    private static readonly string fileName = "Save";
-	static public GameStateModel Deserialize(byte[] data)
+	static public T Deserialize<T>(byte[] data) where T : ISavable
 	{
         Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey,SALT);
 
         string str = DecryptStringFromBytes(data,pdb.GetBytes(32), pdb.GetBytes(16));
-		GameStateModel model = JsonConvert.DeserializeObject<GameStateModel>(str);
-        return model;
+		T obj = JsonConvert.DeserializeObject<T>(str);
+        return obj;
 	}
-
+    static public void SerializeAndMakeFile(string fileName , GameStateModel model)
+    {
+        byte[] data = Serialize(model);
+        byte[] metaData = Serialize(GenerateMetaFile());
+        FlushToFile(fileName, data, metaData);
+    }
 	static public byte[] Serialize(GameStateModel model)
 	{
 		string data = JsonConvert.SerializeObject(model, typeof(GameStateModel), null);
@@ -38,22 +41,53 @@ public class GameStateModel {
         Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey,SALT);
         return EncryptStringToBytes(data, pdb.GetBytes(32), pdb.GetBytes(16));
     }
+    static public byte[] Serialize(SaveMeta meta)
+    {
+        string data = JsonConvert.SerializeObject(meta, typeof(GameStateModel), null);
 
-	static public void FlushToFile(byte[] data)
+        Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey,SALT);
+        return EncryptStringToBytes(data, pdb.GetBytes(32), pdb.GetBytes(16));
+    }
+
+	static public void FlushToFile(string fileName, byte[] data, byte[] metaData)
 	{
-		string path = GetSaveLocation();
+		string path = GetSaveLocation(fileName);
 		BinaryWriter writer = new BinaryWriter(File.Create(path));
         using(writer)
 		{
 			writer.Write(data);
 		}
+
+        string metaPath = GetSaveMetaLocation(fileName);
+        BinaryWriter metaWriter = new BinaryWriter(File.Create(metaPath));
+        using(metaWriter)
+		{
+			metaWriter.Write(metaData);
+		}
 	}
 
-    static public string GetSaveLocation()
+    static public string GetSaveLocation(string fileName)
     {
         return Application.dataPath + "/" + fileName + ".bin"; //TODO : 배포할 때 DataPath 변경 필요
     }
 
+    static public string GetSaveMetaLocation(string fileName)
+    {
+        return Application.dataPath + "/" + fileName + ".metaBin"; 
+    }
+
+    static private SaveMeta GenerateMetaFile()
+    {
+        //TODO : 아래가 디버그 코드임 (임시 코드임) 수정할 것 
+        SaveMeta meta = new SaveMeta();
+        meta.savedTime = DateTime.Now;
+        meta.locationAtSavedTime = "NOWHERE";
+        meta.FireDungeonCleared = false;
+        meta.WaterAndElectricityDungeonCleared = false;
+        meta.WindDungeonCleared = false;
+
+        return meta;
+    }
 	static private byte[] EncryptStringToBytes(string plainText, byte[] Key, byte[] IV)
     {
         if (plainText == null || plainText.Length <= 0)
@@ -145,4 +179,15 @@ public class GameStateModel {
             x = vector.x; y = vector.y ; z = vector.z;
         }
 	}
+
+    public class SaveMeta : ISavable
+    {
+        public DateTime savedTime;
+        public string locationAtSavedTime;
+        public bool FireDungeonCleared;
+        public bool WaterAndElectricityDungeonCleared;
+        public bool WindDungeonCleared;
+    }
+
+
 }

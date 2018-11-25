@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
     }
 
     public bool EnableInput { get; private set; }
-
+    public event Action OnEscMenu = () => { };
     public event Action OnStand = () => { };
 
     public event Action<float, float> OnTranslate = (_, __) => { };
@@ -110,10 +110,16 @@ public class InputManager : MonoBehaviour
                 inst_conv.NextConversation();
             }
         }
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) //1124, OnEscMenu때문에 고침, Interaction에서 오류나면 여기 조심할것
         {
             if (currentInteraction != null)
+            {    
                 currentInteraction.cancelAction();
+            }
+            else
+            {
+                OnEscMenu();
+            }
         }
     }
 

@@ -27,19 +27,14 @@ public class TestSerialize : MonoBehaviour {
 		model.lastPosition = vec;
 		model.itemList = test;
 		model.currentHP = 70.0f;
-		model.FireDungeonCleared = false;
-		GameStateModel.FlushToFile(GameStateModel.Serialize(model));
+		GameStateModel.SerializeAndMakeFile("Save", model);
 	}
 	private void DebugDeserialize()
 	{
-		string path = GameStateModel.GetSaveLocation();
+		string path = GameStateModel.GetSaveLocation("Save");
 		byte[] data = File.ReadAllBytes(path);
-		GameStateModel model = GameStateModel.Deserialize(data);
+		GameStateModel model = GameStateModel.Deserialize<GameStateModel>(data);
 		Debug.Log(model);
 	}
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
