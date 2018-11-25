@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BT_Slime : MonoBehaviour
+public class BT_Slime : MonsterController
 {
+    // 어떤 파티클을 쓸지 각각의 몬스터마다 다르니깐 여기서 재정의해주기
+
     private Sequence root = new Sequence();
     private Sequence seqDeath = new Sequence();
     private Sequence seqChase = new Sequence();
     private Sequence seqDamage = new Sequence();
     private Sequence seqAttack = new Sequence();
 
-    private Selector selector = new Selector();
+    private Selector selMove = new Selector();
+    private Selector selChase = new Selector();
 
     private Patrol patrol = new Patrol();
     private IsDead isDead = new IsDead();
@@ -21,47 +24,38 @@ public class BT_Slime : MonoBehaviour
     private InAttackRange inAttackRange = new InAttackRange();
     private Attack attack = new Attack();
 
-    private MonsterController monController;
-
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
         Init();
         StartCoroutine("BehaviorProcess");
     }
 
-    private void Init()
+    override protected void Init()
     {
-        monController = gameObject.GetComponent<MonsterController>();
-        monController.Init();
-
-        patrol.MonController = monController;
-        isDead.MonController = monController;
-        death.MonController = monController;
-        inSight.MonController = monController;
-        chase.MonController = monController;
-        isDamaged.MonController = monController;
-        inAttackRange.MonController = monController;
-        attack.MonController = monController;
+        //Chase
+        selChase.AddChild(inSight);
+        selChase.AddChild(isDamaged);
 
         seqDamage.AddChild(chase);
-        seqDamage.AddChild(isDamaged);
+        seqDamage.AddChild(selChase);
 
+        //Attack
         seqAttack.AddChild(attack);
         seqAttack.AddChild(inAttackRange);
 
-        seqChase.AddChild(chase);
-        seqChase.AddChild(inSight);
+        //Patrol
 
-        selector.AddChild(patrol);
-        selector.AddChild(seqChase);
-        selector.AddChild(seqDamage);
+        selMove.AddChild(patrol);
+        selMove.AddChild(seqChase);
+        selMove.AddChild(seqAttack);
 
+        //Death
         seqDeath.AddChild(death);
         seqDeath.AddChild(isDead);
 
         root.AddChild(seqDeath);
-        root.AddChild(seqAttack);
-        root.AddChild(selector);
+        root.AddChild(selMove);
     }
 
     private IEnumerator BehaviorProcess()

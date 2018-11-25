@@ -12,6 +12,7 @@ public class MonsterController : Pawn
 
     [SerializeField]
     private Transform[] patrolPoints;
+
     private EffectManager effectManager;
 
     //public Transform spawnPoint;
@@ -54,23 +55,18 @@ public class MonsterController : Pawn
         currentPoint = 0;
         //effectManager.StartEffects("MagicCircle");
     }
-    private void OnTriggerEnter(Collider other) //bullet 과 충돌 시 
+
+    private void OnTriggerEnter(Collider other) //bullet 과 충돌 시
     {
         // TODO 1115 이 부분 현재 수정 필요. 충돌판정을 이 스크립트에서 하지 않아야함. Skill 에서 해야함.
-        // if (other.gameObject.tag == "Player")
-        // {
-        //     effectManager.StartEffects("SkillFire");
-        //     Physics.IgnoreCollision(collider, other);
-        // }
-
-        // if (other.gameObject.tag == "Bullet")
-        // {
-        //     effectManager.StartEffects("SlimeAttack");
-        //     effectManager.StartEffects("FireSkill");
-        // }
+        if (other.gameObject.tag == "Player")
+        {
+            //effectManager.StartEffects("SkillFire");
+            Physics.IgnoreCollision(collider, other);
+        }
     }
 
-    public void Init()
+    virtual protected void Init()
     {
         hp = maxHP;
     }
@@ -123,7 +119,7 @@ public class MonsterController : Pawn
 
     public void Chase()
     {
-        if(lockOtherComponentInfluenceOnTransform)
+        if (lockOtherComponentInfluenceOnTransform)
             return;
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), horizontalSpeed * Time.deltaTime);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
@@ -178,24 +174,4 @@ public class MonsterController : Pawn
     public void Summon()
     {
     }
-
-    public bool IsCorrectSkill()
-    {
-        // true, false 분기 지정 필요
-        return true;
-    }
-
-    public bool IsRestOver()
-    {
-        // true, false 분기 지정 필요
-        // 스킬간의 간격이 길 경우 텀을 주기 위해
-        return true;
-    }
-
-    public void RestInit()
-    {
-        // 스킬간의 간격이 길 경우 텀을 주기 위해
-    }
-
-    
 }

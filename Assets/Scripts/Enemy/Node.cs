@@ -57,6 +57,8 @@ public class Sequence : CompositeNode
     }
 }
 
+// TODO : 패턴이 다 똑같아서 추후에 수정하도록 한다
+
 public class IsDead : Node
 {
     private MonsterController monController;
@@ -302,71 +304,6 @@ public class Summon : Node
     {
         Debug.Log("Summon true");
         monController.Summon();
-        return true;
-    }
-}
-
-public class IsCorrectSkill : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        if (monController.IsCorrectSkill())
-        {
-            Debug.Log("IsCorrectSkill true");
-            return true;
-        }
-        else
-        {
-            Debug.Log("IsCorrectSkill false");
-            return false;
-        }
-    }
-}
-
-public class IsRestOver : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        if (monController.IsRestOver())
-        {
-            Debug.Log("IsRestOver true");
-            return true;
-        }
-        else
-        {
-            Debug.Log("IsRestOver false");
-            return false;
-        }
-    }
-}
-
-public class RestInit : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("RestInit true");
-        monController.RestInit();
         return true;
     }
 }
