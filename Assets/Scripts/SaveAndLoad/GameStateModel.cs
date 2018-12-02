@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using System.IO;
 using System.Security.Cryptography;
@@ -81,7 +82,7 @@ public class GameStateModel : ISavable {
         //TODO : 아래가 디버그 코드임 (임시 코드임) 수정할 것 
         SaveMeta meta = new SaveMeta();
         meta.savedTime = DateTime.Now;
-        meta.locationAtSavedTime = "NOWHERE";
+        meta.locationAtSavedTime = SceneManager.GetActiveScene().name;
         meta.FireDungeonCleared = false;
         meta.WaterAndElectricityDungeonCleared = false;
         meta.WindDungeonCleared = false;
@@ -177,6 +178,11 @@ public class GameStateModel : ISavable {
         public void CopyFromVector3(Vector3 vector)
         {
             x = vector.x; y = vector.y ; z = vector.z;
+        }
+
+        public Vector3 ToVector3()
+        {
+            return new Vector3(x, y, z);
         }
 	}
 
