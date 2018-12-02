@@ -23,6 +23,11 @@ public class RaidMonster : MonoBehaviour
     [SerializeField]
     private GameObject hitEffect;
 
+    public GameObject tornado;
+    public GameObject thunderStroke;
+    public GameObject wield;
+    public GameObject pierce;
+
     private void Start()
     {
         inst_Character = CharacterManager.getInstance();
@@ -44,8 +49,8 @@ public class RaidMonster : MonoBehaviour
     {
         while (currentHP > 0)
         {
-            UseSkill();
             yield return new WaitForSeconds(5);
+            UseSkill();
         }
     }
 
@@ -84,14 +89,13 @@ public class RaidMonster : MonoBehaviour
     private void Tornado()
     {
         Debug.Log("Tornado");
-        GameObject clone = Instantiate(rangedSpell, this.transform.position, this.transform.rotation);
-        clone.GetComponent<RangedSpell>().target = targetPlayer;
+        AttackEffect(tornado);
     }
 
     private void ThunderStroke()
     {
         Debug.Log("ThunderStroke");
-        StartEffect();
+        AttackEffect(thunderStroke);
     }
 
     private void Wield()
@@ -104,20 +108,24 @@ public class RaidMonster : MonoBehaviour
     private void Summon()
     {
         Debug.Log("Summon");
-        StartEffect();
+        AttackEffect(thunderStroke);
+
+        //StartEffect();
     }
 
     private void Pierce()
     {
         Debug.Log("Pierce");
-        GameObject clone = Instantiate(rangedSpell, this.transform.position, this.transform.rotation);
-        clone.GetComponent<RangedSpell>().target = targetPlayer;
+        AttackEffect(thunderStroke);
+
+        //GameObject clone = Instantiate(pierce, this.transform.position, this.transform.rotation);
+        //clone.GetComponent<RangedSpell>().target = targetPlayer;
     }
 
-    private void StartEffect()
+    private void AttackEffect(GameObject spell)
     {
         Vector3 pos = new Vector3(targetPlayer.position.x, targetPlayer.position.y + 1.0f, targetPlayer.position.z);
-        GameObject effect = Instantiate(hitEffect, pos, targetPlayer.rotation);
+        GameObject effect = Instantiate(spell, pos, targetPlayer.rotation);
         Destroy(effect, 5.0f);
     }
 }
