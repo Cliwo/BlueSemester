@@ -63,9 +63,9 @@ public class IsDead : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public IsDead(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
@@ -87,9 +87,9 @@ public class Patrol : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public Patrol(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
@@ -104,9 +104,9 @@ public class Death : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public Death(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
@@ -121,9 +121,9 @@ public class InSight : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public InSight(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
@@ -145,9 +145,14 @@ public class Chase : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    //public MonsterController MonController
+    //{
+    //    set { monController = value; }
+    //}
+
+    public Chase(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
@@ -162,9 +167,9 @@ public class IsDamaged : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public IsDamaged(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
@@ -186,9 +191,9 @@ public class InAttackRange : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public InAttackRange(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
@@ -210,100 +215,15 @@ public class Attack : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public Attack(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
         Debug.Log("Attack true");
         monController.Attack();
-        return true;
-    }
-}
-
-public class Tornado : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Tornado true");
-        monController.Tornado();
-        return true;
-    }
-}
-
-public class ThunderStroke : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("ThunderStroke true");
-        monController.ThunderStroke();
-        return true;
-    }
-}
-
-public class Wield : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Wield true");
-        monController.Wield();
-        return true;
-    }
-}
-
-public class Pierce : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Pierce true");
-        monController.Pierce();
-        return true;
-    }
-}
-
-public class Summon : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Summon true");
-        monController.Summon();
         return true;
     }
 }

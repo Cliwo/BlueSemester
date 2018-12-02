@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BT_Slime : MonsterController
+public class BT_FireDog : MonsterController
 {
     private Sequence root;
 
@@ -47,7 +47,7 @@ public class BT_Slime : MonsterController
     override protected void InitStatus()
     {
         base.InitStatus();
-        horizontalSpeed = 1.0f;
+        horizontalSpeed = 2.0f;
     }
 
     override protected void Init()
@@ -88,6 +88,6 @@ public class BT_Slime : MonsterController
 
     public override void Attack()
     {
-        effectManager.StartEffects("FX_SlimeAttack");
+        effectManager.StartEffects("FX_Bite");
     }
 }

@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class MonsterController : Pawn
 {
-    private CharacterManager inst_Character;
+    protected CharacterManager inst_Character;
 
-    private float maxHP = 12;
+    protected float maxHP = 12;
     private float attack = 10;
-    private float atkSpeed = 10;
+    protected float atkSpeed = 10;
 
     [SerializeField]
-    private Transform[] patrolPoints;
+    protected Transform[] patrolPoints;
 
-    private EffectManager effectManager;
+    protected EffectManager effectManager;
 
     //public Transform spawnPoint;
 
-    private int currentPoint;
-    private int beforePoint;
+    protected int currentPoint;
+    protected int beforePoint;
 
-    private Sight sight;
-    private Transform target;
-    private AttackRange attackRange;
-    private CapsuleCollider collider;
+    protected Sight sight;
+    protected Transform target;
+    protected AttackRange attackRange;
+    protected CapsuleCollider collider;
 
     override protected void InitStatus()
     {
@@ -53,15 +53,14 @@ public class MonsterController : Pawn
             transform.position = patrolPoints[0].position;
         }
         currentPoint = 0;
-        //effectManager.StartEffects("MagicCircle");
     }
 
     private void OnTriggerEnter(Collider other) //bullet 과 충돌 시
     {
         // TODO 1115 이 부분 현재 수정 필요. 충돌판정을 이 스크립트에서 하지 않아야함. Skill 에서 해야함.
+        // 이건 그냥 플레이어와 몬스터가 서로 겹쳤을 때 그냥 지나칠 수 있게 하는 코드이므로 둬도 괜찮음.
         if (other.gameObject.tag == "Player")
         {
-            //effectManager.StartEffects("SkillFire");
             Physics.IgnoreCollision(collider, other);
         }
     }
@@ -139,7 +138,6 @@ public class MonsterController : Pawn
 
     public bool InAttackRange()
     {
-        Debug.Log("attackrange? : " + attackRange.inAttackRange);
         if (attackRange.inAttackRange)
         {
             return true;
@@ -150,28 +148,8 @@ public class MonsterController : Pawn
         }
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         Debug.Log("Monster Attacked");
-    }
-
-    public void Tornado()
-    {
-    }
-
-    public void ThunderStroke()
-    {
-    }
-
-    public void Wield()
-    {
-    }
-
-    public void Pierce()
-    {
-    }
-
-    public void Summon()
-    {
     }
 }

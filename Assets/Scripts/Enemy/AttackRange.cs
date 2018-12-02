@@ -5,17 +5,31 @@ using UnityEngine;
 public class AttackRange : MonoBehaviour
 {
     public bool inAttackRange;
+    private float timer;
+    private float waitingTime;
 
     private void Start()
     {
         inAttackRange = false;
+        timer = 0;
+        waitingTime = 2f;
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            inAttackRange = true;
+            if (timer > waitingTime || timer == 0)
+            {
+                inAttackRange = true;
+                timer = 0;
+            }
+            else
+            {
+                inAttackRange = false;
+            }
+
+            timer += Time.deltaTime;
         }
     }
 
@@ -24,6 +38,7 @@ public class AttackRange : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             inAttackRange = false;
+            timer = 0;
         }
     }
 }
