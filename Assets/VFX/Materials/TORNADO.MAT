@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: TORNADO
+  m_Shader: {fileID: 4800000, guid: f55edbfe2d7bafe458cd88bdc564cd24, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: e28dc97a9541e3642a48c0e3886688c5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0.39756384
+    - _ChromaticAberration: 0.1
+    - _Cutoff: 0
+    - _Emission: 1.5
+    - _Float0: 1
+    - _FresnelGlow: 2.33
+    - _FresnelPower: 1.87
+    - _NumberOfWave: 1
+    - _Scaling: 8
+    - _TextureSpeed: -4.08
+    - _Tiling: 8.13
+    - _WaveSpeed: 1
+    - __dirty: 0
+    m_Colors:
+    - _FresnelColor: {r: 0.5829477, g: 0.8696418, b: 0.9433962, a: 1}
+    - _TornadoColor: {r: 0.4130473, g: 0.57444817, b: 0.735849, a: 0}
