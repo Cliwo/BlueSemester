@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Tornado
+  m_Name: TORNADO
   m_Shader: {fileID: 4800000, guid: f55edbfe2d7bafe458cd88bdc564cd24, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
