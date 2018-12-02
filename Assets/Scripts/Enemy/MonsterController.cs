@@ -53,6 +53,11 @@ public class MonsterController : Pawn
             transform.position = patrolPoints[0].position;
         }
         currentPoint = 0;
+
+        if (attackRange.waitingTime == 0)
+        {
+            attackRange.waitingTime = 2;
+        }
     }
 
     private void OnTriggerEnter(Collider other) //bullet 과 충돌 시

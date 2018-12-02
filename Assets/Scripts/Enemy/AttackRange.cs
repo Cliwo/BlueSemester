@@ -6,13 +6,12 @@ public class AttackRange : MonoBehaviour
 {
     public bool inAttackRange;
     private float timer;
-    private float waitingTime;
+    public float waitingTime = 0;
 
     private void Start()
     {
         inAttackRange = false;
         timer = 0;
-        waitingTime = 2f;
     }
 
     public void OnTriggerStay(Collider other)
