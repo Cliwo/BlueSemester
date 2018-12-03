@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/terrain/test.unity
+    path: Assets/Scenes/Town.unity
     guid: 46985a89c58e5b14b869f9cd83ed3296
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 62941ddddd5c84551a701d1cfe21b122
   - enabled: 1
-    path: Assets/LowpolyDungeonAssets/Demo Scene/Demo Scene Test.unity
+    path: Assets/ExternalPlugins/LowpolyDungeonAssets/Demo Scene/Demo Scene Test.unity
     guid: 2af71e59e87863849ae479dfa2aae16f
+  - enabled: 1
+    path: Assets/Scenes/DatabaseTest.unity
+    guid: 962574cf80a2f9f45b1dd66733b691fb
   m_configObjects: {}

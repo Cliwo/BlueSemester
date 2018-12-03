@@ -526,16 +526,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114274155153790772, guid: efae0abda4b8f41c09950999d1cdbf74,
-        type: 2}
-      propertyPath: MinimapCamera
-      value: 
-      objectReference: {fileID: 44652302}
     - target: {fileID: 223812086534609506, guid: efae0abda4b8f41c09950999d1cdbf74,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1861517706}
+    - target: {fileID: 114274155153790772, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: MinimapCamera
+      value: 
+      objectReference: {fileID: 44652302}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efae0abda4b8f41c09950999d1cdbf74, type: 2}
   m_IsPrefabAsset: 0

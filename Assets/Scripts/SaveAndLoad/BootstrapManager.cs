@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class BootstrapManager : MonoBehaviour {
 
 	private static BootstrapManager instance;
@@ -20,23 +22,25 @@ public class BootstrapManager : MonoBehaviour {
 			Destroy(this);
 		}
 	}
-	public void RebootGameWithData(GameStateModel model)
+	public void RebootGameWithData(GameStateModel model, GameStateModel.SaveMeta meta)
 	{
-		UnloadScene();
-		BootGameWithData(model);
+		ChangeScene(meta.locationAtSavedTime , model);
 	}
-	public void BootGameWithData(GameStateModel model)
+	private void ChangeScene(string scene, GameStateModel model)
+	{
+		//Unload를 해도 manager들은 죽으면 안 됨 
+		SceneManager.sceneLoaded += (_, __) => 
+		{
+			MatData(model);
+		};
+		SceneManager.LoadScene(scene);
+	}
+	public void MatData(GameStateModel model)
 	{
 		//각 Manager들에서 데이터를 넣을 부분을 뽑아와야함.
 		CharacterManager inst_character = CharacterManager.getInstance();
 		inst_character.gameObject.transform.position = model.lastPosition.ToVector3();
 		
-	}
-
-	private void UnloadScene()
-	{
-		//Unload를 해도 manager들은 죽으면 안 됨 
-
 	}
 
 }
