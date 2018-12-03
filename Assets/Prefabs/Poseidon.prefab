@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1102556513403272
 GameObject:
   m_ObjectHideFlags: 1
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 54001543014289056}
   - component: {fileID: 136045556714955120}
   - component: {fileID: 136710224955461442}
-  - component: {fileID: 114863264823263032}
+  - component: {fileID: 114427430621155692}
   m_Layer: 0
   m_Name: Poseidon
   m_TagString: Enemy
@@ -437,6 +437,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inSight: 0
+--- !u!114 &114427430621155692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1600006283184090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32436892b129de449a7424c739fc3912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  patrolPoints: []
+  raidMonster: 1
+  rangedSpell: {fileID: 1642726821868710, guid: 62037571a45445b4d8a4ad42ba8682cd,
+    type: 2}
+  hitEffect: {fileID: 1123767725254008, guid: c7731d2b95da31446a0ee11ee7b8f3f6, type: 2}
+  tornado: {fileID: 1093436315144598, guid: 28d101a8e19154a4a856709938df8b3f, type: 2}
+  thunderStroke: {fileID: 1221365282928736, guid: 4aecf2503dfd0ad44bd786eda948228d,
+    type: 2}
+  wield: {fileID: 0}
+  pierce: {fileID: 1259512979531006, guid: 868997b57e8ed094e9895bdcb75cd04b, type: 2}
 --- !u!114 &114612535856861074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,25 +476,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &114863264823263032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1600006283184090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f01e7e37238240f46a1e4e081d43d576, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangedSpell: {fileID: 1642726821868710, guid: 62037571a45445b4d8a4ad42ba8682cd,
-    type: 2}
-  hitEffect: {fileID: 1123767725254008, guid: c7731d2b95da31446a0ee11ee7b8f3f6, type: 2}
-  tornado: {fileID: 1093436315144598, guid: 28d101a8e19154a4a856709938df8b3f, type: 2}
-  thunderStroke: {fileID: 1221365282928736, guid: 4aecf2503dfd0ad44bd786eda948228d,
-    type: 2}
-  wield: {fileID: 0}
-  pierce: {fileID: 1259512979531006, guid: 868997b57e8ed094e9895bdcb75cd04b, type: 2}
 --- !u!135 &135244652201933688
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -493,7 +498,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 300
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136045556714955120
 CapsuleCollider:

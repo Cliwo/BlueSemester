@@ -24,6 +24,7 @@ public class MonsterController : Pawn
     protected Transform target;
     protected AttackRange attackRange;
     protected CapsuleCollider collider;
+    public bool raidMonster = false;
 
     override protected void InitStatus()
     {
