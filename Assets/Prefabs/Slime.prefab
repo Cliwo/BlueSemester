@@ -371,6 +371,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 12
+  damage: 0
+  atkSpeed: 10
+  raidMonster: 0
   patrolPoints: []
 --- !u!135 &135136243437019860
 SphereCollider:

@@ -46,11 +46,13 @@ public class BT_Slime : MonsterController
 
     override protected void InitStatus()
     {
-        base.InitStatus();
-        horizontalSpeed = 1.0f;
+        maxHP = 50;
+        damage = 10;
+        hp = maxHP;
+        horizontalSpeed = 1;
     }
 
-    override protected void Init()
+    private void Init()
     {
         //Patrol
 

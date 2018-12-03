@@ -46,11 +46,13 @@ public class BT_FireDog : MonsterController
 
     override protected void InitStatus()
     {
-        base.InitStatus();
-        horizontalSpeed = 2.0f;
+        maxHP = 150;
+        damage = 100;
+        hp = maxHP;
+        horizontalSpeed = 1;
     }
 
-    override protected void Init()
+    private void Init()
     {
         //Patrol
 

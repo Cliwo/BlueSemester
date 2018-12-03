@@ -65,11 +65,13 @@ public class BT_Poseidon : MonsterController
 
     override protected void InitStatus()
     {
-        base.InitStatus();
+        maxHP = 1000;
+        damage = 200;
+        hp = maxHP;
         horizontalSpeed = 0;
     }
 
-    override protected void Init()
+    private void Init()
     {
         //Death
         seqDeath.AddChild(death);

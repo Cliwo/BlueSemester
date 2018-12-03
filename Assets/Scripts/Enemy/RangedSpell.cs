@@ -8,6 +8,7 @@ public class RangedSpell : MonoBehaviour
     private CharacterManager inst_Character;
     private float lifespan = 5.0f;
     public float spellSpeed = 8.0f;
+    public float damage;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class RangedSpell : MonoBehaviour
         if (target != null)
         {
             float distance = Vector3.Distance(target.position, this.transform.position);
-            if (distance > 2.0f)
+            if (distance > 0)
             {
                 transform.Translate(Vector3.forward * spellSpeed * Time.deltaTime);
             }
@@ -41,5 +42,22 @@ public class RangedSpell : MonoBehaviour
     private void HitTarget()
     {
         Destroy(this.gameObject);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Pawn pawnScript = other.GetComponent<Pawn>();
+
+        if (pawnScript != null && other.gameObject.tag == "Player")
+        {
+            ApplyDamage(pawnScript);
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void ApplyDamage(Pawn target)
+    {
+        target.hp -= damage;
+        Debug.Log("get damaged + " + target + " - " + damage + " = " + target.hp);
     }
 }

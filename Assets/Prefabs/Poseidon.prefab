@@ -451,8 +451,11 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
-  patrolPoints: []
+  maxHP: 12
+  damage: 0
+  atkSpeed: 10
   raidMonster: 1
+  patrolPoints: []
   rangedSpell: {fileID: 1642726821868710, guid: 62037571a45445b4d8a4ad42ba8682cd,
     type: 2}
   hitEffect: {fileID: 1123767725254008, guid: c7731d2b95da31446a0ee11ee7b8f3f6, type: 2}

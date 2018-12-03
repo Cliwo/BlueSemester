@@ -5,17 +5,15 @@ using UnityEngine;
 public class MonsterController : Pawn
 {
     protected CharacterManager inst_Character;
+    protected EffectManager effectManager;
 
-    protected float maxHP = 12;
-    private float attack = 10;
-    protected float atkSpeed = 10;
+    public float maxHP;
+    public float damage;
+    public float atkSpeed;
+    public bool raidMonster = false;
 
     [SerializeField]
     protected Transform[] patrolPoints;
-
-    protected EffectManager effectManager;
-
-    //public Transform spawnPoint;
 
     protected int currentPoint;
     protected int beforePoint;
@@ -24,19 +22,20 @@ public class MonsterController : Pawn
     protected Transform target;
     protected AttackRange attackRange;
     protected CapsuleCollider collider;
-    public bool raidMonster = false;
-
-    override protected void InitStatus()
-    {
-        hp = maxHP;
-        horizontalSpeed = 1.0f;
-    }
 
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
         attackRange = transform.Find("AttackRange").GetComponent<AttackRange>();
         effectManager = GetComponentInChildren<EffectManager>();
+    }
+
+    override protected void InitStatus()
+    {
+        maxHP = 50;
+        damage = 10;
+        hp = maxHP;
+        horizontalSpeed = 1;
     }
 
     override protected void Start()
@@ -47,8 +46,6 @@ public class MonsterController : Pawn
 
         collider = GetComponent<CapsuleCollider>();
 
-        hp = maxHP;
-        //patrolPoints[0].position = spawnPoint.position;
         if (patrolPoints.Length > 0)
         {
             transform.position = patrolPoints[0].position;
@@ -69,11 +66,6 @@ public class MonsterController : Pawn
         {
             Physics.IgnoreCollision(collider, other);
         }
-    }
-
-    virtual protected void Init()
-    {
-        hp = maxHP;
     }
 
     public bool IsDead()
