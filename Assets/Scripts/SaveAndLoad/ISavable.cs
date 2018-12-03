@@ -15,4 +15,7 @@ public class SaveLoadConst
 	public static readonly string EmptySlotTextInSave = "New Save";
     public static readonly string EmptySlotTextInLoad = "Empty";
 
+	public static readonly string SAVEFILESUBFIX = ".bin";
+	public static readonly string METAFILESUBFIX = ".metaBin";
+
 }

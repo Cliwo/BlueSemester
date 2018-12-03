@@ -3,33 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-public class LoadSlotUI : MonoBehaviour {
+public class GameContinueSlotUI : MonoBehaviour {
+	private BootstrapManager inst_boot;
 	public GameObject panel;
-	public CheckDialog checkDialog;
 	public Text slot01Text;
 	public Text slot02Text;
 	public Text slot03Text;
 	private string selectedPath;
-	public bool IsOpen{ get; private set; }
-	
+
+	void Start()
+	{
+		inst_boot = BootstrapManager.getInstance();
+	}
 	public void OpenMenu()
 	{
 		panel.SetActive(true);
-		IsOpen = true;
 		InitAllSlots();
 	}
-
 	public void CloseMenu()
 	{
-		if(checkDialog.IsOpen)
-		{
-			checkDialog.CloseDialog();
-			return;
-		}
-
 		panel.SetActive(false);
-		IsOpen = false;
 	}
+
 	public void OnSlotSelected(int index)
 	{
 		Text text = GetSelectedSlotText(index);
@@ -38,7 +33,15 @@ public class LoadSlotUI : MonoBehaviour {
 			return;
 		}
 		selectedPath = GetSelectedSlotSavePath(index);
-		checkDialog.OpenDialog(Load);
+		Load();
+	}
+	private void Load()
+	{
+		byte[] save = File.ReadAllBytes(GameStateModel.GetSaveLocation(selectedPath));
+		byte[] meta = File.ReadAllBytes(GameStateModel.GetSaveMetaLocation(selectedPath));
+		
+		inst_boot.RebootGameWithData(GameStateModel.Deserialize<GameStateModel>(save), 
+			GameStateModel.Deserialize<GameStateModel.SaveMeta>(meta));		
 	}
 	private Text GetSelectedSlotText(int index)
 	{
@@ -53,7 +56,7 @@ public class LoadSlotUI : MonoBehaviour {
 		}
 		return null;
 	} 
-
+	
 	private string GetSelectedSlotSavePath(int index)
 	{
 		switch(index)
@@ -66,19 +69,6 @@ public class LoadSlotUI : MonoBehaviour {
 			return SaveLoadConst.FILE03NAME;
 		}
 		return null;
-	}
-	private void Load()
-	{
-		if(checkDialog.IsOpen)
-		{
-			checkDialog.CloseDialog();
-		}
-		byte[] save = File.ReadAllBytes(GameStateModel.GetSaveLocation(selectedPath));
-		byte[] meta = File.ReadAllBytes(GameStateModel.GetSaveMetaLocation(selectedPath));
-		//TODO : Bootstrap 같은 형식으로 Boot 클래스가 필요함.
-		BootstrapManager.getInstance().RebootGameWithData(GameStateModel.Deserialize<GameStateModel>(save),
-		GameStateModel.Deserialize<GameStateModel.SaveMeta>(meta));
-		CloseMenu();
 	}
 	private void InitAllSlots()
 	{
