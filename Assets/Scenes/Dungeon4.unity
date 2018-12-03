@@ -632,30 +632,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 1740327818928652, guid: 0b7f361232c4f1840aacdcfa1cef9230, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1960117391046812, guid: 0b7f361232c4f1840aacdcfa1cef9230, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114340440994378340, guid: 0b7f361232c4f1840aacdcfa1cef9230,
-        type: 2}
-      propertyPath: breathSkill
-      value: 
-      objectReference: {fileID: 1368676299040832, guid: 1a26ba714785ea141ba6aef796031458,
-        type: 2}
-    - target: {fileID: 135581605774295918, guid: 0b7f361232c4f1840aacdcfa1cef9230,
-        type: 2}
-      propertyPath: m_Radius
-      value: 800
-      objectReference: {fileID: 0}
-    - target: {fileID: 135969017226614776, guid: 0b7f361232c4f1840aacdcfa1cef9230,
-        type: 2}
-      propertyPath: m_Radius
-      value: 810
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b7f361232c4f1840aacdcfa1cef9230, type: 2}
   m_IsPrefabAsset: 0

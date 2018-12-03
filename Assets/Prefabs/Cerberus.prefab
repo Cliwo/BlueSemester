@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4088425689417698
 Transform:
   m_ObjectHideFlags: 1
@@ -452,7 +452,7 @@ MonoBehaviour:
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
   patrolPoints: []
-  breathSkill: {fileID: 1642726821868710, guid: 62037571a45445b4d8a4ad42ba8682cd,
+  breathSkill: {fileID: 1368676299040832, guid: 1a26ba714785ea141ba6aef796031458,
     type: 2}
 --- !u!135 &135581605774295918
 SphereCollider:
@@ -464,7 +464,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 440
+  m_Radius: 710
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135969017226614776
 SphereCollider:
@@ -476,7 +476,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 450
+  m_Radius: 700
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136275666893168600
 CapsuleCollider:
