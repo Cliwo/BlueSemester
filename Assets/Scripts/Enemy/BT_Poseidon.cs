@@ -156,25 +156,19 @@ public class BT_Poseidon : MonsterController
     private void Wield()
     {
         Debug.Log("Wield");
-        GameObject clone = Instantiate(rangedSpell, this.transform.position, this.transform.rotation);
-        clone.GetComponent<RangedSpell>().target = target;
     }
 
     private void Summon()
     {
         Debug.Log("Summon");
-        AttackEffect(thunderStroke);
-
-        //StartEffect();
     }
 
     private void Pierce()
     {
         Debug.Log("Pierce");
-        AttackEffect(thunderStroke);
-
-        //GameObject clone = Instantiate(pierce, this.transform.position, this.transform.rotation);
-        //clone.GetComponent<RangedSpell>().target = targetPlayer;
+        GameObject clone = Instantiate(pierce, this.transform.position, this.transform.rotation);
+        clone.transform.LookAt(target);
+        Destroy(clone, 5.0f);
     }
 
     private void AttackEffect(GameObject spell)
