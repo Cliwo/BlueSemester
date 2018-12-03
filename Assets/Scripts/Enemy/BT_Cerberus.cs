@@ -93,8 +93,9 @@ public class BT_Cerberus : MonsterController
 
     public override void Attack()
     {
-        //effectManager.StartEffects("FX_Bite");
         GameObject go = Instantiate(breathSkill, this.transform.position, this.transform.rotation);
-        go.GetComponent<RangedSpell>().target = target;
+        RangedSpell spell = go.GetComponent<RangedSpell>();
+        spell.spellSpeed = 3;
+        spell.target = target;
     }
 }
