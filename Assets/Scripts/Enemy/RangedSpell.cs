@@ -58,6 +58,6 @@ public class RangedSpell : MonoBehaviour
     private void ApplyDamage(Pawn target)
     {
         target.hp -= damage;
-        Debug.Log("get damaged + " + target + " - " + damage + " = " + target.hp);
+        Debug.Log("Player damaged - " + damage + " = " + target.hp);
     }
 }

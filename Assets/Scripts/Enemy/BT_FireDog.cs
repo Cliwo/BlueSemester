@@ -91,5 +91,14 @@ public class BT_FireDog : MonsterController
     public override void Attack()
     {
         effectManager.StartEffects("FX_Bite");
+        base.Attack();
+    }
+
+    protected override void InitAttack()
+    {
+        attackActiveDuration = 2;
+        attackPreDelay = 0.8f;
+        meleeAttack = true;
+        attackRange.cooldownTime = 3;
     }
 }

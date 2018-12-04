@@ -23,6 +23,12 @@ public class MonsterController : Pawn
     protected AttackRange attackRange;
     protected CapsuleCollider collider;
 
+    protected float attackInitTime;
+    protected float attackActiveDuration;
+    protected float attackPreDelay;
+    protected bool meleeAttack = false;
+    protected bool canAttack = false;
+
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
@@ -51,21 +57,6 @@ public class MonsterController : Pawn
             transform.position = patrolPoints[0].position;
         }
         currentPoint = 0;
-
-        if (attackRange.waitingTime == 0)
-        {
-            attackRange.waitingTime = 2;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other) //bullet 과 충돌 시
-    {
-        // TODO 1115 이 부분 현재 수정 필요. 충돌판정을 이 스크립트에서 하지 않아야함. Skill 에서 해야함.
-        // 이건 그냥 플레이어와 몬스터가 서로 겹쳤을 때 그냥 지나칠 수 있게 하는 코드이므로 둬도 괜찮음.
-        if (other.gameObject.tag == "Player")
-        {
-            Physics.IgnoreCollision(collider, other);
-        }
     }
 
     public bool IsDead()
@@ -148,6 +139,49 @@ public class MonsterController : Pawn
 
     public virtual void Attack()
     {
-        Debug.Log("Monster Attacked");
+        InitAttack();
+        Invoke("OnAttack", attackPreDelay);
+    }
+
+    protected virtual void InitAttack()
+    {
+    }
+
+    protected void OnAttack()
+    {
+        if (canAttack)
+        {
+            ApplyDamage(target.GetComponent<Pawn>());
+        }
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(collider, other);
+        }
+    }
+
+    protected void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            canAttack = true;
+        }
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            canAttack = false;
+        }
+    }
+
+    private void ApplyDamage(Pawn targetPawn)
+    {
+        targetPawn.hp -= damage;
+        Debug.Log("Player damaged - " + damage + " = " + targetPawn.hp);
     }
 }

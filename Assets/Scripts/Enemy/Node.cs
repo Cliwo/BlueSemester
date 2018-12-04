@@ -72,12 +72,12 @@ public class IsDead : Node
     {
         if (monController.IsDead())
         {
-            Debug.Log("IsDead true");
+            //Debug.Log("IsDead true");
             return true;
         }
         else
         {
-            Debug.Log("IsDead false");
+            //Debug.Log("IsDead false");
             return false;
         }
     }
@@ -94,7 +94,7 @@ public class Patrol : Node
 
     public override bool Invoke()
     {
-        Debug.Log("Patrol true");
+        //Debug.Log("Patrol true");
         monController.Patrol();
         return true;
     }
@@ -111,7 +111,7 @@ public class Death : Node
 
     public override bool Invoke()
     {
-        Debug.Log("Death true");
+        //Debug.Log("Death true");
         monController.Death();
         return true;
     }
@@ -130,12 +130,12 @@ public class InSight : Node
     {
         if (monController.InSight())
         {
-            Debug.Log("InSight true");
+            //Debug.Log("InSight true");
             return true;
         }
         else
         {
-            Debug.Log("InSight false");
+            //Debug.Log("InSight false");
             return false;
         }
     }
@@ -157,7 +157,7 @@ public class Chase : Node
 
     public override bool Invoke()
     {
-        Debug.Log("Chase true");
+        //Debug.Log("Chase true");
         monController.Chase();
         return true;
     }
@@ -176,12 +176,12 @@ public class IsDamaged : Node
     {
         if (monController.IsDamaged())
         {
-            Debug.Log("IsDamaged true");
+            //Debug.Log("IsDamaged true");
             return true;
         }
         else
         {
-            Debug.Log("IsDamaged false");
+            //Debug.Log("IsDamaged false");
             return false;
         }
     }
@@ -200,12 +200,12 @@ public class InAttackRange : Node
     {
         if (monController.InAttackRange())
         {
-            Debug.Log("InAttackRange true");
+            //Debug.Log("InAttackRange true");
             return true;
         }
         else
         {
-            Debug.Log("InAttackRange false");
+            //Debug.Log("InAttackRange false");
             return false;
         }
     }
@@ -222,7 +222,7 @@ public class Attack : Node
 
     public override bool Invoke()
     {
-        Debug.Log("Attack true");
+        //Debug.Log("Attack true");
         monController.Attack();
         return true;
     }

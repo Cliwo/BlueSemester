@@ -46,7 +46,7 @@ public class BT_Cerberus : MonsterController
         Init();
         StartCoroutine("BehaviorProcess");
 
-        attackRange.waitingTime = 3;
+        attackRange.cooldownTime = 3;
     }
 
     override protected void InitStatus()

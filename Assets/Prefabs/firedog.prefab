@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
-  waitingTime: 0
+  cooldownTime: 0
 --- !u!114 &114975970515135944
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -91,5 +91,14 @@ public class BT_Slime : MonsterController
     public override void Attack()
     {
         effectManager.StartEffects("FX_SlimeAttack");
+        base.Attack();
+    }
+
+    protected override void InitAttack()
+    {
+        attackActiveDuration = 0.5f;
+        attackPreDelay = 0.2f;
+        meleeAttack = true;
+        attackRange.cooldownTime = 1;
     }
 }
