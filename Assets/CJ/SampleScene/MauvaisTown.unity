@@ -6505,6 +6505,80 @@ Prefab:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1726047735256852, guid: efae0abda4b8f41c09950999d1cdbf74, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224091754703816788, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 1280
+      objectReference: {fileID: 0}
+    - target: {fileID: 224091754703816788, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 260
+      objectReference: {fileID: 0}
+    - target: {fileID: 224091754703816788, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 205
+      objectReference: {fileID: 0}
+    - target: {fileID: 114903830307904126, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114903830307904126, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224843784625255616, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114903830307904126, guid: efae0abda4b8f41c09950999d1cdbf74,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efae0abda4b8f41c09950999d1cdbf74, type: 2}
   m_IsPrefabAsset: 0
@@ -9058,6 +9132,35 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: ba2c3a7495a98d5499af0f9a5e0a04cb,
     type: 3}
   m_PrefabInternal: {fileID: 1920388216}
+--- !u!1 &1924181318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 6dbd46258232524439764b87d7857146,
+    type: 3}
+  m_PrefabInternal: {fileID: 731269850}
+--- !u!114 &1924181320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1924181318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f66ee881e3a643bbb85f8b63d508b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textKey: blacksmith
+--- !u!135 &1924181321
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1924181318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1941323227
 Prefab:
   m_ObjectHideFlags: 0
