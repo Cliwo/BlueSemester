@@ -2781,15 +2781,15 @@ Prefab:
       objectReference: {fileID: 2100000, guid: bf02189f5f715fd4aa54f3a8826ca994, type: 2}
     - target: {fileID: 100004, guid: 41f60bc0699108047a347777c17b33cb, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 41f60bc0699108047a347777c17b33cb, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 41f60bc0699108047a347777c17b33cb, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41f60bc0699108047a347777c17b33cb, type: 3}
