@@ -2,66 +2,81 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BT_Slime : MonoBehaviour
+public class BT_Slime : MonsterController
 {
-    private Sequence root = new Sequence();
-    private Sequence seqDeath = new Sequence();
-    private Sequence seqChase = new Sequence();
-    private Sequence seqDamage = new Sequence();
-    private Sequence seqAttack = new Sequence();
+    private Sequence root;
 
-    private Selector selector = new Selector();
+    private Sequence seqDeath;
+    private Sequence seqChase;
+    private Sequence seqAttack;
 
-    private Patrol patrol = new Patrol();
-    private IsDead isDead = new IsDead();
-    private Death death = new Death();
-    private InSight inSight = new InSight();
-    private Chase chase = new Chase();
-    private IsDamaged isDamaged = new IsDamaged();
-    private InAttackRange inAttackRange = new InAttackRange();
-    private Attack attack = new Attack();
+    private Selector selMove;
+    private Selector selChase;
 
-    private MonsterController monController;
+    private Patrol patrol;
+    private IsDead isDead;
+    private Death death;
+    private InSight inSight;
+    private Chase chase;
+    private IsDamaged isDamaged;
+    private InAttackRange inAttackRange;
+    private Attack attack;
 
-    private void Start()
+    override protected void Start()
     {
+        root = new Sequence();
+        seqDeath = new Sequence();
+        seqChase = new Sequence();
+        seqAttack = new Sequence();
+        selMove = new Selector();
+        selChase = new Selector();
+        patrol = new Patrol(this);
+        isDead = new IsDead(this);
+        death = new Death(this);
+        inSight = new InSight(this);
+        chase = new Chase(this);
+        isDamaged = new IsDamaged(this);
+        inAttackRange = new InAttackRange(this);
+        attack = new Attack(this);
+
+        base.Start();
         Init();
         StartCoroutine("BehaviorProcess");
     }
 
+    override protected void InitStatus()
+    {
+        maxHP = 50;
+        damage = 10;
+        hp = maxHP;
+        horizontalSpeed = 1;
+    }
+
     private void Init()
     {
-        monController = gameObject.GetComponent<MonsterController>();
-        monController.Init();
+        //Patrol
 
-        patrol.MonController = monController;
-        isDead.MonController = monController;
-        death.MonController = monController;
-        inSight.MonController = monController;
-        chase.MonController = monController;
-        isDamaged.MonController = monController;
-        inAttackRange.MonController = monController;
-        attack.MonController = monController;
+        //Chase
+        selChase.AddChild(inSight);
+        selChase.AddChild(isDamaged);
 
-        seqDamage.AddChild(chase);
-        seqDamage.AddChild(isDamaged);
+        seqChase.AddChild(chase);
+        seqChase.AddChild(selChase);
 
+        //Attack
         seqAttack.AddChild(attack);
         seqAttack.AddChild(inAttackRange);
 
-        seqChase.AddChild(chase);
-        seqChase.AddChild(inSight);
+        selMove.AddChild(patrol);
+        selMove.AddChild(seqChase);
+        selMove.AddChild(seqAttack);
 
-        selector.AddChild(patrol);
-        selector.AddChild(seqChase);
-        selector.AddChild(seqDamage);
-
+        //Death
         seqDeath.AddChild(death);
         seqDeath.AddChild(isDead);
 
         root.AddChild(seqDeath);
-        root.AddChild(seqAttack);
-        root.AddChild(selector);
+        root.AddChild(selMove);
     }
 
     private IEnumerator BehaviorProcess()
@@ -71,5 +86,19 @@ public class BT_Slime : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         Debug.Log("Behavior Process Exit");
+    }
+
+    public override void Attack()
+    {
+        effectManager.StartEffects("FX_SlimeAttack");
+        base.Attack();
+    }
+
+    protected override void InitAttack()
+    {
+        attackActiveDuration = 0.5f;
+        attackPreDelay = 0.2f;
+        meleeAttack = true;
+        attackRange.cooldownTime = 1;
     }
 }

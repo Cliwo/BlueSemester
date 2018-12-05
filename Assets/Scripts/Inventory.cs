@@ -146,7 +146,7 @@ public class Inventory : MonoBehaviour
         return tooltip;
     }
 
-    private void AddItem(int id)
+    public void AddItem(int id)
     {
         for (int i = 0; i < inventory.Count; i++)
         {

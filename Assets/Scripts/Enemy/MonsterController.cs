@@ -4,37 +4,44 @@ using UnityEngine;
 
 public class MonsterController : Pawn
 {
-    private CharacterManager inst_Character;
+    protected CharacterManager inst_Character;
+    protected EffectManager effectManager;
 
-    private float maxHP = 12;
-    private float attack = 10;
-    private float atkSpeed = 10;
+    public float maxHP;
+    public float damage;
+    public float atkSpeed;
+    public bool raidMonster = false;
 
     [SerializeField]
-    private Transform[] patrolPoints;
-    private EffectManager effectManager;
+    protected Transform[] patrolPoints;
 
-    //public Transform spawnPoint;
+    protected int currentPoint;
+    protected int beforePoint;
 
-    private int currentPoint;
-    private int beforePoint;
+    protected Sight sight;
+    protected Transform target;
+    protected AttackRange attackRange;
+    protected CapsuleCollider collider;
 
-    private Sight sight;
-    private Transform target;
-    private AttackRange attackRange;
-    private CapsuleCollider collider;
-
-    override protected void InitStatus()
-    {
-        hp = maxHP;
-        horizontalSpeed = 1.0f;
-    }
+    protected float attackInitTime;
+    protected float attackActiveDuration;
+    protected float attackPreDelay;
+    protected bool meleeAttack = false;
+    protected bool canAttack = false;
 
     private void Awake()
     {
         sight = transform.Find("Sight").GetComponent<Sight>();
         attackRange = transform.Find("AttackRange").GetComponent<AttackRange>();
         effectManager = GetComponentInChildren<EffectManager>();
+    }
+
+    override protected void InitStatus()
+    {
+        maxHP = 50;
+        damage = 10;
+        hp = maxHP;
+        horizontalSpeed = 1;
     }
 
     override protected void Start()
@@ -45,34 +52,11 @@ public class MonsterController : Pawn
 
         collider = GetComponent<CapsuleCollider>();
 
-        hp = maxHP;
-        //patrolPoints[0].position = spawnPoint.position;
         if (patrolPoints.Length > 0)
         {
             transform.position = patrolPoints[0].position;
         }
         currentPoint = 0;
-        //effectManager.StartEffects("MagicCircle");
-    }
-    private void OnTriggerEnter(Collider other) //bullet 과 충돌 시 
-    {
-        // TODO 1115 이 부분 현재 수정 필요. 충돌판정을 이 스크립트에서 하지 않아야함. Skill 에서 해야함.
-        // if (other.gameObject.tag == "Player")
-        // {
-        //     effectManager.StartEffects("SkillFire");
-        //     Physics.IgnoreCollision(collider, other);
-        // }
-
-        // if (other.gameObject.tag == "Bullet")
-        // {
-        //     effectManager.StartEffects("SlimeAttack");
-        //     effectManager.StartEffects("FireSkill");
-        // }
-    }
-
-    public void Init()
-    {
-        hp = maxHP;
     }
 
     public bool IsDead()
@@ -123,7 +107,7 @@ public class MonsterController : Pawn
 
     public void Chase()
     {
-        if(lockOtherComponentInfluenceOnTransform)
+        if (lockOtherComponentInfluenceOnTransform)
             return;
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), horizontalSpeed * Time.deltaTime);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
@@ -143,7 +127,6 @@ public class MonsterController : Pawn
 
     public bool InAttackRange()
     {
-        Debug.Log("attackrange? : " + attackRange.inAttackRange);
         if (attackRange.inAttackRange)
         {
             return true;
@@ -154,48 +137,51 @@ public class MonsterController : Pawn
         }
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
-        Debug.Log("Monster Attacked");
+        InitAttack();
+        Invoke("OnAttack", attackPreDelay);
     }
 
-    public void Tornado()
-    {
-    }
-
-    public void ThunderStroke()
+    protected virtual void InitAttack()
     {
     }
 
-    public void Wield()
+    protected void OnAttack()
     {
+        if (canAttack)
+        {
+            ApplyDamage(target.GetComponent<Pawn>());
+        }
     }
 
-    public void Pierce()
+    protected void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(collider, other);
+        }
     }
 
-    public void Summon()
+    protected void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.tag == "Player")
+        {
+            canAttack = true;
+        }
     }
 
-    public bool IsCorrectSkill()
+    protected void OnTriggerExit(Collider other)
     {
-        // true, false 분기 지정 필요
-        return true;
+        if (other.gameObject.tag == "Player")
+        {
+            canAttack = false;
+        }
     }
 
-    public bool IsRestOver()
+    private void ApplyDamage(Pawn targetPawn)
     {
-        // true, false 분기 지정 필요
-        // 스킬간의 간격이 길 경우 텀을 주기 위해
-        return true;
+        targetPawn.hp -= damage;
+        Debug.Log("Player damaged - " + damage + " = " + targetPawn.hp);
     }
-
-    public void RestInit()
-    {
-        // 스킬간의 간격이 길 경우 텀을 주기 위해
-    }
-
-    
 }

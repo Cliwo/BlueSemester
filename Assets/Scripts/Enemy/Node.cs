@@ -57,25 +57,27 @@ public class Sequence : CompositeNode
     }
 }
 
+// TODO : 패턴이 다 똑같아서 추후에 수정하도록 한다
+
 public class IsDead : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public IsDead(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
         if (monController.IsDead())
         {
-            Debug.Log("IsDead true");
+            //Debug.Log("IsDead true");
             return true;
         }
         else
         {
-            Debug.Log("IsDead false");
+            //Debug.Log("IsDead false");
             return false;
         }
     }
@@ -85,14 +87,14 @@ public class Patrol : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public Patrol(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
-        Debug.Log("Patrol true");
+        //Debug.Log("Patrol true");
         monController.Patrol();
         return true;
     }
@@ -102,14 +104,14 @@ public class Death : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public Death(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
-        Debug.Log("Death true");
+        //Debug.Log("Death true");
         monController.Death();
         return true;
     }
@@ -119,21 +121,21 @@ public class InSight : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public InSight(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
         if (monController.InSight())
         {
-            Debug.Log("InSight true");
+            //Debug.Log("InSight true");
             return true;
         }
         else
         {
-            Debug.Log("InSight false");
+            //Debug.Log("InSight false");
             return false;
         }
     }
@@ -143,14 +145,19 @@ public class Chase : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    //public MonsterController MonController
+    //{
+    //    set { monController = value; }
+    //}
+
+    public Chase(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
-        Debug.Log("Chase true");
+        //Debug.Log("Chase true");
         monController.Chase();
         return true;
     }
@@ -160,21 +167,21 @@ public class IsDamaged : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public IsDamaged(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
         if (monController.IsDamaged())
         {
-            Debug.Log("IsDamaged true");
+            //Debug.Log("IsDamaged true");
             return true;
         }
         else
         {
-            Debug.Log("IsDamaged false");
+            //Debug.Log("IsDamaged false");
             return false;
         }
     }
@@ -184,21 +191,21 @@ public class InAttackRange : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public InAttackRange(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
         if (monController.InAttackRange())
         {
-            Debug.Log("InAttackRange true");
+            //Debug.Log("InAttackRange true");
             return true;
         }
         else
         {
-            Debug.Log("InAttackRange false");
+            //Debug.Log("InAttackRange false");
             return false;
         }
     }
@@ -208,165 +215,15 @@ public class Attack : Node
 {
     private MonsterController monController;
 
-    public MonsterController MonController
+    public Attack(MonsterController monster)
     {
-        set { monController = value; }
+        monController = monster;
     }
 
     public override bool Invoke()
     {
-        Debug.Log("Attack true");
+        //Debug.Log("Attack true");
         monController.Attack();
-        return true;
-    }
-}
-
-public class Tornado : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Tornado true");
-        monController.Tornado();
-        return true;
-    }
-}
-
-public class ThunderStroke : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("ThunderStroke true");
-        monController.ThunderStroke();
-        return true;
-    }
-}
-
-public class Wield : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Wield true");
-        monController.Wield();
-        return true;
-    }
-}
-
-public class Pierce : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Pierce true");
-        monController.Pierce();
-        return true;
-    }
-}
-
-public class Summon : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("Summon true");
-        monController.Summon();
-        return true;
-    }
-}
-
-public class IsCorrectSkill : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        if (monController.IsCorrectSkill())
-        {
-            Debug.Log("IsCorrectSkill true");
-            return true;
-        }
-        else
-        {
-            Debug.Log("IsCorrectSkill false");
-            return false;
-        }
-    }
-}
-
-public class IsRestOver : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        if (monController.IsRestOver())
-        {
-            Debug.Log("IsRestOver true");
-            return true;
-        }
-        else
-        {
-            Debug.Log("IsRestOver false");
-            return false;
-        }
-    }
-}
-
-public class RestInit : Node
-{
-    private MonsterController monController;
-
-    public MonsterController MonController
-    {
-        set { monController = value; }
-    }
-
-    public override bool Invoke()
-    {
-        Debug.Log("RestInit true");
-        monController.RestInit();
         return true;
     }
 }
