@@ -46,16 +46,18 @@ public class BT_Cerberus : MonsterController
         Init();
         StartCoroutine("BehaviorProcess");
 
-        attackRange.waitingTime = 3;
+        attackRange.cooldownTime = 3;
     }
 
     override protected void InitStatus()
     {
-        base.InitStatus();
-        horizontalSpeed = 1.0f;
+        maxHP = 500;
+        damage = 200;
+        hp = maxHP;
+        horizontalSpeed = 1;
     }
 
-    override protected void Init()
+    private void Init()
     {
         //Patrol
 
@@ -96,6 +98,7 @@ public class BT_Cerberus : MonsterController
         GameObject go = Instantiate(breathSkill, this.transform.position, this.transform.rotation);
         RangedSpell spell = go.GetComponent<RangedSpell>();
         spell.spellSpeed = 3;
+        spell.damage = damage;
         spell.target = target;
     }
 }

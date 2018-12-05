@@ -28,6 +28,7 @@ public class CharacterManager : Pawn
 
     [SerializeField]
     private GameObject fireSkillForDebug;
+
     [SerializeField]
     private GameObject secondSkillForDebug;
 
@@ -67,11 +68,13 @@ public class CharacterManager : Pawn
             inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
         }
     }
+
     override protected void InitStatus()
     {
-        hp = 10f;
+        hp = 500f;
         horizontalSpeed = 0.2f;
     }
+
     private void Awake()
     {
         if (instance == null)
@@ -115,7 +118,7 @@ public class CharacterManager : Pawn
     {
         base.Update();
         moveDirection.y += gravity;
-        if(lockOtherComponentInfluenceOnTransform)
+        if (lockOtherComponentInfluenceOnTransform)
         {
             return; //Navaigation 과 입력이동을 모두 막는다.
         }
@@ -211,7 +214,6 @@ public class CharacterManager : Pawn
 
     private void OnCombinationSkill()
     {
-
     }
 
     private void MeleeAttack()
@@ -234,5 +236,4 @@ public class CharacterManager : Pawn
         }
         Debug.Log("OffAttack");
     }
-
 }

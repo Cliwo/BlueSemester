@@ -46,11 +46,13 @@ public class BT_Slime : MonsterController
 
     override protected void InitStatus()
     {
-        base.InitStatus();
-        horizontalSpeed = 1.0f;
+        maxHP = 50;
+        damage = 10;
+        hp = maxHP;
+        horizontalSpeed = 1;
     }
 
-    override protected void Init()
+    private void Init()
     {
         //Patrol
 
@@ -89,5 +91,14 @@ public class BT_Slime : MonsterController
     public override void Attack()
     {
         effectManager.StartEffects("FX_SlimeAttack");
+        base.Attack();
+    }
+
+    protected override void InitAttack()
+    {
+        attackActiveDuration = 0.5f;
+        attackPreDelay = 0.2f;
+        meleeAttack = true;
+        attackRange.cooldownTime = 1;
     }
 }

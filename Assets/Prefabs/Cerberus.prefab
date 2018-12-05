@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
-  waitingTime: 0
+  cooldownTime: 0
 --- !u!114 &114340440994378340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -451,6 +451,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 12
+  damage: 0
+  atkSpeed: 10
+  raidMonster: 0
   patrolPoints: []
   breathSkill: {fileID: 1368676299040832, guid: 1a26ba714785ea141ba6aef796031458,
     type: 2}

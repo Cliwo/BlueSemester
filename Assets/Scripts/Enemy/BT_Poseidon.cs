@@ -65,11 +65,13 @@ public class BT_Poseidon : MonsterController
 
     override protected void InitStatus()
     {
-        base.InitStatus();
+        maxHP = 1000;
+        damage = 200;
+        hp = maxHP;
         horizontalSpeed = 0;
     }
 
-    override protected void Init()
+    private void Init()
     {
         //Death
         seqDeath.AddChild(death);
@@ -110,7 +112,6 @@ public class BT_Poseidon : MonsterController
 
     private void UseSkill()
     {
-        Debug.Log("UseSkill + " + currentSkill);
         switch (skillSet[currentSkill])
         {
             case 1:
@@ -144,18 +145,28 @@ public class BT_Poseidon : MonsterController
     private void Tornado()
     {
         Debug.Log("Tornado");
-        AttackEffect(tornado);
+        GameObject clone = Instantiate(tornado, target.position, target.rotation);
+
+        RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
+        spell.Damage = 200;
+        spell.AttackActiveDuration = 4;
+        spell.AttackPreDelay = 0.5f;
     }
 
     private void ThunderStroke()
     {
         Debug.Log("ThunderStroke");
-        AttackEffect(thunderStroke);
+        GameObject clone = Instantiate(thunderStroke, target.position, target.rotation);
+
+        RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
+        spell.Damage = 100;
+        spell.AttackActiveDuration = 1.5f;
+        spell.AttackPreDelay = 0.3f;
     }
 
     private void Wield()
     {
-        Debug.Log("Wield");
+        Debug.Log("Wield"); // 30
     }
 
     private void Summon()
@@ -168,13 +179,10 @@ public class BT_Poseidon : MonsterController
         Debug.Log("Pierce");
         GameObject clone = Instantiate(pierce, this.transform.position, this.transform.rotation);
         clone.transform.LookAt(target);
-        Destroy(clone, 5.0f);
-    }
 
-    private void AttackEffect(GameObject spell)
-    {
-        Vector3 pos = new Vector3(target.position.x, target.position.y, target.position.z);
-        GameObject effect = Instantiate(spell, pos, target.rotation);
-        Destroy(effect, 5.0f);
+        RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
+        spell.Damage = 50;
+        spell.AttackActiveDuration = 1.2f;
+        spell.AttackPreDelay = 0.2f;
     }
 }

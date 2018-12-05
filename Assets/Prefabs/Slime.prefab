@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
-  waitingTime: 0
+  cooldownTime: 0
 --- !u!114 &114908391502824274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,6 +371,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 12
+  damage: 0
+  atkSpeed: 10
+  raidMonster: 0
   patrolPoints: []
 --- !u!135 &135136243437019860
 SphereCollider:
@@ -405,7 +409,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 69.08
+  m_Radius: 60
   m_Height: 58
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: -4.6}
@@ -418,7 +422,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 52
+  m_Radius: 48
   m_Height: 58
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: -4.6}
