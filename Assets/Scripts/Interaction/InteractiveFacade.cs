@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractiveTreasureBox : InteractionObject
+using UnityEngine.SceneManagement;
+public class InteractiveFacade : InteractionObject
 {
 	[SerializeField]
-    private Animator animator;
+	private CheckDialog checkDialog;
     public override float InteractingTime
     {
         get
@@ -13,11 +14,9 @@ public class InteractiveTreasureBox : InteractionObject
 			return 0.1f;
         }
     }
-
 	protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
-		animator.SetTrigger("open");
-        inst_Input.InteractionBundles.Remove(bundle);
+		checkDialog.OpenDialog(CheckDialog.ENTER_DUNGEON, ()=> { SceneManager.LoadScene("Dungeon4"); } );
     }
 }
