@@ -38,7 +38,7 @@ public class LoadSlotUI : MonoBehaviour {
 			return;
 		}
 		selectedPath = GetSelectedSlotSavePath(index);
-		checkDialog.OpenDialog(Load);
+		checkDialog.OpenDialog(CheckDialog.LOAD_TEXT, Load);
 	}
 	private Text GetSelectedSlotText(int index)
 	{

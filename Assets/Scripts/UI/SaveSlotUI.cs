@@ -49,7 +49,7 @@ public class SaveSlotUI : MonoBehaviour
 		}
 		else
 		{
-			checkDialog.OpenDialog(Save);
+			checkDialog.OpenDialog(CheckDialog.SAVE_TEXT , Save);
 		}
 	}
 
