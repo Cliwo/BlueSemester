@@ -10,7 +10,7 @@ public class SceneChanger : MonoBehaviour {
 	public GameContinueSlotUI slotUI;
 	public string TargetScene = "";
 
-	public void ChangeScene()
+	public void LoadGame()
 	{
 		if(startStatus.continueAvailable)
 		{
@@ -20,7 +20,11 @@ public class SceneChanger : MonoBehaviour {
 		{
 			SceneManager.LoadScene(TargetScene);
 		}
-		
+	}
+
+	public void NewGame()
+	{
+		SceneManager.LoadScene(TargetScene);
 	}
 
 }
