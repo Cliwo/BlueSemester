@@ -13,6 +13,7 @@ public class Item
     public Texture2D itemIcon;
     public ItemType itemType;
     public string itemStringType;
+    public int itemCount;
 
     public enum ItemType
     {
@@ -37,6 +38,7 @@ public class Item
         itemType = type;
         itemStringType = RequestItemStringType(type);
         itemIcon = Resources.Load<Texture2D>("UI/Inventory/" + itemStringType + "Icon/" + itemStringType.ToLower() + "Icon_" + code); // 아이템 아이콘 나오면 위치 수정 필요
+        itemCount = 1;
     }
 
     private string RequestItemStringType(ItemType type)

@@ -6,12 +6,28 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    private static Inventory instance;
+
+    public static Inventory getInstance()
+    {
+        return instance;
+    }
+
     public List<Item> inventory = new List<Item>();
 
     private ItemDatabase db;
 
     public int slotX, slotY;
-    public List<Item> slots = new List<Item>();
+    public List<Item> slotsResource = new List<Item>();
+    public List<Item> slotsAccessory = new List<Item>();
+    public List<Item> slotsFairy = new List<Item>();
+
+    public float iconSizeX = 150;
+    public float iconSizeY = 150;
+    public float paddingX = 38.6f;
+    public float paddingY = 0.24f;
+    public float paddingLeft = 928.3f;
+    public float paddingUp = 641.5f;
 
     private bool showInventory = false;
 
@@ -26,16 +42,32 @@ public class Inventory : MonoBehaviour
 
     private GameObject background;
 
+    public Sprite[] backgroundSprite = new Sprite[3];
+    public Sprite currentBackgroundSprite;
+    private string currentType = "Resource";
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     private void Start()
     {
-        slotX = 5;
+        slotX = 4;
         slotY = 2;
+
         background = GameObject.Find("Background");
+        currentBackgroundSprite = background.GetComponent<Image>().sprite;
         background.SetActive(false);
 
         for (int i = 0; i < slotX * slotY; i++)
         {
-            slots.Add(new Item());
+            slotsResource.Add(new Item());
+            slotsAccessory.Add(new Item());
+            slotsFairy.Add(new Item());
             inventory.Add(new Item());
         }
         db = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
@@ -55,7 +87,7 @@ public class Inventory : MonoBehaviour
         AddItem(0202);
         AddItem(0203);
 
-        RemoveItem(0202);
+        //RemoveItem(0202);
     }
 
     private void Update()
@@ -75,79 +107,100 @@ public class Inventory : MonoBehaviour
 
         if (showInventory)
         {
-            DrawInventory();
-            background.SetActive(true);
+            if (currentType == "Resource")
+            {
+                DrawInventory(slotsResource);
+            }
+            else if (currentType == "Accessory")
+            {
+                DrawInventory(slotsAccessory);
+            }
+            else if (currentType == "Fairy")
+            {
+                DrawInventory(slotsFairy);
+            }
         }
-        if (showTooltip)
-        {
-            GUI.Box(new Rect(Event.current.mousePosition.x + 25, Event.current.mousePosition.y + 25, 200, 200), tooltip, skin.GetStyle("tooltip"));
-        }
+        // 툴팁을 잠시 막아놓는다
+        //if (showTooltip)
+        //{
+        //    GUI.Box(new Rect(Event.current.mousePosition.x + tooltipPaddingX, Event.current.mousePosition.y + tooltipPaddingY, tooltipSizeX, tooltipSizeY), tooltip, skin.GetStyle("tooltip"));
+        //}
         if (dragItem)
         {
             GUI.DrawTexture(new Rect(Event.current.mousePosition.x - 25, Event.current.mousePosition.y - 25, 50, 50), draggedItem.itemIcon);
         }
     }
 
-    private void DrawInventory()
+    private void DrawInventory(List<Item> slots)
     {
-        int k = 0;
+        background.GetComponent<Image>().sprite = currentBackgroundSprite;
+        background.SetActive(true);
+
+        int b = 0;
+        int c = 0;
         Event e = Event.current;
 
-        for (int j = 0; j < slotY; j++)
+        for (int a = 0; a < slotX * slotY; a++)
         {
-            for (int i = 0; i < slotX; i++)
+            if (inventory[a] == null) continue;
+            if (inventory[a].itemStringType != currentType) continue;
+
+            Rect slotRect = new Rect(b * (iconSizeX + paddingX) + paddingLeft, c * (iconSizeY + paddingY) + paddingUp, iconSizeX, iconSizeY);
+            GUI.Box(slotRect, inventory[a].itemCount.ToString(), skin.GetStyle("slot background"));
+
+            slots[a] = inventory[a];
+
+            if (slots[a].itemName != null)
             {
-                //Rect slotRect = new Rect(i * 52 + 100, j * 52 + 30, 50, 50);
-                Rect slotRect = new Rect(i * 150 + 879, j * 150 + 608, 150, 150);
-                GUI.Box(slotRect, "", skin.GetStyle("slot background"));
+                GUIStyle style = GUIStyle.none;
 
-                if (inventory[k] == null) continue;
-                slots[k] = inventory[k];
+                GUI.DrawTexture(slotRect, slots[a].itemIcon);
 
-                if (slots[k].itemName != null)
+                if (slotRect.Contains(e.mousePosition))
                 {
-                    GUI.DrawTexture(slotRect, slots[k].itemIcon);
+                    tooltip = CreateTooltip(slots[b]);
+                    showTooltip = true;
 
-                    if (slotRect.Contains(e.mousePosition))
-                    {
-                        tooltip = CreateTooltip(slots[i]);
-                        showTooltip = true;
-
-                        if (e.button == 0 && e.type == EventType.MouseDrag && !dragItem)
-                        {
-                            dragItem = true;
-                            prevIndex = k;
-                            draggedItem = slots[k];
-                            inventory[k] = new Item();
-                        }
-                        if (e.type == EventType.MouseUp && dragItem)
-                        {
-                            inventory[prevIndex] = inventory[k];
-                            inventory[k] = draggedItem;
-                            dragItem = false;
-                            draggedItem = null;
-                        }
-                    }
+                    // 아이템 스왑도 잠시 막아놓음
+                    //if (e.button == 0 && e.type == EventType.MouseDrag && !dragItem)
+                    //{
+                    //    dragItem = true;
+                    //    prevIndex = a;
+                    //    draggedItem = slots[a];
+                    //    inventory[a] = new Item();
+                    //}
+                    //if (e.type == EventType.MouseUp && dragItem)
+                    //{
+                    //    inventory[prevIndex] = inventory[a];
+                    //    inventory[a] = draggedItem;
+                    //    dragItem = false;
+                    //    draggedItem = null;
+                    //}
                 }
-                else
-                {
-                    if (slotRect.Contains(e.mousePosition))
-                    {
-                        if (e.type == EventType.MouseUp && dragItem)
-                        {
-                            inventory[k] = draggedItem;
-                            dragItem = false;
-                            draggedItem = null;
-                        }
-                    }
-                }
+            }
+            //else
+            //{
+            //    if (slotRect.Contains(e.mousePosition))
+            //    {
+            //        if (e.type == EventType.MouseUp && dragItem)
+            //        {
+            //            inventory[a] = draggedItem;
+            //            dragItem = false;
+            //            draggedItem = null;
+            //        }
+            //    }
+            //}
 
-                if (tooltip == "")
-                {
-                    showTooltip = false;
-                }
+            if (tooltip == "")
+            {
+                showTooltip = false;
+            }
 
-                k++;
+            b++;
+            if (b > slotX)
+            {
+                b = 0;
+                c++;
             }
         }
     }
@@ -162,6 +215,11 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventory.Count; i++)
         {
+            if (inventory[i].itemID == id)
+            {
+                inventory[i].itemCount++;
+                return;
+            }
             if (inventory[i].itemName == null)
             {
                 for (int j = 0; j < db.items.Count; j++)
@@ -197,8 +255,32 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void RequestResourceInventory()
+    {
+        Debug.Log("RequestResourceInventory");
+        currentType = "Resource";
+        currentBackgroundSprite = backgroundSprite[0];
+    }
+
+    public void RequestAccessoryInventory()
+    {
+        Debug.Log("RequestAccessoryInventory");
+        currentType = "Accessory";
+        currentBackgroundSprite = backgroundSprite[1];
+    }
+
+    public void RequestFairyInventory()
+    {
+        Debug.Log("RequestFairyInventory");
+        currentType = "Fairy";
+        currentBackgroundSprite = backgroundSprite[2];
+    }
+
     public void CloseInventory()
     {
-        gameObject.SetActive(false);
+        // TODO : 한번에 껐다 켜도록 수정하기
+        background.SetActive(false);
+        showInventory = false;
+        showTooltip = false;
     }
 }
