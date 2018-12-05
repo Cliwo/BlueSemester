@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Item
@@ -11,6 +12,7 @@ public class Item
     public string itemDesc;
     public Texture2D itemIcon;
     public ItemType itemType;
+    public string itemStringType;
 
     public enum ItemType
     {
@@ -32,8 +34,24 @@ public class Item
         itemCode = code;
         itemID = id;
         itemDesc = desc;
-        itemIcon = Resources.Load<Texture2D>("UISample/" + type + "_" + code); // 아이템 아이콘 나오면 위치 수정 필요
-        //itemIcon = Resources.Load<Texture2D>("ItemIcons/34x34icons180709_" + img);
         itemType = type;
+        itemStringType = RequestItemStringType(type);
+        itemIcon = Resources.Load<Texture2D>("UI/Inventory/" + itemStringType + "Icon/" + itemStringType.ToLower() + "Icon_" + code); // 아이템 아이콘 나오면 위치 수정 필요
+    }
+
+    private string RequestItemStringType(ItemType type)
+    {
+        switch (type)
+        {
+            case ItemType.Resource:
+                return "Resource";
+
+            case ItemType.Accessory:
+                return "Accessory";
+
+            case ItemType.Fairy:
+                return "Fairy";
+        }
+        return "ERROR";
     }
 }

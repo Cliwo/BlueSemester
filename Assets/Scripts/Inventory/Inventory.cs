@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -23,10 +24,14 @@ public class Inventory : MonoBehaviour
     private Item draggedItem;
     private int prevIndex;
 
+    private GameObject background;
+
     private void Start()
     {
         slotX = 5;
-        slotY = 4;
+        slotY = 2;
+        background = GameObject.Find("Background");
+        background.SetActive(false);
 
         for (int i = 0; i < slotX * slotY; i++)
         {
@@ -43,11 +48,14 @@ public class Inventory : MonoBehaviour
         //    k++;
         //}
 
-        AddItem(0101);
+        AddItem(0001);
+        AddItem(0002);
         AddItem(0003);
+        AddItem(0201);
         AddItem(0202);
+        AddItem(0203);
 
-        RemoveItem(0101);
+        RemoveItem(0202);
     }
 
     private void Update()
@@ -55,6 +63,8 @@ public class Inventory : MonoBehaviour
         if (Input.GetButtonDown("Inventory"))
         {
             showInventory = !showInventory;
+            if (showInventory) background.SetActive(true);
+            else if (!showInventory) background.SetActive(false);
         }
     }
 
@@ -66,6 +76,7 @@ public class Inventory : MonoBehaviour
         if (showInventory)
         {
             DrawInventory();
+            background.SetActive(true);
         }
         if (showTooltip)
         {
@@ -86,7 +97,8 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < slotX; i++)
             {
-                Rect slotRect = new Rect(i * 52 + 100, j * 52 + 30, 50, 50);
+                //Rect slotRect = new Rect(i * 52 + 100, j * 52 + 30, 50, 50);
+                Rect slotRect = new Rect(i * 150 + 879, j * 150 + 608, 150, 150);
                 GUI.Box(slotRect, "", skin.GetStyle("slot background"));
 
                 if (inventory[k] == null) continue;
@@ -183,5 +195,10 @@ public class Inventory : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void CloseInventory()
+    {
+        gameObject.SetActive(false);
     }
 }
