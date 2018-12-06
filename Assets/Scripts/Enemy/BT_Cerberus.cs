@@ -97,7 +97,7 @@ public class BT_Cerberus : MonsterController
     {
         GameObject go = Instantiate(breathSkill, this.transform.position, this.transform.rotation);
         RangedSpell spell = go.GetComponent<RangedSpell>();
-        spell.spellSpeed = 3;
+        spell.spellSpeed = 5;
         spell.damage = damage;
         spell.target = target;
     }

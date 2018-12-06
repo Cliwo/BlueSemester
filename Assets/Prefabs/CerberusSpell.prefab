@@ -284,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   spellSpeed: 8
+  damage: 0
 --- !u!135 &135846202961419352
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -304,7 +305,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1586632226486330}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 3
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -4837,7 +4838,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1597967986093132}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 3
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -9370,7 +9371,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1896568345835810}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 3
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -13912,7 +13913,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1116948643499314}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 3
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -18445,7 +18446,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1079322378766078}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 3
   stopAction: 0
   looping: 1
   prewarm: 0
