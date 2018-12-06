@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FairyManager : MonoBehaviour
 {
-    [SerializeField]
+    private CharacterManager inst_char;
     private Transform target;
 
     [SerializeField]
@@ -22,6 +22,8 @@ public class FairyManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        inst_char = CharacterManager.getInstance();
+        target = inst_char.gameObject.transform;
     }
 
     // Update is called once per frame

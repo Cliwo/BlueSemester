@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
     }
 
     public bool EnableInput { get; private set; }
-
+    public event Action OnEscMenu = () => { };
     public event Action OnStand = () => { };
 
     public event Action<float, float> OnTranslate = (_, __) => { };
@@ -77,6 +77,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     public void DisableInput()
     {
+        OnTranslate(0,0);
         EnableInput = false;
     }
 
@@ -97,7 +98,7 @@ public class InputManager : MonoBehaviour
         {
             CheckInteractions();
             CheckCharacterInputs();
-            CheckCameraInputs();
+            CheckMouseInputs();
         }
     }
 
@@ -110,10 +111,16 @@ public class InputManager : MonoBehaviour
                 inst_conv.NextConversation();
             }
         }
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) //1124, OnEscMenu때문에 고침, Interaction에서 오류나면 여기 조심할것
         {
             if (currentInteraction != null)
+            {    
                 currentInteraction.cancelAction();
+            }
+            else
+            {
+                OnEscMenu();
+            }
         }
     }
 
@@ -139,7 +146,7 @@ public class InputManager : MonoBehaviour
         float verticalWeight = Input.GetAxis("Vertical");
         if (Mathf.Abs(horizonWeight) <= float.Epsilon && Mathf.Abs(verticalWeight) <= float.Epsilon)
         {
-            if (!inst_char.IsNavigationStarted)
+            if (!inst_char.IsNavigationStarted && !inst_char.isComboStarted)
             {
                 OnStand();
             }
@@ -173,7 +180,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void CheckCameraInputs()
+    private void CheckMouseInputs()
     {
         mouseWheel(Input.mouseScrollDelta.y);
         if (Input.GetMouseButtonDown(0))

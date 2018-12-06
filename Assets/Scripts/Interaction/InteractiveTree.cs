@@ -23,6 +23,14 @@ public class InteractiveTree : InteractionObject
         }
     }
 
+    protected override string ToolTipText
+    {
+        get
+        {
+            return InterationToolTip.BASIC_INTERACTION_TOOLTIP;
+        }
+    }
+
     protected override void OnInteractionStart()
     {
         base.OnInteractionStart();
