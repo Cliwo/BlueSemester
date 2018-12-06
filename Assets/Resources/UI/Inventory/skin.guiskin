@@ -334,10 +334,10 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
-    m_Alignment: 0
+    m_Alignment: 8
     m_WordWrap: 0
     m_RichText: 0
     m_TextClipping: 1
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_CustomStyles:
   - m_Name: slot background
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 9bf2b18aacb7b8049b55d8ea361e6e87, type: 3}
+      m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
@@ -1397,19 +1397,19 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Padding:
-      m_Left: 2
-      m_Right: 2
-      m_Top: 2
-      m_Bottom: 2
+      m_Left: 20
+      m_Right: 20
+      m_Top: 20
+      m_Bottom: 20
     m_Overflow:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
-    m_Alignment: 0
+    m_Alignment: 8
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0
@@ -1421,7 +1421,7 @@ MonoBehaviour:
     m_StretchHeight: 0
   - m_Name: tooltip
     m_Normal:
-      m_Background: {fileID: 2800000, guid: c4252620b05678449b8a6eecabef03bb, type: 3}
+      m_Background: {fileID: 2800000, guid: b732eb1c76e394a499de5eceae2ddfe9, type: 3}
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
@@ -1463,17 +1463,17 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Padding:
-      m_Left: 2
-      m_Right: 2
-      m_Top: 2
-      m_Bottom: 2
+      m_Left: 100
+      m_Right: 100
+      m_Top: 100
+      m_Bottom: 100
     m_Overflow:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_Alignment: 0
     m_WordWrap: 0
@@ -1484,7 +1484,7 @@ MonoBehaviour:
     m_FixedWidth: 0
     m_FixedHeight: 0
     m_StretchWidth: 1
-    m_StretchHeight: 0
+    m_StretchHeight: 1
   m_Settings:
     m_DoubleClickSelectsWord: 1
     m_TripleClickSelectsLine: 1
