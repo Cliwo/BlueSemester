@@ -197,20 +197,20 @@ public class CharacterManager : Pawn
     }
     private void OnAttack()
     {
-        Debug.Log("Attack");
-        if(currentAnimationFSM == null)
-        {
-            inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
-            inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.MeleeAttack);
-            isComboStarted = true;
-        }
-        else
-        {
-            if(currentAnimationFSM.comboID != 2)
-            {
-                inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.MeleeAttack);
-            }
-        }
+        // Debug.Log("Attack");
+        // if(currentAnimationFSM == null)
+        // {
+        //     inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
+        //     inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.MeleeAttack);
+        //     isComboStarted = true;
+        // }
+        // else
+        // {
+        //     if(currentAnimationFSM.comboID != 2)
+        //     {
+        //         inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.MeleeAttack);
+        //     }
+        // }
     }
 
     private void OnFirstSkill()

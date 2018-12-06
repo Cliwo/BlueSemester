@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireDungeonDoorTrigger : MonoBehaviour {
 	private InputManager inst_input;
 	private CameraEffect_Cinema cameraEffect;
+	public SpawnEnemy spawn;
 	public Animator door;
 	public ParticleSystem particle;
 	public float freezeTime;
@@ -22,6 +23,7 @@ public class FireDungeonDoorTrigger : MonoBehaviour {
 			door.SetTrigger("Appear");
 			StartCoroutine("WaitSomeWhile");	
 			inst_input.DisableInput();
+			spawn.StartStage();
 		}
 	}
 
