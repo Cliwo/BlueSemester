@@ -9,7 +9,7 @@ public class CollectItems : MonoBehaviour
 
     private void Start()
     {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        inventory = Inventory.getInstance();
         db = GameObject.Find("Database").GetComponent<ItemDatabase>();
     }
 
