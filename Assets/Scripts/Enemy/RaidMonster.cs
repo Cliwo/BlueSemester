@@ -124,7 +124,7 @@ public class RaidMonster : MonoBehaviour
 
     private void AttackEffect(GameObject spell)
     {
-        Vector3 pos = new Vector3(targetPlayer.position.x, targetPlayer.position.y + 1.0f, targetPlayer.position.z);
+        Vector3 pos = new Vector3(targetPlayer.position.x, targetPlayer.position.y, targetPlayer.position.z);
         GameObject effect = Instantiate(spell, pos, targetPlayer.rotation);
         Destroy(effect, 5.0f);
     }
