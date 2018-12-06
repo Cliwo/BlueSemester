@@ -166,7 +166,13 @@ public class BT_Poseidon : MonsterController
 
     private void Wield()
     {
-        Debug.Log("Wield"); // 30
+        Debug.Log("Wield");
+        GameObject clone = Instantiate(wield, this.transform.position, this.transform.rotation);
+
+        RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
+        spell.Damage = 30;
+        spell.AttackActiveDuration = 1;
+        spell.AttackPreDelay = 0.3f;
     }
 
     private void Summon()
