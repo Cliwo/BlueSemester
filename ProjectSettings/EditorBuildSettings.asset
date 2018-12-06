@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon4.unity
     guid: 62a0e6fe1ef9e4e4998ce5ffb196c86e
+  - enabled: 1
+    path: Assets/Scenes/Dungeon4_nonDuplication.unity
+    guid: fce832fd3a27a452eb0aac6b807d10aa
   m_configObjects: {}
