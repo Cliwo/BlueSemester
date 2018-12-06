@@ -25,10 +25,8 @@ public class InteractiveCharacter : InteractionObject {
 
     protected override void OnInteractionStart()
 	{
-        inst_Cam.StartShake(2.0f);
-        inst_Cam.StartCinema();
         base.OnInteractionStart();
-		transform.LookAt(inst_Char.transform.position);
+        XZIgnoreLookAt(transform, inst_Char.transform.position);
         inst_Conv.StartConversation(textKey, OnInteractionEnd, OnInteractionCancel);
 	}
 
@@ -36,7 +34,6 @@ public class InteractiveCharacter : InteractionObject {
     {
         base.OnInteractionCancel();
         inst_Cam.CancelCinema();
-        Debug.Log("Conversation Canceld");
         inst_Conv.EndConversation();
     }
 
@@ -44,8 +41,13 @@ public class InteractiveCharacter : InteractionObject {
     {
         base.OnInteractionEnd();
         inst_Cam.CancelCinema();
-        Debug.Log("Conversation End");
         inst_Conv.EndConversation();
     }
 
+    private void XZIgnoreLookAt(Transform targetTransform, Vector3 position)
+    {   
+        Vector2 originRotXZ = new Vector2(targetTransform.rotation.eulerAngles.x , targetTransform.rotation.eulerAngles.z);
+		targetTransform.LookAt(position);
+        targetTransform.rotation = Quaternion.Euler(originRotXZ.x, targetTransform.rotation.eulerAngles.y, originRotXZ.y);
+    }
 }

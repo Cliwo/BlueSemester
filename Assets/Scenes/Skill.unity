@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.496413, b: 0.5748175, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,6 +157,11 @@ Prefab:
       propertyPath: targetForSkillDebug
       value: 
       objectReference: {fileID: 1103919847}
+    - target: {fileID: 95904595171397050, guid: 7a6f1db62330142f49091c3966c8e1dd,
+        type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114913202545108412, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
@@ -310,6 +315,53 @@ Transform:
   m_Father: {fileID: 1076213002}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1001 &146591334
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1398910524}
+    m_Modifications:
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95962886705181254, guid: 0f5e22d96ebd24144b159be6f0ee7442,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9799dd98b8f02404c807c3da255c5fdc, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f5e22d96ebd24144b159be6f0ee7442, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &163824525
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &311969051
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -470,6 +523,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!114 &317809532
 MonoBehaviour:
@@ -482,6 +539,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!54 &317809533
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -605,6 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &410913663
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -678,6 +744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &534631010
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -790,6 +857,10 @@ Prefab:
     - target: {fileID: 100000, guid: e969ae00a2d2849698a669cf3e712d0d, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e969ae00a2d2849698a669cf3e712d0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e969ae00a2d2849698a669cf3e712d0d, type: 3}
@@ -1255,6 +1326,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!135 &1071353512
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1296,6 +1375,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!1 &1076213001
 GameObject:
@@ -1444,6 +1527,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!114 &1103919849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,6 +1549,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!1 &1107859809
 GameObject:
@@ -1666,6 +1761,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!114 &1129217307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1680,6 +1783,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!135 &1129217308
 SphereCollider:
@@ -1750,6 +1857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &1142613789
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1777,7 +1885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1207983377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1936,6 +2044,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!114 &1364975979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,6 +2066,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!135 &1364975980
 SphereCollider:
@@ -2026,6 +2146,35 @@ Transform:
   - {fileID: 2002649531}
   m_Father: {fileID: 1207983378}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1398910523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1398910524}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1398910524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1398910523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1789095135}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1523510060
 Prefab:
@@ -2116,6 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &1632497897
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2278,6 +2428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &1696489865
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2290,6 +2441,11 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.3571644
   m_Center: {x: 0, y: 0.2, z: -0.50783634}
+--- !u!4 &1789095135 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4776393453463780, guid: 0f5e22d96ebd24144b159be6f0ee7442,
+    type: 2}
+  m_PrefabInternal: {fileID: 146591334}
 --- !u!1 &1825148396 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: e969ae00a2d2849698a669cf3e712d0d,
@@ -2311,6 +2467,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!135 &1825148399
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2352,6 +2516,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!1 &1862038598
 GameObject:
@@ -2395,6 +2563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &1862038601
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2449,6 +2618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &1886280888
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2544,6 +2714,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!135 &1901413172
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2585,6 +2763,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!1 &1920793058
 GameObject:
@@ -2682,6 +2864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &1946539330
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2715,6 +2898,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!114 &1956593422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,6 +2920,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!135 &1956593423
 SphereCollider:
@@ -2799,6 +2994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inAttackRange: 0
+  cooldownTime: 0
 --- !u!135 &1969263554
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2832,6 +3028,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!114 &2002649533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2846,6 +3050,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!135 &2002649534
 SphereCollider:
@@ -3013,6 +3221,10 @@ MonoBehaviour:
   horizontalSpeed: 0
   hp: 0
   lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
   patrolPoints: []
 --- !u!114 &2051133523
 MonoBehaviour:
@@ -3025,6 +3237,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f793dfce6278141b161dcd0b82d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  hp: 0
+  lockOtherComponentInfluenceOnTransform: 0
+  maxHP: 0
+  damage: 0
+  atkSpeed: 0
+  raidMonster: 0
+  patrolPoints: []
 --- !u!135 &2051133524
 SphereCollider:
   m_ObjectHideFlags: 0

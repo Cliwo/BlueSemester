@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
-public abstract class InteractionObject : MonoBehaviour {
+public abstract class InteractionObject : MonoBehaviour 
+{
+    private static InterationToolTip inst_toolTipUI;
 	abstract public float InteractingTime { get; }
-	protected static InputManager inst_Input;
+    virtual protected string ToolTipText { get { return null; } }
+    protected static InputManager inst_Input;
 	protected static CharacterAnimationManager inst_Animation;
 	protected InteractionEventBundle bundle;
 	protected float startTime;
 	protected bool isStarted = false;
+
 	public class InteractionEventBundle
 	{
 		public InteractionObject eventOwner;
@@ -19,7 +23,8 @@ public abstract class InteractionObject : MonoBehaviour {
 	protected virtual void Start() {
 		inst_Animation = CharacterAnimationManager.getInstance();
 		inst_Input = InputManager.getInstance();
-		bundle = new InteractionEventBundle
+        inst_toolTipUI = InterationToolTip.getInstance();
+        bundle = new InteractionEventBundle
 				{
 					eventOwner = this,
 					startAction = OnInteractionStart,
@@ -43,7 +48,10 @@ public abstract class InteractionObject : MonoBehaviour {
 		if(other.GetComponent<CharacterManager>() != null)
 		{
 			inst_Input.InteractionBundles.Add(bundle);
-			Debug.Log("Bundle Add");
+            if(ToolTipText != null)
+            {
+                inst_toolTipUI.ShowToolTip(ToolTipText);
+            }
 		}
 	}
 
@@ -51,7 +59,10 @@ public abstract class InteractionObject : MonoBehaviour {
 		if(other.GetComponent<CharacterManager>() != null)
 		{
 			inst_Input.InteractionBundles.Remove(bundle);
-			Debug.Log("Bundle Removed");
+            if (ToolTipText != null && inst_Input.InteractionBundles.Count == 0)
+            {
+                inst_toolTipUI.HideToolTip();
+            }
 		}
 	}
 
@@ -59,7 +70,6 @@ public abstract class InteractionObject : MonoBehaviour {
 	{
 		startTime = Time.time;
 		isStarted = true;
-		Debug.Log("Start");
 	}
 	protected virtual void OnInteracting()
 	{
@@ -71,13 +81,11 @@ public abstract class InteractionObject : MonoBehaviour {
 		isStarted = false;
 		//TODO : 여기서 직접 Input을 참조하는게 맞는걸까?
 		inst_Input.currentInteraction = null;
-		Debug.Log("Complete");
 	}
 	protected virtual void OnInteractionCancel()
 	{
 		isStarted = false;
 		//TODO : 여기서 직접 Input을 참조하는게 맞는걸까?
 		inst_Input.currentInteraction = null;
-		Debug.Log("Canceled");
 	}
 }

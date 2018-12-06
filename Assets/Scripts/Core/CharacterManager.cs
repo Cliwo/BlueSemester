@@ -24,7 +24,7 @@ public class CharacterManager : Pawn
     private bool isJumped = false;
     private const float gravity = -0.03f;
 
-    private Hit wand;
+    public ComboState currentAnimationFSM;
 
     [SerializeField]
     private GameObject fireSkillForDebug;
@@ -104,8 +104,7 @@ public class CharacterManager : Pawn
         inst_Input.OnTranslate += OnTranslate;
         inst_Input.OnTranslate += (_, __) => NavigationCancel();
         inst_Input.OnJump += OnJump;
-        inst_Input.mouseLeftClickDown += OnArrow;
-        inst_Input.mouseLeftClickUp += OnAttack;
+        inst_Input.mouseLeftClickDown += OnAttack;
         inst_Input.firstSkill += OnFirstSkill;
         inst_Input.secondSkill += OnSecondSkill;
         inst_Input.combinationSkill += OnCombinationSkill;
@@ -188,18 +187,30 @@ public class CharacterManager : Pawn
         }
     }
 
-    private void OnArrow()
-    {
-        DrawArrow();
-    }
+    public bool isComboStarted = false;
 
-    private void DrawArrow()
+    public void OnComboTimeOut()
     {
+        inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, true);
+        isComboStarted = false;
+        currentAnimationFSM = null;
     }
-
     private void OnAttack()
     {
-        MeleeAttack();
+        Debug.Log("Attack");
+        if(currentAnimationFSM == null)
+        {
+            inst_Anim.animator.SetBool(CharacterAnimationManager.AnimatorTrigger.Idle, false);
+            inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.MeleeAttack);
+            isComboStarted = true;
+        }
+        else
+        {
+            if(currentAnimationFSM.comboID != 2)
+            {
+                inst_Anim.animator.SetTrigger(CharacterAnimationManager.AnimatorTrigger.MeleeAttack);
+            }
+        }
     }
 
     private void OnFirstSkill()
@@ -210,30 +221,11 @@ public class CharacterManager : Pawn
     private void OnSecondSkill()
     {
         Skill.GenerateSkill(secondSkillForDebug, transform.position);
-    }
+  }
 
     private void OnCombinationSkill()
     {
     }
 
-    private void MeleeAttack()
-    {
-        Debug.Log("Attack!");
-        if (wand)
-        {
-            wand = transform.Find("Wand").GetComponent<Hit>();
-            wand.GetComponent<CapsuleCollider>().enabled = true;
-        }
-        StartCoroutine("AttackDelay");
-    }
 
-    private IEnumerator AttackDelay()
-    {
-        yield return new WaitForSeconds(3);
-        if (wand)
-        {
-            wand.GetComponent<CapsuleCollider>().enabled = false;
-        }
-        Debug.Log("OffAttack");
-    }
 }
