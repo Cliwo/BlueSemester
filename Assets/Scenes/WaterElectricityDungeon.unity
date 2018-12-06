@@ -538,9 +538,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1192216469627748, guid: 07a3142de0544b94495541c220d3646f, type: 2}
-      propertyPath: m_Name
-      value: Poseidon
+    - target: {fileID: 135995166131843598, guid: 07a3142de0544b94495541c220d3646f,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 135995166131843598, guid: 07a3142de0544b94495541c220d3646f,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 135995166131843598, guid: 07a3142de0544b94495541c220d3646f,
+        type: 2}
+      propertyPath: m_Radius
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07a3142de0544b94495541c220d3646f, type: 2}

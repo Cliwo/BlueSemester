@@ -1403,6 +1403,7 @@ MonoBehaviour:
     type: 2}
   wield: {fileID: 1445337017469240, guid: 4f1a021801c123a43808dadafcc38f35, type: 2}
   pierce: {fileID: 1259512979531006, guid: 868997b57e8ed094e9895bdcb75cd04b, type: 2}
+  warning: {fileID: 1600252028541844, guid: 8efa1efbf86ae26478654c2c5a28aaa4, type: 2}
 --- !u!114 &114505071968534008
 MonoBehaviour:
   m_ObjectHideFlags: 1

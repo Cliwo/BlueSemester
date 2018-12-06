@@ -32,10 +32,13 @@ public class BT_Poseidon : MonsterController
     [SerializeField]
     private GameObject hitEffect;
 
+    private Vector3 skillPosition;
+
     public GameObject tornado;
     public GameObject thunderStroke;
     public GameObject wield;
     public GameObject pierce;
+    public GameObject warning;
 
     protected override void Start()
     {
@@ -103,11 +106,23 @@ public class BT_Poseidon : MonsterController
 
         while (!isDead.Invoke() && inAttackRange.Invoke())
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(4.5f);
+            if (currentSkill != 2 && currentSkill != 3) // 휘두르기, 소환 제외
+            {
+                ShowWarningSign();
+            }
+            yield return new WaitForSeconds(0.5f);
             UseSkill();
         }
 
         StartCoroutine("BehaviorProcess");
+    }
+
+    private void ShowWarningSign()
+    {
+        skillPosition = target.position;
+        GameObject warningSign = Instantiate(warning, target.position, target.rotation);
+        Destroy(warningSign, 1);
     }
 
     private void UseSkill()
@@ -145,7 +160,7 @@ public class BT_Poseidon : MonsterController
     private void Tornado()
     {
         Debug.Log("Tornado");
-        GameObject clone = Instantiate(tornado, target.position, target.rotation);
+        GameObject clone = Instantiate(tornado, skillPosition, Quaternion.identity);
 
         RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
         spell.Damage = 200;
@@ -156,7 +171,7 @@ public class BT_Poseidon : MonsterController
     private void ThunderStroke()
     {
         Debug.Log("ThunderStroke");
-        GameObject clone = Instantiate(thunderStroke, target.position, target.rotation);
+        GameObject clone = Instantiate(thunderStroke, skillPosition, Quaternion.identity);
 
         RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
         spell.Damage = 100;
