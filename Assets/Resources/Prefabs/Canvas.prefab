@@ -974,6 +974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1399359070290554}
+  text: {fileID: 114324296696387796}
 --- !u!114 &114050935760101262
 MonoBehaviour:
   m_ObjectHideFlags: 1
