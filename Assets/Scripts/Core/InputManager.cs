@@ -97,7 +97,7 @@ public class InputManager : MonoBehaviour
         {
             CheckInteractions();
             CheckCharacterInputs();
-            CheckCameraInputs();
+            CheckMouseInputs();
         }
     }
 
@@ -145,7 +145,7 @@ public class InputManager : MonoBehaviour
         float verticalWeight = Input.GetAxis("Vertical");
         if (Mathf.Abs(horizonWeight) <= float.Epsilon && Mathf.Abs(verticalWeight) <= float.Epsilon)
         {
-            if (!inst_char.IsNavigationStarted)
+            if (!inst_char.IsNavigationStarted && !inst_char.isComboStarted)
             {
                 OnStand();
             }
@@ -179,7 +179,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void CheckCameraInputs()
+    private void CheckMouseInputs()
     {
         mouseWheel(Input.mouseScrollDelta.y);
         if (Input.GetMouseButtonDown(0))
