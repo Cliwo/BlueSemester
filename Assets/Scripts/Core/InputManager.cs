@@ -77,6 +77,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     public void DisableInput()
     {
+        OnTranslate(0,0);
         EnableInput = false;
     }
 
