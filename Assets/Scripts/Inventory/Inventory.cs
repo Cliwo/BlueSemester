@@ -26,8 +26,8 @@ public class Inventory : MonoBehaviour
     public float iconSizeY = 150;
     public float paddingX = 38.6f;
     public float paddingY = 0.24f;
-    public float paddingLeft = 928.3f;
-    public float paddingUp = 641.5f;
+    public float paddingLeft = 606.9f;
+    public float paddingUp = 462.9f;
 
     private bool showInventory = false;
 
@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
     private int prevIndex;
 
     private GameObject background;
+    private GameObject contents;
 
     public Sprite[] backgroundSprite = new Sprite[3];
     public Sprite currentBackgroundSprite;
@@ -61,7 +62,9 @@ public class Inventory : MonoBehaviour
 
         background = GameObject.Find("Background");
         currentBackgroundSprite = background.GetComponent<Image>().sprite;
-        background.SetActive(false);
+
+        contents = GameObject.Find("Contents");
+        contents.SetActive(false);
 
         for (int i = 0; i < slotX * slotY; i++)
         {
@@ -72,7 +75,7 @@ public class Inventory : MonoBehaviour
         }
         db = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
 
-        inventory[0] = db.items[0];
+        //inventory[0] = db.items[0];
         //int k = 0;
         //foreach (var item in db.items)
         //{
@@ -95,8 +98,14 @@ public class Inventory : MonoBehaviour
         if (Input.GetButtonDown("Inventory"))
         {
             showInventory = !showInventory;
-            if (showInventory) background.SetActive(true);
-            else if (!showInventory) background.SetActive(false);
+            if (showInventory)
+            {
+                OpenInventory();
+            }
+            else
+            {
+                CloseInventory();
+            }
         }
     }
 
@@ -134,7 +143,6 @@ public class Inventory : MonoBehaviour
     private void DrawInventory(List<Item> slots)
     {
         background.GetComponent<Image>().sprite = currentBackgroundSprite;
-        background.SetActive(true);
 
         int b = 0;
         int c = 0;
@@ -276,11 +284,16 @@ public class Inventory : MonoBehaviour
         currentBackgroundSprite = backgroundSprite[2];
     }
 
+    private void OpenInventory()
+    {
+        showInventory = true;
+        contents.SetActive(true);
+    }
+
     public void CloseInventory()
     {
-        // TODO : 한번에 껐다 켜도록 수정하기
-        background.SetActive(false);
         showInventory = false;
+        contents.SetActive(false);
         showTooltip = false;
     }
 }
