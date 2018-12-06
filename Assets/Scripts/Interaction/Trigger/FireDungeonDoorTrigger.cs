@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test_Fire_DungeonDoor : MonoBehaviour {
+public class FireDungeonDoorTrigger : MonoBehaviour {
 	public Animator door;
 	public ParticleSystem particle;
-
 	void OnTriggerEnter(Collider other) {
 		door.SetTrigger("Appear");
 		StartCoroutine("WaitSomeWhile");	
