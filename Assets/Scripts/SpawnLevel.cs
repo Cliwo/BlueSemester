@@ -47,6 +47,15 @@ public class SpawnLevel : MonoBehaviour {
 			//Destroy시 무조건 Level의 List를 비워주는 형태로 해야함
 			return p.hp < 0;
 		});
+		bool allNull = true;
+		foreach(var enemy in enemies)
+		{
+			if(enemy != null)
+			{
+				allNull = false;
+			}
+		}
+		isClear = allNull;
 	}
 
 }

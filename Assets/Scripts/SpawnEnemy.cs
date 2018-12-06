@@ -7,7 +7,7 @@ public class SpawnEnemy : MonoBehaviour {
 
 	public List<SpawnLevel> levels;
 	private bool isStarted = false;
-	private int currentLevel = -1;
+	private int currentLevel = 0;
 
 	public event Action ConsumeEvents = () => { };
 	public event Action PersistEvents = ()=> { };
@@ -26,11 +26,12 @@ public class SpawnEnemy : MonoBehaviour {
 		levels[currentLevel].StartLevel();
 	}
 
-	void Start()
-	{
-		//Debug
-		StartStage();
-	}
+	// void Start()
+	// {
+	// 	//Debug
+	// 	StartStage();
+	// }
+
 	void Update()
 	{
 		if(levels[currentLevel].IsClear() && isStarted)
