@@ -38,7 +38,7 @@ public class Water : Skill
     {
         get
         {
-            return 0.0f;
+            return 0.5f;
         }
     }
 
@@ -53,7 +53,7 @@ public class Water : Skill
     {
         get
         {
-            return 3.0f;
+            return 10.0f;
         }
     }
 
