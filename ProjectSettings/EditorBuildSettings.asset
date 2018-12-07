@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon4_nonDuplication.unity
     guid: fce832fd3a27a452eb0aac6b807d10aa
+  - enabled: 1
+    path: Assets/Scenes/WaterElectricityDungeon_nonDuplicate.unity
+    guid: 79cdbc05a6421414888b199c253d8cd5
   m_configObjects: {}

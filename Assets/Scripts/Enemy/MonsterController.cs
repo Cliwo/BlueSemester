@@ -88,7 +88,7 @@ public class MonsterController : Pawn
         }
     }
 
-    public void Death()
+    public virtual void Death()
     {
         Destroy(gameObject);
     }

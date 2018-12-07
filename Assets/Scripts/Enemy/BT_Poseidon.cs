@@ -40,6 +40,8 @@ public class BT_Poseidon : MonsterController
     public GameObject pierce;
     public GameObject warning;
 
+    public Animator animator;
+
     protected override void Start()
     {
         root = new Sequence();
@@ -107,12 +109,14 @@ public class BT_Poseidon : MonsterController
         while (!isDead.Invoke() && inAttackRange.Invoke())
         {
             yield return new WaitForSeconds(4.5f);
+            animator.SetBool("Idle", false);
             if (currentSkill != 2 && currentSkill != 3) // 휘두르기, 소환 제외
             {
                 ShowWarningSign();
             }
             yield return new WaitForSeconds(0.5f);
             UseSkill();
+            animator.SetBool("Idle", true);
         }
 
         StartCoroutine("BehaviorProcess");
@@ -160,8 +164,8 @@ public class BT_Poseidon : MonsterController
     private void Tornado()
     {
         Debug.Log("Tornado");
+        animator.SetTrigger("Tornado");
         GameObject clone = Instantiate(tornado, skillPosition, Quaternion.identity);
-
         RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
         spell.Damage = 200;
         spell.AttackActiveDuration = 4;
@@ -171,6 +175,7 @@ public class BT_Poseidon : MonsterController
     private void ThunderStroke()
     {
         Debug.Log("ThunderStroke");
+        animator.SetTrigger("ThunderStroke");
         GameObject clone = Instantiate(thunderStroke, skillPosition, Quaternion.identity);
 
         RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
@@ -182,6 +187,7 @@ public class BT_Poseidon : MonsterController
     private void Wield()
     {
         Debug.Log("Wield");
+        animator.SetTrigger("Wield");
         GameObject clone = Instantiate(wield, this.transform.position, this.transform.rotation);
 
         RaidMonsterSpell spell = clone.GetComponent<RaidMonsterSpell>();
@@ -193,11 +199,13 @@ public class BT_Poseidon : MonsterController
     private void Summon()
     {
         Debug.Log("Summon");
+        animator.SetTrigger("Summon");
     }
 
     private void Pierce()
     {
         Debug.Log("Pierce");
+        animator.SetTrigger("Pierce");
         GameObject clone = Instantiate(pierce, this.transform.position, this.transform.rotation);
         clone.transform.LookAt(target);
 
@@ -205,5 +213,12 @@ public class BT_Poseidon : MonsterController
         spell.Damage = 50;
         spell.AttackActiveDuration = 1.2f;
         spell.AttackPreDelay = 0.2f;
+    }
+
+    public override void Death()
+    {
+        animator.SetBool("Idle", false);
+        animator.SetTrigger("Death");
+        base.Death();
     }
 }
