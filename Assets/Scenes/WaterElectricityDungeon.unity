@@ -862,7 +862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &483484490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3197,7 +3197,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -15.52
+      value: -19.58
       objectReference: {fileID: 0}
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3205,27 +3205,31 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -16.79
+      value: -19.07
       objectReference: {fileID: 0}
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.41442364
       objectReference: {fileID: 0}
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.91008407
       objectReference: {fileID: 0}
     - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204693011090652, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 48.966003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
@@ -4291,7 +4295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1838072341
 RectTransform:
   m_ObjectHideFlags: 0
