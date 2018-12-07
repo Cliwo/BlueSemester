@@ -816,8 +816,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1192216469627748}
-  m_LocalRotation: {x: -0, y: 0.32288796, z: -0, w: 0.94643724}
-  m_LocalPosition: {x: 15.4, y: -0.55, z: 14.49}
+  m_LocalRotation: {x: -0, y: 0.20376572, z: -0, w: 0.9790197}
+  m_LocalPosition: {x: 15.4, y: 1.56, z: 14.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4881429916028360}
@@ -825,7 +825,7 @@ Transform:
   - {fileID: 4293513890108356}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 37.675003, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 23.514002, z: 0}
 --- !u!4 &4256925417121668
 Transform:
   m_ObjectHideFlags: 1
@@ -861,7 +861,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1685090125543296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4233359350659976}
@@ -901,7 +901,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450574372644576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4233359350659976}
@@ -1165,7 +1165,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437629018827756}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4878404278323642}
@@ -1511,7 +1511,7 @@ CapsuleCollider:
   m_Radius: 1.03
   m_Height: 4.38
   m_Direction: 1
-  m_Center: {x: -0.01, y: 3.25, z: 0.19}
+  m_Center: {x: -0.01, y: 1.25, z: 0.19}
 --- !u!136 &136729973887839844
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1524,7 +1524,7 @@ CapsuleCollider:
   m_Radius: 1.31
   m_Height: 4.83
   m_Direction: 1
-  m_Center: {x: -0.01, y: 3.25, z: 0.19}
+  m_Center: {x: -0.01, y: 1.25, z: 0.19}
 --- !u!137 &137544876682239118
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
