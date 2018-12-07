@@ -9,29 +9,32 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     public int MaxMinimapSize;
     public int MinMinimapSize;
     public Camera MinimapCamera;
-    Canvas canvas;
-    RectTransform MinimapRect;
+    private Canvas canvas;
+    private RectTransform MinimapRect;
 
-    MinimapManager inst_Minimap;
+    private MinimapManager inst_Minimap;
+    private CharacterManager inst_Character;
 
-    float verticalMinimapScale;
-    float horizontalMinimapScale;
+    private float verticalMinimapScale;
+    private float horizontalMinimapScale;
 
-    void Awake()
+    private void Awake()
     {
         MinimapRect = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
-        
-        UpdateMinimapScale();
     }
-    void Start()
+
+    private void Start()
     {
+        inst_Character = CharacterManager.getInstance();
+        MinimapCamera = inst_Character.GetComponent<Transform>().Find("MinimapCamera").GetComponent<Camera>();
+        UpdateMinimapScale();
         inst_Minimap = MinimapManager.getInstance();
     }
 
     public void Minify()
     {
-        if(MaxMinimapSize <= MinimapCamera.orthographicSize)
+        if (MaxMinimapSize <= MinimapCamera.orthographicSize)
         {
             return;
         }
@@ -52,25 +55,25 @@ public class MinimapUIManager : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Vector2 localPos;
-        if(RectTransformUtility.ScreenPointToLocalPointInRectangle(MinimapRect,
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(MinimapRect,
             eventData.position, eventData.pressEventCamera, out localPos))
         {
             Vector2 clamp = ClampClickPosition(localPos);
-            Vector3 rayCastStart = new Vector3(clamp.x * horizontalMinimapScale, MinimapCamera.transform.position.y, 
+            Vector3 rayCastStart = new Vector3(clamp.x * horizontalMinimapScale, MinimapCamera.transform.position.y,
                 clamp.y * verticalMinimapScale);
             inst_Minimap.PinPointNavigate(rayCastStart);
         }
     }
 
-    Vector2 ClampClickPosition(Vector2 pos)
+    private Vector2 ClampClickPosition(Vector2 pos)
     {
         float vert = (pos.y + MinimapRect.rect.height) / MinimapRect.rect.height;
-        float horiz = (pos.x + MinimapRect.rect.width) / MinimapRect.rect.width ;
+        float horiz = (pos.x + MinimapRect.rect.width) / MinimapRect.rect.width;
 
         return new Vector2(horiz * 2 - 1, vert * 2 - 1); //[-1,+1] , [-1,+1]
     }
 
-    void UpdateMinimapScale()
+    private void UpdateMinimapScale()
     {
         verticalMinimapScale = MinimapCamera.orthographicSize;
         horizontalMinimapScale = MinimapCamera.aspect * verticalMinimapScale;
