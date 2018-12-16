@@ -15,7 +15,13 @@ public class InteractiveCharacter : InteractionObject {
             return float.PositiveInfinity;
         }
     }
-
+    protected override string ToolTipText
+    {
+        get
+        {
+            return InterationToolTip.BASIC_INTERACTION_TOOLTIP;
+        }
+    }
     override protected void Start() {
         base.Start();
         inst_Conv = ConversationManager.getInstance();
