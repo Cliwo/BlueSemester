@@ -26,12 +26,6 @@ public class SpawnEnemy : MonoBehaviour {
 		levels[currentLevel].StartLevel();
 	}
 
-	// void Start()
-	// {
-	// 	//Debug
-	// 	StartStage();
-	// }
-
 	void Update()
 	{
 		if(levels[currentLevel].IsClear() && isStarted)
