@@ -6,8 +6,9 @@ public class Water : Skill
 {
     private float Speed = 10f;
     /* 스킬 종류별로 쿨타임이 달라야하기 때문 */
-	private static float LastTime;
-    public override float SkillLastUsedTimePerKind 
+    private static float LastTime;
+
+    public override float SkillLastUsedTimePerKind
     {
         get
         {
@@ -18,6 +19,7 @@ public class Water : Skill
             LastTime = value;
         }
     }
+
     public override float SkillPreDelay
     {
         get
@@ -38,7 +40,7 @@ public class Water : Skill
     {
         get
         {
-            return 0.5f;
+            return 0.2f;
         }
     }
 
@@ -49,11 +51,12 @@ public class Water : Skill
             return 1.0f;
         }
     }
+
     public override float Damage
     {
         get
         {
-            return 10.0f;
+            return 20.0f;
         }
     }
 
@@ -64,6 +67,7 @@ public class Water : Skill
             return "WaterSkill";
         }
     }
+
     protected override int targetLayer
     {
         get
@@ -80,12 +84,11 @@ public class Water : Skill
         }
     }
 
-
     override protected void ApplyCC(Pawn target)
     {
         target.states.Add(new Slow(target));
     }
-    
+
     override protected void Update()
     {
         base.Update();

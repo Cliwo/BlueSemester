@@ -72,7 +72,7 @@ public class CharacterManager : Pawn
     override protected void InitStatus()
     {
         hp = 500f;
-        horizontalSpeed = 0.2f;
+        horizontalSpeed = 0.10f;
     }
 
     private void Awake()
@@ -104,9 +104,9 @@ public class CharacterManager : Pawn
         inst_Input.OnTranslate += OnTranslate;
         inst_Input.OnTranslate += (_, __) => NavigationCancel();
         inst_Input.OnJump += OnJump;
-        inst_Input.mouseLeftClickDown += OnAttack;
-        inst_Input.firstSkill += OnFirstSkill;
-        inst_Input.secondSkill += OnSecondSkill;
+        inst_Input.mouseLeftClickDown += OnSecondSkill;
+        //inst_Input.firstSkill += OnFirstSkill;
+        //inst_Input.secondSkill += OnSecondSkill;
         inst_Input.combinationSkill += OnCombinationSkill;
 
         s_navAgent.updatePosition = false;
@@ -195,6 +195,7 @@ public class CharacterManager : Pawn
         isComboStarted = false;
         currentAnimationFSM = null;
     }
+
     private void OnAttack()
     {
         // Debug.Log("Attack");
@@ -221,11 +222,9 @@ public class CharacterManager : Pawn
     private void OnSecondSkill()
     {
         Skill.GenerateSkill(secondSkillForDebug, transform.position);
-  }
+    }
 
     private void OnCombinationSkill()
     {
     }
-
-
 }
