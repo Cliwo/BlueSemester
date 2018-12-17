@@ -51,10 +51,10 @@ public class BT_Cerberus : MonsterController
 
     override protected void InitStatus()
     {
-        maxHP = 500;
+        maxHP = 350;
         damage = 200;
         hp = maxHP;
-        horizontalSpeed = 1;
+        horizontalSpeed = 0.7f;
     }
 
     private void Init()

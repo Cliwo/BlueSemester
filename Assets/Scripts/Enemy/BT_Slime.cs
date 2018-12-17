@@ -49,7 +49,7 @@ public class BT_Slime : MonsterController
         maxHP = 50;
         damage = 10;
         hp = maxHP;
-        horizontalSpeed = 1;
+        horizontalSpeed = 1.6f;
     }
 
     private void Init()

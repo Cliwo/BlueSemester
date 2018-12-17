@@ -49,7 +49,7 @@ public class BT_FireDog : MonsterController
         maxHP = 150;
         damage = 100;
         hp = maxHP;
-        horizontalSpeed = 1;
+        horizontalSpeed = 1.8f;
     }
 
     private void Init()
