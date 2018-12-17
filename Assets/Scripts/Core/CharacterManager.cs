@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class CharacterManager : Pawn
 {
@@ -23,6 +24,10 @@ public class CharacterManager : Pawn
     public bool IsNavigationStarted { get { return navigationStarted; } }
     private bool isJumped = false;
     private const float gravity = -0.03f;
+
+    public Slider hpBar;
+    private float maxHP = 500f;
+    private GameObject gameOver;
 
     public ComboState currentAnimationFSM;
 
@@ -71,7 +76,7 @@ public class CharacterManager : Pawn
 
     override protected void InitStatus()
     {
-        hp = 500f;
+        hp = maxHP;
         horizontalSpeed = 0.10f;
     }
 
@@ -111,10 +116,21 @@ public class CharacterManager : Pawn
 
         s_navAgent.updatePosition = false;
         s_navAgent.updateRotation = false;
+
+        if (GameObject.FindWithTag("HPBar") == null) return;
+        hpBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
+        gameOver = GameObject.Find("GameOver");
+        gameOver.SetActive(false);
     }
 
     override protected void Update()
     {
+        if (hp <= 0)
+        {
+            gameOver.SetActive(true);
+            return;
+        }
+
         base.Update();
         moveDirection.y += gravity;
         if (lockOtherComponentInfluenceOnTransform)
@@ -126,6 +142,11 @@ public class CharacterManager : Pawn
             s_characterController.Move(moveDirection); //TODO : input에서는 Fixed에서 Update하는데 얘는 Update에서 함
         }
         NavigationCheck();
+
+        if (hpBar != null)
+        {
+            hpBar.value = hp / maxHP;
+        }
     }
 
     private void OnIdle()

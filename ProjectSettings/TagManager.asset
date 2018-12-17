@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - EnemySkill
   - ItemDatabase
+  - HPBar
   layers:
   - Default
   - TransparentFX

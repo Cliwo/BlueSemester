@@ -1780,11 +1780,14 @@ MonoBehaviour:
   characterModel: {fileID: 1943921311148842}
   s_navAgent: {fileID: 0}
   jumpWeightConst: 0.31
+  hpBar: {fileID: 114501866417657276, guid: ffa09ba1a906b2a4db59e9cbda0a4fbd, type: 2}
+  currentAnimationFSM: {fileID: 0}
   fireSkillForDebug: {fileID: 1703314762443654, guid: 5f07aec8fa9847a4b8c2d9b6126378d0,
     type: 2}
   secondSkillForDebug: {fileID: 1254790426769018, guid: 51b309db00c161d4a9e51c5376fa7eeb,
     type: 2}
   targetForSkillDebug: {fileID: 0}
+  isComboStarted: 0
 --- !u!114 &114449668915004518
 MonoBehaviour:
   m_ObjectHideFlags: 1
