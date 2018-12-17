@@ -26,7 +26,7 @@ public class CharacterManager : Pawn
     private const float gravity = -0.03f;
 
     public Slider hpBar;
-    private float maxHP = 500f;
+    private float maxHP = 800f;
     private GameObject gameOver;
 
     public ComboState currentAnimationFSM;
