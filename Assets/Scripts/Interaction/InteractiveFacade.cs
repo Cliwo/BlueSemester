@@ -14,6 +14,13 @@ public class InteractiveFacade : InteractionObject
 			return 0.1f;
         }
     }
+     protected override string ToolTipText
+    {
+        get
+        {
+            return InterationToolTip.BASIC_INTERACTION_TOOLTIP;
+        }
+    }
 	protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();

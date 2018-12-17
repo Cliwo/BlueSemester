@@ -16,6 +16,9 @@ public class GameStateModel : ISavable {
 	public SerializableVector3 lastPosition;
 	public Dictionary<string, int> itemList;	//아이템 코드와 갯수
 	public float currentHP;
+    public bool FireDungeonCleared;
+    public bool WaterAndElectricityDungeonCleared;
+    public bool WindDungeonCleared;
 
 	private static string EncryptionKey = "Banana";
     private static readonly byte[] SALT = new byte[] { 0x26, 0xdc, 0xff, 0x00, 0xad, 0xed, 0x7a, 0xee, 0xc5, 0xfe, 0x07, 0xaf, 0x4d, 0x08, 0x22, 0x3c };
@@ -32,7 +35,7 @@ public class GameStateModel : ISavable {
     static public void SerializeAndMakeFile(string fileName , GameStateModel model)
     {
         byte[] data = Serialize(model);
-        byte[] metaData = Serialize(GenerateMetaFile());
+        byte[] metaData = Serialize(GenerateMetaFile(model));
         FlushToFile(fileName, data, metaData);
     }
 	static public byte[] Serialize(GameStateModel model)
@@ -77,15 +80,15 @@ public class GameStateModel : ISavable {
         return Application.dataPath + "/" + fileName + ".metaBin"; 
     }
 
-    static private SaveMeta GenerateMetaFile()
+    static private SaveMeta GenerateMetaFile(GameStateModel model)
     {
         //TODO : 아래가 디버그 코드임 (임시 코드임) 수정할 것 
         SaveMeta meta = new SaveMeta();
         meta.savedTime = DateTime.Now;
         meta.locationAtSavedTime = SceneManager.GetActiveScene().name;
-        meta.FireDungeonCleared = false;
-        meta.WaterAndElectricityDungeonCleared = false;
-        meta.WindDungeonCleared = false;
+        meta.FireDungeonCleared = model.FireDungeonCleared;
+        meta.WaterAndElectricityDungeonCleared = model.WaterAndElectricityDungeonCleared;
+        meta.WindDungeonCleared = model.WindDungeonCleared;
 
         return meta;
     }

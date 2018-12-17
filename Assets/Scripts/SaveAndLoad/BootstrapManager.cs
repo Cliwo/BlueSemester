@@ -11,6 +11,7 @@ public class BootstrapManager : MonoBehaviour {
 	{
 		return instance;
 	}
+	public GameStateModel model;
 
 	void Awake() {
 		if(instance == null)
@@ -21,7 +22,9 @@ public class BootstrapManager : MonoBehaviour {
 		{
 			Destroy(this);
 		}
+		DontDestroyOnLoad(this);
 	}
+
 	public void RebootGameWithData(GameStateModel model, GameStateModel.SaveMeta meta)
 	{
 		ChangeScene(meta.locationAtSavedTime , model);
@@ -40,7 +43,7 @@ public class BootstrapManager : MonoBehaviour {
 		//각 Manager들에서 데이터를 넣을 부분을 뽑아와야함.
 		CharacterManager inst_character = CharacterManager.getInstance();
 		inst_character.gameObject.transform.position = model.lastPosition.ToVector3();
-		
+		this.model = model;
 	}
 
 }

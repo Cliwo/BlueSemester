@@ -13,6 +13,7 @@ public abstract class InteractionObject : MonoBehaviour
 	protected InteractionEventBundle bundle;
 	protected float startTime;
 	protected bool isStarted = false;
+	private bool isToolTipVisible = false;
 
 	public class InteractionEventBundle
 	{
@@ -51,6 +52,7 @@ public abstract class InteractionObject : MonoBehaviour
             if(ToolTipText != null)
             {
                 inst_toolTipUI.ShowToolTip(ToolTipText);
+				isToolTipVisible = true;
             }
 		}
 	}
@@ -70,6 +72,10 @@ public abstract class InteractionObject : MonoBehaviour
 	{
 		startTime = Time.time;
 		isStarted = true;
+		if(isToolTipVisible)
+		{
+			inst_toolTipUI.HideToolTip();
+		}
 	}
 	protected virtual void OnInteracting()
 	{
