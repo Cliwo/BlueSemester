@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
         slotX = 4;
         slotY = 2;
 
-        background = GameObject.Find("Background");
+        background = GameObject.Find("TabBackground");
         currentBackgroundSprite = background.GetComponent<Image>().sprite;
 
         contents = GameObject.Find("Contents");
