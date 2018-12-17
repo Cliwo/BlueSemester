@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 62941ddddd5c84551a701d1cfe21b122
   - enabled: 1
-    path: Assets/CJ/SampleScene/MauvaisTown.unity
+    path: Assets/Scenes/MauvaisTown.unity
     guid: 9be30d64187114247965d8ad0d63ea03
   - enabled: 1
     path: Assets/Scenes/Dungeon4.unity
