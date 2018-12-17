@@ -296,6 +296,48 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6742d01a839095b49855cdc8376933f0, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1001 &1229812530
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640331715585130, guid: 8c9942d587196144a947d19873386abb, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c9942d587196144a947d19873386abb, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1369073766
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +443,19 @@ Prefab:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 1723991569261986, guid: 4cc4470a1cfe77a4a9a68028153cb35e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260467700356460, guid: 4cc4470a1cfe77a4a9a68028153cb35e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114312020015152466, guid: 4cc4470a1cfe77a4a9a68028153cb35e,
+        type: 2}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2120074400}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc4470a1cfe77a4a9a68028153cb35e, type: 2}
   m_IsPrefabAsset: 0
@@ -655,3 +710,8 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a09edda459d62c042bb275f856c277c1, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &2120074400 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95904595171397050, guid: 7a6f1db62330142f49091c3966c8e1dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1546880651}

@@ -3073,6 +3073,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a6f1db62330142f49091c3966c8e1dd, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &1546880652 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95904595171397050, guid: 7a6f1db62330142f49091c3966c8e1dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1546880651}
 --- !u!1 &1564036786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4673,6 +4678,11 @@ Prefab:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 114312020015152466, guid: 4cc4470a1cfe77a4a9a68028153cb35e,
+        type: 2}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1546880652}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc4470a1cfe77a4a9a68028153cb35e, type: 2}
   m_IsPrefabAsset: 0
