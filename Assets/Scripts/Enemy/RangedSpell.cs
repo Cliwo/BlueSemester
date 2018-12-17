@@ -17,7 +17,7 @@ public class RangedSpell : MonoBehaviour
         {
             target = inst_Character.GetComponent<Transform>();
         }
-        Vector3 targetPos = new Vector3(target.position.x, this.transform.position.y, target.position.z); // 모든 range skill의 y값을 일정하게 해도 될까 의문.
+        Vector3 targetPos = new Vector3(target.position.x, target.position.y, target.position.z); // y를 일자에서 target의 y로 수정
         this.transform.LookAt(targetPos);
 
         Destroy(this.gameObject, lifespan);
